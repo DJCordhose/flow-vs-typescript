@@ -7,5 +7,6 @@ function foo(num/*: number*/) {
 	}
 }
 
-console.log(foo(100).toString());
-console.log(foo(1).toString());
+// return might be undefined
+// console.log(foo(100).toString());
+// console.log(foo(1).toString());
