@@ -35,9 +35,9 @@ let animals: Array<Animal> = [];
 // https://github.com/facebook/flow/blob/master/lib/core.js#L144
 //  declare class Array<T> { ...
 //
-// - invariant: types effectively need to match exatcly
-// - covariant: 
-// - contravariant:  
+// - invariant: types effectively need to match exatcly to be compatible
+// - covariant: type must match or be more special (superset of properties)
+// - contravariant: type must match or be more common (subset of properties)  
 // - bivariant: covariant and contravariant at the same time 
 
 let purry: Cat = {
