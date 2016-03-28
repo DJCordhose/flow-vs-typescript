@@ -1,7 +1,9 @@
 /* @flow */
 
 // error
-function foo(num/*: number*/) {
+// function foo(num: number): ?string {
+// function foo(num: number): string {
+function foo(num: number) {
 	if (num > 10) {
 		return 'cool';
 	}

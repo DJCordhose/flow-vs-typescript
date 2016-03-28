@@ -1,5 +1,8 @@
 class Animal {
-   constructor(public name: string) {}
+   name: string;
+   constructor(name: string) {
+       this.name = name;
+   }
 }
 
 class Dog extends Animal {
@@ -11,9 +14,12 @@ class Cat extends Animal {
     purrFactor: number;    
 }
 let cats: Array<Cat> = [];
-let animals: Array<Animal>;
+// nope, no cat
+// cats.push(10);
+// nope, no cat
+// cats.push(new Animal('Fido'));
 
-cats = [];
+// cool, is a cat
 cats.push(new Cat('Purry'));
 
 // can not do, they are not cats
@@ -22,8 +28,11 @@ cats.push(new Cat('Purry'));
 
 // https://github.com/Microsoft/TypeScript/blob/master/lib/lib.core.es6.d.ts#L1109
 // wow, that is no longer safe
+let animals: Array<Animal> = [];
 animals = cats;
-// because those are now all cool, even though cats === animals
+// nope: Property 'purrFactor' is missing in type 'Animal'.
+cats = animals;
+// because those are now all cool
 animals.push(new Dog('Brutus'));
 animals.push(new Animal('Twinky'));
 

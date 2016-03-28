@@ -1,0 +1,9 @@
+{
+  "name": "flow-sandbox",
+  "scripts": {
+    "start": "flow"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.22.1"
+  }
+}

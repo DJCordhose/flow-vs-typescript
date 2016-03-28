@@ -2,11 +2,8 @@
   "name": "typescript-playground",
   "version": "1.0.0",
   "scripts": {
-    "start": "webpack --watch"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/DJCordhose/typescript-es6-babel-webpack.git"
+    "start": "webpack --watch",
+    "run": "node public/dist/bundle.js"
   },
   "author": "Oliver Zeigermann",
   "license": "MIT",

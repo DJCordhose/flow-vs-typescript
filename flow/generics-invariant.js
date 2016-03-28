@@ -23,8 +23,12 @@ let cats: Array<Cat> = [];
 let animals: Array<Animal> = [];
 
 // ERROR
-// not possible, animals do not have purrFactor
-// animals = cats;
+// property `purrFactor` of Cat. Property not found in Animal
+// cats = animals;
+
+// ERROR
+// property `purrFactor` of Cat. Property not found in Animal
+animals = cats;
 //
 // why:
 // http://flowtype.org/docs/classes.html#polymorphic-classes
@@ -57,7 +61,7 @@ let brutus: Dog = {
     
 };
 
-// can not do, they are not cats
+// can do, sub types of animals
 animals.push(twinky);
 animals.push(brutus);
 

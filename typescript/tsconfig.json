@@ -14,7 +14,7 @@
         "suppressImplicitAnyIndexErrors": true,
         "sourceMap": true
     },
-  "exclude": [
-    "node_modules"
+  "files": [
+    "sandbox.ts"
   ]
 }

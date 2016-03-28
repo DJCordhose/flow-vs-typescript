@@ -8,8 +8,9 @@
 // to allow for ES6 features
 import 'babel-polyfill';
 
-import './no-non-null-check.ts';
-import './generics-bi-variant.ts';
+// import './basics.ts';
+// import './no-non-null-check.ts';
+import './generics-covariant.ts';
 
 // weird, build crashes when there is nothing in this module
-console.log('Main');
+console.log('Done');

@@ -3,7 +3,7 @@
 function foo(num: number) {
 	if (num > 10) {
 		return 'cool';
-	//} else {
+    //} else {
      //   return 100;
      //   return 'also cool';
     }
@@ -11,4 +11,4 @@ function foo(num: number) {
 
 const result: string = foo(100);
 console.log(result.toString());
-// console.log(foo(1).toString());
+console.log(foo(1).toString());
