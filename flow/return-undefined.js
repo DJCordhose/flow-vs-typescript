@@ -10,5 +10,12 @@ function foo(num: number) {
 }
 
 // return might be undefined
+
+
 // console.log(foo(100).toString());
 // console.log(foo(1).toString());
+
+const fooed: ?string = foo(100);
+if (fooed) {
+    fooed.toString();
+}

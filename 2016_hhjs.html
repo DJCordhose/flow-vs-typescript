@@ -116,10 +116,9 @@
             <h1>So?</h1>
         </section>
         <section>
-            <h3>In any case, type systems make code easier to maintain</h3>
+            <h3>IMHO type systems make code easier to maintain</h3>
             <ul>
-                <li class="fragment">large code and long living code bases are always hard to maintain...
-                <li class="fragment">... but type annotations
+                <li class="fragment">type annotations
                     <ul>
                         <li class="fragment">make code more readable
                         <li class="fragment">make code easier to analyse
@@ -132,7 +131,7 @@
 
         <section>
             <h2>TypeScript</h2>
-            <h3 class="fragment">ease or use and tool support over soundness</h3>
+            <h3 class="fragment">ease of use and tool support over soundness</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
                 <li class="fragment">By Microsoft (Anders Hejlsberg)
@@ -281,7 +280,12 @@ function foo(num: number) {
 // error: call of method `toString`. Method cannot be called on possibly null value
 console.log(foo(100).toString());
 </code></pre>
-        <!--<p class="fragment">Why?</p>-->
+            <p class="fragment">Flow does catch this</p>
+        <p class="fragment">But why?</p>
+        </section>
+            <section>
+                <h3>Flow does not return string as a type</h3>
+                <p class="fragment">The inferred type is something else</p>
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
                // error: return undefined. This type is incompatible with string
 function foo(num: number): string {
@@ -291,9 +295,8 @@ function foo(num: number): string {
 }
 
 </code></pre>
-            <!--<p class="fragment">The inferred type is something else</p>-->
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
-// nullable type, same as first example
+// nullable type: the one inferred
 function foo(num: number): ?string {
 	if (num > 10) {
 		return 'cool';
@@ -301,10 +304,18 @@ function foo(num: number): ?string {
 }
 
 </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// to fix this, we need to check the result
+const fooed: ?string = foo(100);
+if (fooed) {
+    fooed.toString();
+}
+
+</code></pre>
       </section>
 
         <section>
-            <h2>Why?</h2>
+            <h2>Non-nullable types</h2>
             <p class="fragment">Types are nullable in TypeScript</p>
             <p class="fragment">Types are non-nullable by default in Flow</p>
             <p class="fragment">Nullable types in Flow also possible</p>
@@ -375,11 +386,6 @@ animals.push(new Cat('Purry'));
 
         <section>
             <h3>Up to this point this pretty much works in Flow and TypeScript the same way ...</h3>
-        </section>
-
-        <section>
-            <h3>... optional part starts ...</h3>
-            <h4 class="fragment">... but wait</h4>
         </section>
 
         <section>
@@ -455,10 +461,6 @@ let animals: Array&lt;Animal> = []; // can only contain animals
             </ul>
         </section>
 
-        <section>
-            <h3>... optional part ends ...</h3>
-        </section>
-
         <!--// for jsunconf???-->
         <!--<section>-->
             <!--<h2>React support</h2>-->
@@ -469,7 +471,6 @@ let animals: Array&lt;Animal> = []; // can only contain animals
     <!-- - union-->
     <!-- - intersection-->
     <!-- - array types-->
-        <!-- - generics part not optional-->
         <!-- - checker capabilities or TypeScript-->
 
         <section>
@@ -477,12 +478,14 @@ let animals: Array&lt;Animal> = []; // can only contain animals
             <ul>
                 <li class="fragment">TypeScript and Flow have influenced each other heavily
                 <li class="fragment">Basic typings are pretty similar
-                <li class="fragment">Flow can even understand TypeScript declearion files
+                <li class="fragment">Many more constructs like union, intersection, and array types in both
+                <li class="fragment">Flow can even understand TypeScript declaration files
                 <li class="fragment">TypeScript is a compiler, Flow is a checker
                 <li class="fragment">Flow shoots for soundness, TypeScript for tool support
                 <li class="fragment">Flow has non-nullable types as defaults
                 <li class="fragment">Generics in TypeScript are easier, but less expressive
                 <li class="fragment">Flow's type system is generally more expressive
+                <li class="fragment">Flow written in OCaml, Typescript in Typescript
             </ul>
         </section>
 
@@ -522,6 +525,8 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <!--</section>-->
 
         <section>
+            <a href="http://www.embarc.de/"><img src="embarc13.png"
+                                                 height="150"></a>
             <h1>Thank you!</h1>
 
             <h2>Questions / Discussion</h2>

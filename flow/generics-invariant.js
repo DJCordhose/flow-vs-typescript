@@ -28,7 +28,7 @@ let animals: Array<Animal> = [];
 
 // ERROR
 // property `purrFactor` of Cat. Property not found in Animal
-animals = cats;
+// animals = cats;
 //
 // why:
 // http://flowtype.org/docs/classes.html#polymorphic-classes
