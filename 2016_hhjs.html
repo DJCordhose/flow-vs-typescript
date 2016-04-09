@@ -97,69 +97,81 @@
         <!--<section>-->
             <!--<h2>JavaScript is lacking a type system, which might impact this...</h2>-->
         <!--</section>-->
+        <!--<section>-->
+            <!--<h3>Does a type system make you more productive?</h3>-->
+            <!--<h4 class="fragment">Or less?</h4>-->
+            <!--<ul>-->
+                <!--<li class="fragment">some people claim <a target="_blank"-->
+                                                         <!--href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using-->
+                    <!--a type system is even unethical</a> in this Strangeloop talk-->
+                    <!--<ul>-->
+                        <!--<li class="fragment">(given you have an SLA)-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>-->
+                    <!--elaborates that there is little or no impact-->
+            <!--</ul>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h1>So?</h1>-->
+        <!--</section>-->
         <section>
-            <h3>Does a type system make you more productive?</h3>
-            <h4 class="fragment">Or less?</h4>
-            <ul>
-                <li class="fragment">some poeple claim <a target="_blank"
-                                                         href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using
-                    a type system is even unethical</a> in this Strangeloop talk
-                    <ul>
-                        <li class="fragment">(given you have an SLA)
-                    </ul>
-                </li>
-                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>
-                    elaborates that there is little or no impact
+            <h2>Why using type systems?</h2>
+            <h3 class="fragment">IMHO type systems make code easier to maintain</h3>
+            <p class="fragment">type annotations</p>
+            <ul class="fragment">
+                <li>make code more readable
+                <li>make code easier to analyse
+                <li>allow for reliable refactoring
+                <li>allow for better IDE support
             </ul>
         </section>
+
         <section>
-            <h1>So?</h1>
-        </section>
-        <section>
-            <h3>IMHO type systems make code easier to maintain</h3>
+            <h3>Most important single use case for me</h3>
+            <p class="fragment">JSON style data structures (mainly server side)</p>
             <ul>
-                <li class="fragment">type annotations
-                    <ul>
-                        <li class="fragment">make code more readable
-                        <li class="fragment">make code easier to analyse
-                        <li class="fragment">allow for reliable refactoring
-                        <li class="fragment">allow for better IDE support
-                    </ul>
-                </li>
+                <li class="fragment">REST payload
+                <li class="fragment">config files
+                <li class="fragment">objects from and to database
             </ul>
+            <p class="fragment">as a close second place: <em>find usages</em></p>
         </section>
 
         <section>
             <h2>TypeScript</h2>
             <h3 class="fragment">ease of use and tool support over soundness</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
-                <li class="fragment">By Microsoft (Anders Hejlsberg)
-                <li class="fragment">Based on ES6 (probably ES7/ES8)
-                <li class="fragment">Adds optional type annotations, visibility, and decorators
-                <li class="fragment">Compiler checks and removes annotations
-                <li class="fragment"><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>
-                <li class="fragment">External declarations can add type information to pure JavaScript
-                <li class="fragment">Extensive support in WebStorm and Visual Studio Code
+            <ul class="fragment">
+                <li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
+                <li>By Microsoft (Anders Hejlsberg)
+                <li>Based on ES6 (probably ES7/ES8)
+                <li>Adds optional type annotations, visibility, and decorators
+                <li>Compiler checks and removes annotations
+                <li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>
+                <li>External declarations can add type information to pure JavaScript
+                <li>Extensive support in
+
+                <a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code
             </ul>
         </section>
 
         <section>
             <h2>Flow</h2>
-            <h3 class="fragment">soundness, no runtime exceptions</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>
-                <li class="fragment">By Facebook
-                <li class="fragment"><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
-                <li class="fragment">Not a compiler, but checker
-                <li class="fragment">Works without any type annotations
-                <li class="fragment">Very good at inferring types
-                <li class="fragment">If present, type annotations can very easily be removed by babel for runtime
+            <h3 class="fragment">soundness, no runtime exceptions as goal</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>
+                <li>By Facebook
+                <li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
+                <li>Not a compiler, but checker
+                <li>Works without any type annotations
+                <li>Very good at inferring types
+                <li>If present, type annotations can very easily be removed by babel for runtime
             </ul>
         </section>
 
         <section>
             <h1>Part II: Comparison</h1>
+            <h2 class="fragment">aka what I find most important</h2>
         </section>
 
         <section>
@@ -284,7 +296,7 @@ console.log(foo(100).toString());
         <p class="fragment">But why?</p>
         </section>
             <section>
-                <h3>Flow does not return string as a type</h3>
+                <h3>Flow does not infer string as the return type</h3>
                 <p class="fragment">The inferred type is something else</p>
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
                // error: return undefined. This type is incompatible with string
@@ -474,10 +486,33 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <!-- - checker capabilities or TypeScript-->
 
         <section>
+            <h1>Part III: Epilogue</h1>
+        </section>
+
+
+        <section>
+            <h3>Should I use a type checker?</h3>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
+                <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
+                <li class="fragment">but: <span class="fragment">a type system is a complex thing</span>
+            </ul>
+            <p class="fragment">My recommendation</p>
+            <ul>
+                <li class="fragment">if your project does not live for long: <em class="fragment">no</em>
+                <li class="fragment">if your project is really simple: <em class="fragment">no</em>
+                <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
+                <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
+                <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
+            </ul>
+        </section>
+
+        <section>
             <h2>Wrap-Up</h2>
             <ul>
                 <li class="fragment">TypeScript and Flow have influenced each other heavily
                 <li class="fragment">Basic typings are pretty similar
+                <li class="fragment">Both also support React
                 <li class="fragment">Many more constructs like union, intersection, and array types in both
                 <li class="fragment">Flow can even understand TypeScript declaration files
                 <li class="fragment">TypeScript is a compiler, Flow is a checker
@@ -525,8 +560,8 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <!--</section>-->
 
         <section>
-            <a href="http://www.embarc.de/"><img src="embarc13.png"
-                                                 height="150"></a>
+            <!--<a href="http://www.embarc.de/"><img src="embarc13.png "-->
+                                                 <!--height="150"></a>-->
             <h1>Thank you!</h1>
 
             <h2>Questions / Discussion</h2>
