@@ -124,6 +124,7 @@
                 <li>can make code easier to analyse
                 <li>can allow for reliable refactoring
                 <li>can allow for generally better IDE support
+                <li>can catch errors early
             </ul>
         </section>
 
@@ -187,7 +188,7 @@ obj = 10;
 </code></pre>
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
 
-// return type can be inferred
+// types can be inferred (return type)
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
@@ -244,11 +245,13 @@ class Sayer {
       </section>
 
         <section>
-            <h3>Right, pretty much the same</h3>
+            <h2>Right, pretty much the same</h2>
+            <p class="fragment">Those basic features help with documentation, refactoring, and IDE support</p>
         </section>
 
         <section>
             <h2>Non-Nullable Types</h2>
+            <h4 class="fragment">Talking about correctness</h4>
         </section>
 
         <section>
@@ -284,19 +287,20 @@ console.log(foo(1).toString());
         <h3>Flow</h3>
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
 function foo(num: number) {
-	if (num > 10) {
-		return 'cool';
-	}
+    if (num > 10) {
+        return 'cool';
+    }
 }
 
-// error: call of method `toString`. Method cannot be called on possibly null value
+// error: call of method `toString`.
+// Method cannot be called on possibly null value
 console.log(foo(100).toString());
 </code></pre>
             <p class="fragment">Flow does catch this</p>
         <p class="fragment">But why?</p>
         </section>
             <section>
-                <h3>Flow does not infer string as the return type</h3>
+                <h4>Flow does not infer string as the return type</h4>
                 <p class="fragment">The inferred type is something else</p>
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
                // error: return undefined. This type is incompatible with string
@@ -344,6 +348,7 @@ if (fooed) {
         <section>
             <h2>Generics</h2>
             <h3 class="fragment">aka Parametric Types</h3>
+            <h4 class="fragment">might be a bit scary...</h4>
         </section>
 
         <section>
