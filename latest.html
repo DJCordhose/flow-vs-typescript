@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Flow vs TypeScript</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+
+        <section>
+            <h1>Flow vs TypeScript</h1>
+            <h2>Type Systems for JavaScript</h2>
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+            <!--<p><small><a href="http://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html">http://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html</a></small></p>-->
+
+        </section>
+
+        <section>
+            <h1>Part I: Introduction</h1>
+        </section>
+
+        <section>
+            <h2>Motivation: Why a type system in the first place?</h2>
+        </section>
+        <section>
+            <h3>JavaScript is great to create usable solutions quickly</h3>
+        </section>
+        <section>
+            <h2 class="fragment">However...</h2>
+            <h3 class="fragment">... if your system ...</h3>
+                <ul>
+                    <li class="fragment">is large
+                    <li class="fragment">is very important or even crucial for the success of your company
+                    <li class="fragment">contains substantial amounts of business logic
+                    <li class="fragment">lives for a long time
+                    <li class="fragment">has a lot of contributors
+                </ul>
+            </ul>
+            <h3 class="fragment">... long term maintainability might be more interesting than short term velocity</h3>
+        </section>
+        <section>
+            <h2>JavaScript is lacking a type system, which might impact this...</h2>
+        </section>
+        <section>
+            <h3>Does a type system make you more productive?</h3>
+            <h4 class="fragment">Or less?</h4>
+            <ul>
+                <li class="fragment">some people claim <a target="_blank"
+                                                         href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using
+                    a type system is even unethical</a> in this Strangeloop talk
+                    <ul>
+                        <li class="fragment">(given you have an SLA)
+                    </ul>
+                </li>
+                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>
+                    elaborates that there is little or no impact
+            </ul>
+        </section>
+        <section>
+            <h1>So?</h1>
+        </section>
+        <section>
+            <h2>Why using type systems?</h2>
+            <h3 class="fragment">IMHO type systems make code easier to maintain</h3>
+            <p class="fragment">type annotations</p>
+            <ul class="fragment">
+                <li>can make code more readable
+                <li>can make code easier to analyse
+                <li>can allow for reliable refactoring
+                <li>can allow for generally better IDE support
+                <li>can catch errors early
+            </ul>
+        </section>
+
+        <section>
+            <h3>Most important single use case for me</h3>
+            <p class="fragment">JSON style data structures</p>
+            <ul>
+                <li class="fragment">REST payload
+                <li class="fragment">config files
+                <li class="fragment">objects from and to database
+            </ul>
+            <p class="fragment">as a close second place: <em>find usages</em></p>
+        </section>
+
+        <section>
+            <h2>TypeScript</h2>
+            <h3 class="fragment">ease of use and tool support over soundness</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
+                <li>By Microsoft (Anders Hejlsberg)
+                <li>Based on ES6 (probably ES7/ES8)
+                <li>Adds optional type annotations, visibility, and decorators
+                <li>Compiler checks and removes annotations
+                <li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>
+                <li>External declarations can add type information to pure JavaScript
+                <li>Extensive support in
+
+                <a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code
+            </ul>
+        </section>
+
+        <section>
+            <h2>Flow</h2>
+            <h3 class="fragment">soundness, no runtime exceptions as goal</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>
+                <li>By Facebook
+                <li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
+                <li>Not a compiler, but checker
+                <li>Works without any type annotations
+                <li>Very good at inferring types
+                <li>If present, type annotations can very easily be removed by babel for runtime
+            </ul>
+        </section>
+
+        <section>
+            <h1>Part II: Comparison</h1>
+            <h2 class="fragment">aka what I find most important</h2>
+        </section>
+
+        <section>
+            <h2>Basics</h2>
+        </section>
+
+        <section>
+        <h3>TypeScript</h3>
+           <pre class="fragment"><code class="typescript" contenteditable>let obj: string;
+obj = 'yo';
+// Error: Type 'number' is not assignable to type 'string'.
+obj = 10;
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+
+// types can be inferred (return type)
+function sayIt(what: string) {
+    return `Saying: ${what}`;
+}
+const said: string = sayIt(obj);
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+class Sayer {
+    // mandatory
+    what: string;
+
+    constructor(what: string) {
+        this.what = what;
+    }
+
+    // return type if you want to
+    sayIt(): string {
+        return `Saying: ${this.what}`;
+    }
+}
+</code></pre>
+      </section>
+
+        <section>
+        <h3>Flow</h3>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+let obj: string;
+obj = 'yo';
+// Error: number: This type is incompatible with string
+obj = 10;
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+function sayIt(what: string) {
+    return `Saying: ${what}`;
+}
+const said: string = sayIt(obj);
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+class Sayer {
+    what: string;
+
+    constructor(what: string) {
+        this.what = what;
+    }
+
+    sayIt(): string {
+        return `Saying: ${this.what}`;
+    }
+}
+
+</code></pre>
+      </section>
+
+        <section>
+            <h2>Right, pretty much the same</h2>
+            <p class="fragment">Those basic features help with documentation, refactoring, and IDE support</p>
+        </section>
+
+        <section>
+            <h2>Non-Nullable Types</h2>
+            <h4 class="fragment">Talking about correctness</h4>
+        </section>
+
+        <section>
+        <h3>TypeScript</h3>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+function foo(num: number) {
+    if (num > 10) {
+      return 'cool';
+    }
+}
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// cool
+const result: string = foo(100);
+console.log(result.toString());
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// still cool?
+console.log(foo(1).toString());
+
+</code></pre>
+           <pre class="fragment"><code contenteditable data-trim>
+// error at runtime
+"Cannot read property 'toString' of undefined"
+</code></pre>
+
+        <p class="fragment">TypeScript does not catch this</p>
+      </section>
+
+        <section>
+        <h3>Flow</h3>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+function foo(num: number) {
+    if (num > 10) {
+        return 'cool';
+    }
+}
+
+// error: call of method `toString`.
+// Method cannot be called on possibly null value
+console.log(foo(100).toString());
+</code></pre>
+            <p class="fragment">Flow does catch this</p>
+        <p class="fragment">But why?</p>
+        </section>
+            <section>
+                <h4>Flow does not infer string as the return type</h4>
+                <p class="fragment">The inferred type is something else</p>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+               // error: return undefined. This type is incompatible with string
+function foo(num: number): string {
+	if (num > 10) {
+		return 'cool';
+	}
+}
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// nullable type: the one inferred (not quite, but this is the closest we can write down)
+function foo(num: number): ?string {
+	if (num > 10) {
+		return 'cool';
+	}
+}
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// to fix this, we need to check the result
+const fooed: ?string = foo(100);
+if (fooed) {
+    fooed.toString();
+}
+
+</code></pre>
+      </section>
+
+        <section>
+            <h2>Non-nullable types</h2>
+            <p class="fragment">Types are nullable in TypeScript</p>
+            <p class="fragment">Types are non-nullable by default in Flow</p>
+            <p class="fragment">Nullable types in Flow also possible</p>
+            <p class="fragment">Non-nullable types not yet present in TypeScript
+<br>
+                (<a target="_blank"
+                    href="https://github.com/Microsoft/TypeScript/pull/7140">
+                    but there is hope
+                </a>)
+
+            </p>
+        </section>
+
+        <section>
+            <h2>Generics</h2>
+            <h3 class="fragment">aka Parametric Types</h3>
+            <h4 class="fragment">might be a bit scary...</h4>
+        </section>
+
+        <section>
+        <h3>Consider this type hierarchy</h3>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+class Animal {
+   name: string;
+   constructor(name: string) {
+       this.name = name;
+   }
+}
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+class Dog extends Animal {
+    // just to make this different from cat
+    goodBoyFactor: number;
+}
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+
+class Cat extends Animal {
+    purrFactor: number;
+}
+</code></pre>
+      </section>
+        <section>
+        <h3>Generic Type information</h3>
+            <p class="fragment">Types can be parameterized by others</p>
+            <p class="fragment">Most common with collection types</p>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+let cats: Array&lt;Cat> = []; // can only contain cats
+let animals: Array&lt;Animal> = []; // can only contain animals
+
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// nope, no cat
+cats.push(10);
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// nope, no cat
+cats.push(new Animal('Fido'));
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// cool, is a cat
+cats.push(new Cat('Purry'));
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// cool, cat is a sub type of animal
+animals.push(new Cat('Purry'));
+           </code></pre>
+      </section>
+
+        <section>
+            <h3>Up to this point this pretty much works in Flow and TypeScript the same way ...</h3>
+        </section>
+
+        <section>
+            <h3>... but wait</h3>
+        </section>
+
+        <section>
+        <h3>TypeScript</h3>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+let cats: Array&lt;Cat> = []; // can only contain cats
+let animals: Array&lt;Animal> = []; // can only contain animals
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// error TS2322: Type 'Animal[]' is not assignable to type 'Cat[]'.
+//  Type 'Animal' is not assignable to type 'Cat'.
+//    Property 'purrFactor' is missing in type 'Animal'.
+// cats = animals;
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// wow, works, but is no longer safe
+animals = cats;
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// because those are now all cool
+animals.push(new Dog('Brutus'));
+animals.push(new Animal('Twinky'));
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// ouch:
+cats.forEach(cat => console.log(`Cat: ${cat.name}`));
+// Cat: Purry
+// Cat: Brutus
+// Cat: Twinky
+</code></pre>
+      </section>
+
+        <section>
+        <h3>Flow</h3>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+let cats: Array&lt;Cat> = []; // can only contain cats
+let animals: Array&lt;Animal> = []; // can only contain animals
+</code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// ERROR
+// property `purrFactor` of Cat. Property not found in Animal
+// cats = animals;
+           </code></pre>
+           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+// same ERROR
+// animals = cats;
+           </code></pre>
+            <p class="fragment">End of story for Flow</p>
+      </section>
+
+        <section>
+            <h2>Why?</h2>
+            <ul>
+                <li class="fragment">TypeScript
+                <ul>
+                    <li class="fragment">parametric types are compatible if the type to assign from has a more special type parameter</li>
+                    <li class="fragment">seems most intuitive
+                    <li class="fragment">allows for obviously wrong code, though
+                </ul>
+            </li>
+                <li class="fragment">Flow
+                    <ul>
+                        <li class="fragment">using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>
+                        <li class="fragment">Array in Flow has an invariant parametric type</li>
+                        <li class="fragment">more expressive
+                        <li class="fragment">harder to understand
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <!--// for jsunconf???-->
+        <!--<section>-->
+            <!--<h2>React support</h2>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>Advanced types</h2>-->
+        <!--</section>-->
+    <!-- - union-->
+    <!-- - intersection-->
+    <!-- - array types-->
+        <!-- - checker capabilities or TypeScript-->
+
+        <section>
+            <h1>Part III: Epilogue</h1>
+        </section>
+
+
+        <section>
+            <h3>Should I use a type checker?</h3>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
+                <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
+                <li class="fragment">but: <span class="fragment">a type system is a complex thing</span>
+            </ul>
+            <p class="fragment">My recommendation</p>
+            <ul>
+                <li class="fragment">if your project does not live for long: <em class="fragment">no</em>
+                <li class="fragment">if your project is really simple: <em class="fragment">no</em>
+                <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
+                <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
+                <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Wrap-Up</h2>
+            <ul>
+                <li class="fragment">TypeScript and Flow have influenced each other heavily
+                <li class="fragment">Basic typings are pretty similar
+                <li class="fragment">Both also support React
+                <li class="fragment">Many more constructs like union, intersection, and array types in both
+                <li class="fragment">Flow can even understand TypeScript declaration files
+                <li class="fragment">TypeScript is a compiler, Flow is a checker
+                <li class="fragment">Flow shoots for soundness, TypeScript for tool support
+                <li class="fragment">Flow has non-nullable types as defaults
+                <li class="fragment">Generics in TypeScript are easier, but less expressive
+                <li class="fragment">Flow's type system is generally more expressive
+                <li class="fragment">Flow written in OCaml, Typescript in Typescript
+            </ul>
+        </section>
+
+        <!--<section>-->
+            <!--<h3>Resources</h3>-->
+            <!--<ul>-->
+            <!--<li>Flow-->
+                <!--<ul>-->
+                <!--<li><a target="_blank"-->
+                       <!--href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">-->
+                    <!--Flow in WebStorm-->
+                <!--</a>-->
+                    <!--<li><a target="_blank"-->
+                           <!--href="https://github.com/facebook/flow/issues/6">-->
+                        <!--No official Windows binaries,-->
+                        <!--unofficial build outdated and seems to break in server mode (March 2016)-->
+                    <!--</a>-->
+                    <!--<li><a target="_blank"-->
+                           <!--href="https://github.com/flowtype/flow-typed">-->
+                        <!--External Flow Type Definitions-->
+                    <!--</a>-->
+            <!--</ul>-->
+            <!--</li>-->
+                <!--<li>TypeScript-->
+                    <!--<ul>-->
+                        <!--<li><a target="_blank"-->
+                               <!--href="https://github.com/Microsoft/TypeScript/pull/7140">-->
+                            <!--PR from Anders Hejlsberg for non-nullable types-->
+                        <!--</a>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li><a target="_blank"-->
+                       <!--href="http://niksilver.com/2016/03/08/discovering-the-elm-language/">-->
+                    <!--Elm experience report</a>-->
+            <!--</ul>-->
+
+        <!--</section>-->
+
+        <section>
+            <!--<a href="http://www.embarc.de/"><img src="embarc13.png "-->
+                                                 <!--height="150"></a>-->
+            <h1>Thank you!</h1>
+
+            <h2>Questions / Discussion</h2>
+
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </p>
+        </section>
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
