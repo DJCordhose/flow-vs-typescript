@@ -15,9 +15,9 @@ function foo(num: number) {
 // console.log(foo(100).toString());
 // console.log(foo(1).toString());
 
-// not quite
-// const fooed: string|null = foo(100);
-const fooed: ?string = foo(100);
+// more accurate
+const fooed: string|void = foo(100);
+// const fooed: ?string = foo(100);
 
 if (fooed) {
     fooed.toString();

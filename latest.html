@@ -37,6 +37,13 @@
             float: right;
             height: 500px;
         }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+
     </style>
 
     <!-- Printing and PDF exports -->
@@ -70,6 +77,33 @@
             <!--<p><small><a href="http://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html">http://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html</a></small></p>-->
 
         </section>
+
+        <section>
+            <h1 class="todo">TODO</h1>
+            <ul class="todo">
+                <li>Line numbers for code samples
+                <li>Update to TypeScript 2.0
+                    <ul>
+                        <li>Discriminated union types: https://github.com/Microsoft/TypeScript/pull/9163 (was hat das mit Redux zu tun? irgendwas?)
+                        <li>Typings installed via npm: https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/
+                        <li>
+<pre>
+- https://github.com/Microsoft/typescript-build2016-demos
+- Motivation from: https://channel9.msdn.com/Events/Build/2016/B881 'Big JavaScript codebases tend to become "read-only".'
+- http://www.infoq.com/news/2016/04/typescript-2-preview?utm_source=javascriptweekly&utm_medium=email
+- https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-Modern-Compiler-Construction
+- https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-TypeScript-2
+</pre></li>
+
+                    </ul>
+                </li>
+                <li>Editor: Nuclide vs VSC
+                <li>Mach sowas Sinn?
+                - https://twitter.com/GiulioCanti/status/749527698402373632?s=03
+                - http://www.fewbutripe.com/swift/math/2015/01/06/proof-in-functions.html
+            </ul>
+        </section>
+
 
         <section>
             <h1>Part I: Introduction</h1>
@@ -312,7 +346,7 @@ function foo(num: number): string {
 
 </code></pre>
            <pre class="fragment"><code class="typescript" contenteditable data-trim>
-// nullable type: the one inferred (not quite, but this is the closest we can write down)
+// nullable type: the one inferred (not quite)
 function foo(num: number): ?string {
 	if (num > 10) {
 		return 'cool';
