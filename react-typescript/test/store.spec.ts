@@ -1,4 +1,4 @@
-import store from '../src/stores/store';
+import store from '../src/stores/dataStore';
 import {assert} from 'expect';
 
 describe('store', () => {

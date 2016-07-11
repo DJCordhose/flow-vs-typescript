@@ -2,14 +2,11 @@ import {assert, spyOn} from 'expect';
 import 'isomorphic-fetch';
 
 import {load} from '../src/actions/actionCreators';
-import store from '../src/stores/store';
+import store from '../src/stores/dataStore';
 
-function createResponse(jsonResponse: Object, status = 200, contentType: string = 'application/json') {
+function createResponse(jsonResponse: Object, status = 200) {
     const response = new Response(JSON.stringify(jsonResponse), {
-        status: status //,
-        // headers: {
-        //     'Content-type': contentType
-        // }
+        status: status
     });
 
     return Promise.resolve(response);

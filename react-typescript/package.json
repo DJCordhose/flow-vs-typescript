@@ -2,9 +2,11 @@
   "name": "react-typescript",
   "version": "0.0.1",
   "scripts": {
-    "start": "webpack --watch",
+    "server": "node src/server",
+    "weback": "webpack --watch",
+    "devserver": "webpack-dev-server --progress --colors --hot --content-base public",
     "tslint": "tslint -r node_modules/tslint-microsoft-contrib -c tslint.json src/index.tsx",
-    "test": "mocha ./test -r jsdom-global/register --compilers ts:ts-node/register --recursive",
+    "test": "mocha test -r jsdom-global/register --compilers ts:ts-node/register --recursive",
     "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
@@ -15,6 +17,8 @@
   },
   "devDependencies": {
     "expect": "^1.20.2",
+    "jsdom": "^9.4.1",
+    "jsdom-global": "^2.0.0",
     "mocha": "^2.5.3",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
@@ -23,7 +27,6 @@
     "tslint-microsoft-contrib": "^2.0.8",
     "typescript": "next",
     "webpack": "^1.13.1",
-    "jsdom": "^9.4.1",
-    "jsdom-global": "^2.0.0"
+    "webpack-dev-server": "^1.14.1"
   }
 }

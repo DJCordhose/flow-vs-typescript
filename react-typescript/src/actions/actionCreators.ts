@@ -1,7 +1,7 @@
 import Dispatcher from '../Dispatcher';
 import 'whatwg-fetch';
 
-const url = '/data';
+const url = 'http://localhost:3000/data';
 
 export function load(): Promise<any> {
     return window.fetch(url)
