@@ -1,0 +1,17 @@
+{
+  "name": "react-typescript",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "webpack --watch"
+  },
+  "dependencies": {
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1"
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2",
+    "typescript": "^2.0.0-dev.20160707",
+    "webpack": "^1.13.1"
+  }
+}
