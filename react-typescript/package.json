@@ -2,16 +2,24 @@
   "name": "react-typescript",
   "version": "0.0.1",
   "scripts": {
-    "start": "webpack --watch"
+    "start": "webpack --watch",
+    "tslint": "tslint -r node_modules/tslint-microsoft-contrib -c tslint.json src/index.tsx",
+    "test": "mocha ./test --compilers ts:ts-node/register --recursive",
+    "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   },
   "devDependencies": {
+    "expect": "^1.20.2",
+    "mocha": "^2.5.3",
     "source-map-loader": "^0.1.5",
     "ts-loader": "^0.8.2",
-    "typescript": "^2.0.0-dev.20160707",
+    "ts-node": "latest",
+    "tslint": "next",
+    "tslint-microsoft-contrib": "^2.0.8",
+    "typescript": "next",
     "webpack": "^1.13.1"
   }
 }
