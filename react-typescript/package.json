@@ -4,10 +4,12 @@
   "scripts": {
     "start": "webpack --watch",
     "tslint": "tslint -r node_modules/tslint-microsoft-contrib -c tslint.json src/index.tsx",
-    "test": "mocha ./test --compilers ts:ts-node/register --recursive",
+    "test": "mocha ./test -r jsdom-global/register --compilers ts:ts-node/register --recursive",
     "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
+    "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
     "react": "^15.2.1",
     "react-dom": "^15.2.1"
   },
@@ -20,6 +22,8 @@
     "tslint": "next",
     "tslint-microsoft-contrib": "^2.0.8",
     "typescript": "next",
-    "webpack": "^1.13.1"
+    "webpack": "^1.13.1",
+    "jsdom": "^9.4.1",
+    "jsdom-global": "^2.0.0"
   }
 }
