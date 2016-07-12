@@ -1,18 +1,17 @@
+import {List} from 'immutable';
+
 import Store from './Store';
 import Action from './actions/Action'
 
 class Dispatcher {
-    // todo: make that immutable
-    private stores: Array<Store> = [];
+    private _stores: List<Store> = List<Store>();
 
     dispatch(action: Action) {
-        for (const store of this.stores) {
-            store.accept(action);
-        }
+        this._stores.forEach(store => store.accept(action));
     }
 
     register(store: Store) {
-        this.stores.push(store);
+        this._stores = this._stores.push(store);
     }
 
 }

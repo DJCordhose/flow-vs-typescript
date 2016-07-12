@@ -33,12 +33,11 @@ describe('Load action', () => {
         // when
         const fetchPromise: Promise<any> = load();
 
-        // then
-        fetchPromise.then(()=> {
-            assert(store.model.value === model.value, 'model should be properly defined after load');
+        // then (be sure to return promise so that mocha can check if it succeeds)
+        return fetchPromise.then(()=> {
+            assert(store && store.model && (store.model.value === model.value), `model should be properly defined after load`);
             assert(fetchSpy.calls.length === 1, 'there should be exactly one fetch');
             assert(fetchSpy.calls[0].arguments.length === 1, 'fetch should get url as paramter');
-            // assert(fetchSpy.calls[0].arguments[0]).toMatch(/api\/votes$/);
         });
 
     });
