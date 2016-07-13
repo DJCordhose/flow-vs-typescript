@@ -10,6 +10,8 @@
     "test:watch": "npm run test -- --watch"
   },
   "dependencies": {
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
     "immutable": "^3.8.1",
     "isomorphic-fetch": "^2.2.1",
     "react": "^15.2.1",
