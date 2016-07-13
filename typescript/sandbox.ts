@@ -9,8 +9,8 @@
 import 'babel-polyfill';
 
 // import './basics.ts';
-// import './no-non-null-check.ts';
-import './generics-covariant.ts';
+import './no-non-null-check.ts';
+// import './generics-covariant.ts';
 
 // weird, build crashes when there is nothing in this module
 console.log('Done');

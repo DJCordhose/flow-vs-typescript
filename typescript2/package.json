@@ -1,0 +1,21 @@
+{
+  "name": "typescript2-playground",
+  "version": "2.0.0",
+  "scripts": {
+    "weback": "webpack --watch",
+    "devserver": "webpack-dev-server --progress --colors --hot --content-base public"
+  },
+  "author": "Oliver Zeigermann",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "source-map-loader": "^0.1.5",
+    "ts-loader": "^0.8.2",
+    "ts-node": "latest",
+    "tslint-microsoft-contrib": "^2.0.8",
+    "typescript": "next",
+    "webpack": "^1.13.1",
+    "webpack-dev-server": "^1.14.1"
+  }
+}

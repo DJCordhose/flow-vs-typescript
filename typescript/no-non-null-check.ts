@@ -9,6 +9,6 @@ function foo(num: number) {
     }
 }
 
-const result: string = foo(100);
-console.log(result.toString());
-console.log(foo(1).toString());
+const result: string|void = foo(100);
+// console.log(result.toString()); // Error
+console.log(foo(1).toString()); // Cool
