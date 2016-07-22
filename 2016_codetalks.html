@@ -86,6 +86,7 @@
 <pre>
 - shorten introduction
 - nice to have: add part on React integration (maybe too long anyway)
+- compare: http://blog.namangoel.com/flow-for-typescript-developers
 </pre>
         </section>
 
@@ -388,6 +389,30 @@ fooed!.toString();
                 `strictNullChecks` in `tsconfig.json`</p>
         </section>
 
+    <section>
+        <h3>Caveat</h3>
+        <p>Neither Flow nor TypeScript 2.0 catch this</p>
+           <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+    constructor() {
+        // why no error?
+    }
+}
+const olli: Person = new Person();
+</code></pre>
+        <pre><code class="typescript line-numbers" contenteditable data-trim>
+// issues error as expected
+const daniel: Person = {
+};
+</code></pre>
+        <p>At least in TypeScript, this won't be fixed:
+            <a href="https://github.com/Microsoft/TypeScript/issues/8476" target="_blank">
+                https://github.com/Microsoft/TypeScript/issues/8476
+        </a></p>
+        </section>
+
+
         <section>
             <h2>Generics</h2>
             <h3 class="fragment">aka Parametric Types</h3>
@@ -571,6 +596,14 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <!--<section class="todo">-->
             <!--<h2>IDE</h2>-->
             <!--&lt;!&ndash; - Editor: Nuclide vs VSC&ndash;&gt;-->
+<!--
+        https://twitter.com/thejameskyle/status/753637779754455040?s=03
+        If you're using @AtomEditor without https://t.co/JZ5qliSXIi and @flowtype, you're doing it wrong.
+
+        $ apm install nuclide
+
+        go
+-->
 
         <!--</section>-->
 
