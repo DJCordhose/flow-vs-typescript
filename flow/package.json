@@ -1,9 +1,20 @@
 {
   "name": "flow-sandbox",
   "scripts": {
-    "start": "flow"
+    "weback": "webpack --watch",
+    "devserver": "webpack-dev-server --progress --colors --hot --content-base public",
+    "check": "flow"
   },
   "devDependencies": {
-    "flow-bin": "latest"
+    "babel-core": "latest",
+    "babel-loader": "latest",
+    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "babel-preset-es2015": "latest",
+    "babel-preset-es2016": "latest",
+    "flow-bin": "latest",
+    "flowtype-loader": "latest",
+    "source-map-loader": "latest",
+    "webpack": "latest",
+    "webpack-dev-server": "latest"
   }
 }

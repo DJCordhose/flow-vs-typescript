@@ -10,8 +10,9 @@ class Person {
 
 const olli: Person = new Person();
 
-const daniel: Person = {
-};
+// issues error
+// const daniel: Person = {
+// };
 
 
 function myprint(p: Person) {

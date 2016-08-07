@@ -1,0 +1,6 @@
+/* @flow */
+
+declare function square(n: number): number;
+export {
+    square
+}

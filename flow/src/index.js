@@ -1,0 +1,1 @@
+import './mapping-an-object';
