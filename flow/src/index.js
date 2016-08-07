@@ -1,1 +1,2 @@
-import './mapping-an-object';
+// import './mapping-an-object';
+import './thirdparty-example';

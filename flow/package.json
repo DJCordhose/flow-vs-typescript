@@ -8,7 +8,7 @@
   "devDependencies": {
     "babel-core": "latest",
     "babel-loader": "latest",
-    "babel-plugin-transform-flow-strip-types": "^6.8.0",
+    "babel-plugin-transform-flow-strip-types": "latest",
     "babel-preset-es2015": "latest",
     "babel-preset-es2016": "latest",
     "flow-bin": "latest",
@@ -16,5 +16,8 @@
     "source-map-loader": "latest",
     "webpack": "latest",
     "webpack-dev-server": "latest"
+  },
+  "dependencies": {
+    "underscore": "latest"
   }
 }
