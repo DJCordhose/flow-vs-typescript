@@ -547,11 +547,52 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         </section>
 
         <section>
-            <h1>Part III: Environment and Integrations</h1>
+            <h1>Part III: Are Flow and TypeScript like Java/C++/C#?</h1>
         </section>
 
-        <section class="todo">
-            <h2>Working with 3rd Party Libraries</h2>
+        <section>
+            <h2>Not really</h2>
+            <ul>
+                <li class="fragment">Both
+                    <ul>
+                        <li>optionally typed / any
+                        <li>type compatibiliy is structural, not nominal
+                        <li>build to match common JavaScript programming patterns
+                        <li>type systems more expressive
+                        <li>type inference
+                        <li>control flow based type analysis
+                    </ul>
+                </li>
+                <li class="fragment">TypeScript
+                    <ul>
+                        <li>semantically compatible with JavaScript
+                    </ul>
+                </li>
+                <li class="fragment">Flow
+                    <ul>
+                        <li>just a checker
+                        <li>not even a language of its own
+                        <li>non-nullability as default
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Classes in TypeScript</h2>
+            <p class="fragment">TypeScript has special support for classes</p>
+            <p class="fragment">Makes it easier for people coming from Java/C++/C#</p>
+            <ul class="fragment">
+                <li><em>abstract</em> classes and methods
+                <li>special shortcut constructors (combined definition of fields and initialization)
+                <li>public, private, protected
+            </ul>
+            <p class="fragment">Flow does not feature this or any other syntactic sugar, as it is a checker only</p>
+        </section>
+
+        <section>
+            <h1>Part IV: Integrations</h1>
         </section>
 
         <section>
@@ -623,7 +664,34 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <!-- - checker capabilities or TypeScript-->
 
         <section>
-            <h1>Part IV: Epilogue</h1>
+            <h1>Part V: Epilogue</h1>
+        </section>
+
+        <section>
+            <h3>Why did Facebook build Flow?</h3>
+            <a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
+                <img src="twitter-why-flow.png" height="500px">
+            </a>
+            <p><small><a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
+                https://twitter.com/ReactEurope/status/763337791489146880
+            </a></small></p>
+        </section>
+
+        <section>
+            <h3>Should I use a type checker?</h3>
+            <ul>
+                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
+                <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
+                <li class="fragment">but: <span class="fragment">a type system is a complex thing</span>
+            </ul>
+            <p class="fragment">My recommendation</p>
+            <ul>
+                <li class="fragment">if your project does not live for long: <em class="fragment">no</em>
+                <li class="fragment">if your project is really simple: <em class="fragment">no</em>
+                <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
+                <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
+                <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
+            </ul>
         </section>
 
         <section>
@@ -744,6 +812,9 @@ let animals: Array&lt;Animal> = []; // can only contain animals
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
 <script src="lib/jquery-2.2.4.js"></script>
+<script>
+    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+</script>
 
 <script>
 
