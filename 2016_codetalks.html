@@ -69,6 +69,12 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
+
+
+        <!-- - compare: http://blog.namangoel.com/flow-for-typescript-developers-->
+        <!-- - watch: JavaScript Air | Typed JavaScript with TypeScript and Flow https://javascriptair.com/episodes/2016-08-31/-->
+
+
         <section>
             <h1>Flow vs TypeScript</h1>
             <h2>Type Systems for JavaScript</h2>
@@ -82,59 +88,50 @@
 
         </section>
 
-        <section class="todo">
-<pre>
-- shorten introduction
-- nice to have: add part on React integration (maybe too long anyway)
-- compare: http://blog.namangoel.com/flow-for-typescript-developers
-- watch: JavaScript Air | Typed JavaScript with TypeScript and Flow https://javascriptair.com/episodes/2016-08-31/
-</pre>
-        </section>
-
         <section>
             <h1>Part I: Introduction</h1>
         </section>
 
-        <section>
-            <h2>Motivation: Why a type system in the first place?</h2>
-        </section>
-        <section>
-            <h3>JavaScript is great to create usable solutions quickly</h3>
-        </section>
-        <section>
-            <h2 class="fragment">However...</h2>
-            <h3 class="fragment">... if your system ...</h3>
-                <ul>
-                    <li class="fragment">is large
-                    <li class="fragment">is very important or even crucial for the success of your company
-                    <li class="fragment">contains substantial amounts of business logic
-                    <li class="fragment">lives for a long time
-                    <li class="fragment">has a lot of contributors
-                </ul>
-            </ul>
-            <h3 class="fragment">... long term maintainability might be more interesting than short term velocity</h3>
-        </section>
-        <section>
-            <h2>JavaScript is lacking a type system, which might impact this...</h2>
-        </section>
-        <section>
-            <h3>Does a type system make you more productive?</h3>
-            <h4 class="fragment">Or less?</h4>
-            <ul>
-                <li class="fragment">some people claim <a target="_blank"
-                                                         href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using
-                    a type system is even unethical</a> in this Strangeloop talk
-                    <ul>
-                        <li class="fragment">(given you have an SLA)
-                    </ul>
-                </li>
-                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>
-                    elaborates that there is little or no impact
-            </ul>
-        </section>
-        <section>
-            <h1>So?</h1>
-        </section>
+        <!--<section>-->
+            <!--<h2>Motivation: Why a type system in the first place?</h2>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h3>JavaScript is great to create usable solutions quickly</h3>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>However...</h2>-->
+            <!--<h3 class="fragment">... if your system ...</h3>-->
+                <!--<ul>-->
+                    <!--<li class="fragment">is large-->
+                    <!--<li class="fragment">is very important or even crucial for the success of your company-->
+                    <!--<li class="fragment">contains substantial amounts of business logic-->
+                    <!--<li class="fragment">lives for a long time-->
+                    <!--<li class="fragment">has a lot of contributors-->
+                <!--</ul>-->
+            <!--</ul>-->
+            <!--<h3 class="fragment">... long term maintainability might be more interesting than short term velocity</h3>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>JavaScript is lacking a type system, which might impact this...</h2>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h3>Does a type system make you more productive?</h3>-->
+            <!--<h4 class="fragment">Or less?</h4>-->
+            <!--<ul>-->
+                <!--<li class="fragment">some people claim <a target="_blank"-->
+                                                         <!--href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using-->
+                    <!--a type system is even unethical</a> in this Strangeloop talk-->
+                    <!--<ul>-->
+                        <!--<li class="fragment">(given you have an SLA)-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>-->
+                    <!--elaborates that there is little or no impact-->
+            <!--</ul>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h1>So?</h1>-->
+        <!--</section>-->
         <section>
             <h2>Why using type systems?</h2>
             <h3 class="fragment">IMHO type systems make code easier to maintain</h3>
@@ -152,16 +149,16 @@
             </a></p>
         </section>
 
-        <section>
-            <h3>Most important single use case for me</h3>
-            <p class="fragment">JSON style data structures</p>
-            <ul>
-                <li class="fragment">REST payload
-                <li class="fragment">config files
-                <li class="fragment">objects from and to database
-            </ul>
-            <p class="fragment">as a close second place: <em>find usages</em></p>
-        </section>
+        <!--<section>-->
+            <!--<h3>Most important single use case for me</h3>-->
+            <!--<p class="fragment">JSON style data structures</p>-->
+            <!--<ul>-->
+                <!--<li class="fragment">REST payload-->
+                <!--<li class="fragment">config files-->
+                <!--<li class="fragment">objects from and to database-->
+            <!--</ul>-->
+            <!--<p class="fragment">as a close second place: <em>find usages</em></p>-->
+        <!--</section>-->
 
         <section>
             <h2>TypeScript</h2>
@@ -696,23 +693,6 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         </section>
 
         <section>
-            <h3>Should I use a type checker?</h3>
-            <ul>
-                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
-                <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
-                <li class="fragment">but: <span class="fragment">a type system is a complex thing</span>
-            </ul>
-            <p class="fragment">My recommendation</p>
-            <ul>
-                <li class="fragment">if your project does not live for long: <em class="fragment">no</em>
-                <li class="fragment">if your project is really simple: <em class="fragment">no</em>
-                <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
-                <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
-                <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
-            </ul>
-        </section>
-
-        <section>
             <h2>Wrap-Up</h2>
             <ul>
                 <li class="fragment">TypeScript and Flow have influenced each other heavily
@@ -815,9 +795,16 @@ let animals: Array&lt;Animal> = []; // can only contain animals
 <script src="lib/jquery-2.2.4.js"></script>
 <script>
 //    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
-//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
-$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+//$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+//$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
 //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    // only presentation version has fragments
+    if (window.location.hostname.indexOf('localhost') === -1) {
+        $('.fragment').removeClass('fragment');
+    }
 </script>
 
 <script>
