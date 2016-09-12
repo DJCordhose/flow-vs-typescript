@@ -16,9 +16,9 @@
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
     <link rel="stylesheet" href="reveal.js/css/reveal.css">
-    <link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
     <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
-    <!--<link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
     <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
 
 
@@ -36,6 +36,15 @@
             margin-left: 10px !important;
             float: right;
             height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
         }
     </style>
 
@@ -60,18 +69,24 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
+
+
+        <!-- - compare: http://blog.namangoel.com/flow-for-typescript-developers-->
+        <!-- - watch: JavaScript Air | Typed JavaScript with TypeScript and Flow https://javascriptair.com/episodes/2016-08-31/-->
+
+
         <section>
             <h1>Flow vs TypeScript</h1>
             <h2>Type Systems for JavaScript</h2>
+            <h3>Looking from the perspective of a practitioner</h3>
+            <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html">
+                http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html
+            </a></small></p>
+            <!--<p style="color: red">WORK IN PROGRESS</p>-->
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html">http://djcordhose.github.io/flow-vs-typescript/2016_hhjs.html</a></small></p>
-            <p style="color: red"><small>
-                Most recent version including TypeScript 2.0 can be found here (might be work in progress):
-                <a href="http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html">http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html</a></small></p>
-
         </section>
 
         <section>
@@ -85,7 +100,7 @@
             <!--<h3>JavaScript is great to create usable solutions quickly</h3>-->
         <!--</section>-->
         <!--<section>-->
-            <!--<h2 class="fragment">However...</h2>-->
+            <!--<h2>However...</h2>-->
             <!--<h3 class="fragment">... if your system ...</h3>-->
                 <!--<ul>-->
                     <!--<li class="fragment">is large-->
@@ -129,18 +144,22 @@
                 <li>can allow for generally better IDE support
                 <li>can catch errors early
             </ul>
+
+            <p class="fragment"><a href="https://channel9.msdn.com/Events/Build/2016/B881" target="_blank">
+                Anders Hejlsberg@Build2016: <em>Big JavaScript codebases tend to become "read-only".</em>
+            </a></p>
         </section>
 
-        <section>
-            <h3>Most important single use case for me</h3>
-            <p class="fragment">JSON style data structures</p>
-            <ul>
-                <li class="fragment">REST payload
-                <li class="fragment">config files
-                <li class="fragment">objects from and to database
-            </ul>
-            <p class="fragment">as a close second place: <em>find usages</em></p>
-        </section>
+        <!--<section>-->
+            <!--<h3>Most important single use case for me</h3>-->
+            <!--<p class="fragment">JSON style data structures</p>-->
+            <!--<ul>-->
+                <!--<li class="fragment">REST payload-->
+                <!--<li class="fragment">config files-->
+                <!--<li class="fragment">objects from and to database-->
+            <!--</ul>-->
+            <!--<p class="fragment">as a close second place: <em>find usages</em></p>-->
+        <!--</section>-->
 
         <section>
             <h2>TypeScript</h2>
@@ -184,12 +203,12 @@
 
         <section>
         <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript" contenteditable>let obj: string;
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable>let obj: string;
 obj = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
 obj = 10;
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 
 // types can be inferred (return type)
 function sayIt(what: string) {
@@ -198,7 +217,7 @@ function sayIt(what: string) {
 const said: string = sayIt(obj);
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
     // mandatory
     what: string;
@@ -217,21 +236,21 @@ class Sayer {
 
         <section>
         <h3>Flow</h3>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let obj: string;
 obj = 'yo';
 // Error: number: This type is incompatible with string
 obj = 10;
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
 const said: string = sayIt(obj);
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
     what: string;
 
@@ -259,7 +278,7 @@ class Sayer {
 
         <section>
         <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 function foo(num: number) {
     if (num > 10) {
       return 'cool';
@@ -267,13 +286,13 @@ function foo(num: number) {
 }
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // cool
 const result: string = foo(100);
 console.log(result.toString());
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // still cool?
 console.log(foo(1).toString());
 
@@ -286,9 +305,9 @@ console.log(foo(1).toString());
         <p class="fragment">TypeScript does not catch this</p>
       </section>
 
-        <section>
+    <section>
         <h3>Flow</h3>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 function foo(num: number) {
     if (num > 10) {
         return 'cool';
@@ -302,10 +321,11 @@ console.log(foo(100).toString());
             <p class="fragment">Flow does catch this</p>
         <p class="fragment">But why?</p>
         </section>
+
             <section>
                 <h4>Flow does not infer string as the return type</h4>
                 <p class="fragment">The inferred type is something else</p>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
                // error: return undefined. This type is incompatible with string
 function foo(num: number): string {
 	if (num > 10) {
@@ -314,18 +334,18 @@ function foo(num: number): string {
 }
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // nullable type: the one inferred
-function foo(num: number): ?string {
+function foo(num: number): string | void {
 	if (num > 10) {
 		return 'cool';
 	}
 }
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // to fix this, we need to check the result
-const fooed: ?string = foo(100);
+const fooed: string|void = foo(100);
 if (fooed) {
     fooed.toString();
 }
@@ -333,20 +353,64 @@ if (fooed) {
 </code></pre>
       </section>
 
+    <section>
+        <h3>Enter TypeScript 2.x</h3>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function foo(num: number) {
+    if (num > 10) {
+        return 'cool';
+    }
+}
+</code></pre>
+<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// to fix this, we need to check the result
+const fooed: string|void = foo(100);
+if (fooed) {
+    fooed.toString();
+}
+</code></pre>
+<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// or tell the compiler we not better (in this case we actually do)
+fooed!.toString();
+</code></pre>
+        <p class="fragment" style="color: red">Important: Only works when <em>strictNullChecks</em> option is checked</p>
+        <p class="fragment">More <a target="_blank" href="https://blogs.msdn.microsoft.com/typescript/2016/07/11/announcing-typescript-2-0-beta/">
+            Improvements in TypeScript 2.0
+        </a></p>
+        </section>
+
         <section>
             <h2>Non-nullable types</h2>
-            <p class="fragment">Types are nullable in TypeScript</p>
+            <p class="fragment">Types are nullable by default in TypeScript 1.x</p>
+            <p class="fragment">Non-nullable are still possible in TypeScript 1.x in a limited way</p>
             <p class="fragment">Types are non-nullable by default in Flow</p>
-            <p class="fragment">Nullable types in Flow also possible</p>
-            <p class="fragment">Non-nullable types not yet present in TypeScript
-<br>
-                (<a target="_blank"
-                    href="https://github.com/Microsoft/TypeScript/pull/7140">
-                    but there is hope
-                </a>)
-
-            </p>
+            <p class="fragment">TypeScript 2.x makes types non-nullable by default using
+                `strictNullChecks` in `tsconfig.json`</p>
         </section>
+
+    <section>
+        <h3>Caveat</h3>
+        <p>Neither Flow nor TypeScript 2.0 catch this</p>
+           <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+    constructor() {
+        // why no error?
+    }
+}
+const olli: Person = new Person();
+</code></pre>
+        <pre><code class="typescript line-numbers" contenteditable data-trim>
+// issues error as expected
+const daniel: Person = {
+};
+</code></pre>
+        <p>At least in TypeScript, this won't be fixed:
+            <a href="https://github.com/Microsoft/TypeScript/issues/8476" target="_blank">
+                https://github.com/Microsoft/TypeScript/issues/8476
+        </a></p>
+        </section>
+
 
         <section>
             <h2>Generics</h2>
@@ -481,9 +545,114 @@ let animals: Array&lt;Animal> = []; // can only contain animals
             </ul>
         </section>
 
-        <!--// for jsunconf???-->
-        <!--<section>-->
+        <section>
+            <h1>Part III: Are Flow and TypeScript like Java/C++/C#?</h1>
+        </section>
+
+        <section>
+            <h2>Not really</h2>
+            <ul>
+                <li class="fragment">Both
+                    <ul>
+                        <li>optionally typed / any
+                        <li>type compatibiliy is structural, not nominal
+                        <li>build to match common JavaScript programming patterns
+                        <li>type systems more expressive
+                        <li>type inference
+                        <li>control flow based type analysis
+                    </ul>
+                </li>
+                <li class="fragment">TypeScript
+                    <ul>
+                        <li>semantically compatible with JavaScript
+                    </ul>
+                </li>
+                <li class="fragment">Flow
+                    <ul>
+                        <li>just a checker
+                        <li>not even a language of its own
+                        <li>non-nullability as default
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Classes in TypeScript</h2>
+            <p class="fragment">TypeScript has special support for classes</p>
+            <p class="fragment">Makes it easier for people coming from Java/C++/C#</p>
+            <ul class="fragment">
+                <li><em>abstract</em> classes and methods
+                <li>special shortcut constructors (combined definition of fields and initialization)
+                <li>public, private, protected
+            </ul>
+            <p class="fragment">Flow does not feature this or any other syntactic sugar, as it is a checker only</p>
+        </section>
+
+        <section>
+            <h1>Part IV: Integrations</h1>
+        </section>
+
+        <section>
+            <h3>TypeScript Declaration files</h3>
+            <ul>
+                <li>Core Declarations come with TypeScript compiler
+                <li>Needs External Type Declarations for 3rd party libraries
+                <li>Managed by <a href="https://github.com/typings/typings" target="_blank">Typings</a> tools
+                (<em>typings install dt~mocha --save</em>)
+                <li>Will be made <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">obsolete by npm</a>
+                (<em>npm install @types/react --save</em>)
+                <li>If there are no existing declaration files
+                    <ul>
+                        <li>Bad luck
+                        <li>Use <em>allowJs</em> option to include raw JavaScript
+                        (<a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#including-js-files-with---allowjs">
+                        introduced in 1.8</a>)
+                        <li>Write a dummy module declaration (vastly <a href="https://blogs.msdn.microsoft.com/typescript/2016/07/11/announcing-typescript-2-0-beta/">simplified in 2.0</a>)
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>3rd Party Libraries in Flow</h3>
+            <ul>
+                <li>Core Declarations come with Flow Checker, includes React
+                <li>Other external declarations are optional
+                <li><a target="_blank"
+                       href="https://github.com/flowtype/flow-typed">
+                    External Flow Type Definitions
+                </a>
+                <li>by far less libraries covered than TypeScript
+                <li>some libraries even come with added flow type declarations (e.g. immutable.js)
+                <li><a target="_blank"
+                       href="https://flowtype.org/docs/third-party.html">
+                    Declarations can be added to flow config files
+                </a>
+            </ul>
+        </section>
+
+        <!--<section class="todo">-->
+            <!--<h2>IDE</h2>-->
+            <!--&lt;!&ndash; - Editor: Nuclide vs VSC&ndash;&gt;-->
+<!--
+        https://twitter.com/thejameskyle/status/753637779754455040?s=03
+        If you're using @AtomEditor without https://t.co/JZ5qliSXIi and @flowtype, you're doing it wrong.
+
+        $ apm install nuclide
+
+        go
+-->
+
+        <!--</section>-->
+
+
+        <!--<section class="todo">-->
             <!--<h2>React support</h2>-->
+            <!--&lt;!&ndash;Using with React&ndash;&gt;-->
+            <!--&lt;!&ndash; - https://www.typescriptlang.org/docs/handbook/react-&-webpack.html&ndash;&gt;-->
+
         <!--</section>-->
         <!--<section>-->
             <!--<h2>Advanced types</h2>-->
@@ -494,15 +663,24 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <!-- - checker capabilities or TypeScript-->
 
         <section>
-            <h1>Part III: Epilogue</h1>
+            <h1>Part V: Epilogue</h1>
         </section>
 
+        <section>
+            <h3>Why did Facebook build Flow?</h3>
+            <a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
+                <img src="twitter-why-flow.png" height="500px">
+            </a>
+            <p><small><a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
+                https://twitter.com/ReactEurope/status/763337791489146880
+            </a></small></p>
+        </section>
 
         <section>
             <h3>Should I use a type checker?</h3>
             <ul>
                 <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
-                <li class="fragment">initial effort to introduce a checker is low, though (especially true for flow)
+                <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
                 <li class="fragment">but: <span class="fragment">a type system is a complex thing</span>
             </ul>
             <p class="fragment">My recommendation</p>
@@ -529,43 +707,69 @@ let animals: Array&lt;Animal> = []; // can only contain animals
                 <li class="fragment">Generics in TypeScript are easier, but less expressive
                 <li class="fragment">Flow's type system is generally more expressive
                 <li class="fragment">Flow written in OCaml, Typescript in Typescript
+                <li class="fragment">Integration with existing 3rd party libraries a PITA in TypeScript 1.x
+                <li class="fragment">Vastly improved in TypeScript 2.x
             </ul>
         </section>
 
-        <!--<section>-->
-            <!--<h3>Resources</h3>-->
-            <!--<ul>-->
-            <!--<li>Flow-->
-                <!--<ul>-->
-                <!--<li><a target="_blank"-->
-                       <!--href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">-->
-                    <!--Flow in WebStorm-->
-                <!--</a>-->
-                    <!--<li><a target="_blank"-->
-                           <!--href="https://github.com/facebook/flow/issues/6">-->
-                        <!--No official Windows binaries,-->
-                        <!--unofficial build outdated and seems to break in server mode (March 2016)-->
-                    <!--</a>-->
-                    <!--<li><a target="_blank"-->
-                           <!--href="https://github.com/flowtype/flow-typed">-->
-                        <!--External Flow Type Definitions-->
-                    <!--</a>-->
-            <!--</ul>-->
-            <!--</li>-->
-                <!--<li>TypeScript-->
-                    <!--<ul>-->
-                        <!--<li><a target="_blank"-->
-                               <!--href="https://github.com/Microsoft/TypeScript/pull/7140">-->
-                            <!--PR from Anders Hejlsberg for non-nullable types-->
-                        <!--</a>-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li><a target="_blank"-->
-                       <!--href="http://niksilver.com/2016/03/08/discovering-the-elm-language/">-->
-                    <!--Elm experience report</a>-->
-            <!--</ul>-->
+        <section>
+            <h3>Resources</h3>
+            <ul>
+            <li>Flow
+                <ul>
+                    <li><a target="_blank"
+                           href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.5fhfyngkf">
+                        Flow: Mapping an object
+                    </a>
+                <li><a target="_blank"
+                       href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">
+                    Flow in WebStorm
+                </a>
+                    <li><a target="_blank"
+                           href="https://www.flowtype.org/blog/2016/08/01/Windows-Support.html">
+                        Official Windows binaries since August 2016
+                    </a>
+                    <li><a target="_blank"
+                           href="https://medium.com/@ikai/james-thanks-for-writing-this-795437144d08#.mbd4fyq3l">
+                        Medium uses Flow
+                    </a>
+                    <li><a target="_blank"
+                           href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux-flow/">
+                    Type Checking with Flow in React + Redux
+                    </a>
+                    <li><a target="_blank"
+                           href="https://github.com/flowtype/flow-typed">
+                        External Type Definitions
+                    </a>
+            </ul>
+            </li>
+                <li>TypeScript
+                    <ul>
+                        <li><a target="_blank"
+                               href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">
+                            What's new in TypeScript
+                        </a>
+                        <li><a target="_blank"
+                               href="https://github.com/Microsoft/TypeScript/wiki/Roadmap">
+                        Roadmap
+                        </a>
+                        <li><a target="_blank"
+                               href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-Modern-Compiler-Construction">
+                        Anders Hejlsberg on Modern Compiler Construction
+                        </a>
+                        <li><a target="_blank"
+                               href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-TypeScript-2">
+                        Anders Hejlsberg on TypeScript 2
+                        </a>
+                        <li><a target="_blank"
+                               href="https://vsavkin.com/functional-typescript-316f0e003dc6#.7pooz4sba">
+                        Functional TypeScript
+                        </a>
 
-        <!--</section>-->
+                    </ul>
+                </li>
+            </ul>
+        </section>
 
         <section>
             <!--<a href="http://www.embarc.de/"><img src="embarc13.png "-->
@@ -578,6 +782,10 @@ let animals: Array&lt;Animal> = []; // can only contain animals
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
 
             </p>
+            <p><a href="http://djcordhose.github.io/flow-vs-typescript/2016_codetalks.html">
+                http://djcordhose.github.io/flow-vs-typescript/2016_codetalks.html
+            </a></p>
+
         </section>
     </div>
 
@@ -585,6 +793,20 @@ let animals: Array&lt;Animal> = []; // can only contain animals
 
 <script src="reveal.js/lib/js/head.min.js"></script>
 <script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+//    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+//$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+//$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    // only presentation version has fragments
+    if (window.location.hostname.indexOf('localhost') === -1) {
+        $('.fragment').removeClass('fragment');
+    }
+</script>
 
 <script>
 
@@ -623,7 +845,8 @@ let animals: Array&lt;Animal> = []; // can only contain animals
             }
             },
             {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
-            {src: 'reveal.js/plugin/notes/notes.js', async: true}
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
         ]
     });
 
