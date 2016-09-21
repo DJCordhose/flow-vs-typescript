@@ -24,3 +24,10 @@ class Sayer {
         return `Saying: ${this.what}`;
     }
 }
+
+// flow does not mind
+/**
+ * @type {number}
+ */
+let a = 10;
+a = 'Dog';

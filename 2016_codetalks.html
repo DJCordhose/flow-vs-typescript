@@ -69,23 +69,31 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
-
-
-        <!-- - compare: http://blog.namangoel.com/flow-for-typescript-developers-->
-        <!-- - watch: JavaScript Air | Typed JavaScript with TypeScript and Flow https://javascriptair.com/episodes/2016-08-31/-->
-
-
         <section>
             <h1>Flow vs TypeScript</h1>
             <h2>Type Systems for JavaScript</h2>
+            <h3><a target="_blank"
+                    href="https://www.codetalks.de/2016/programm/flow-vs-typescript-typen-systeme-fuer-javascript">
+                CodeTalks Hamburg 2016</a></h3>
+            <!--<p style="color: red">WORK IN PROGRESS</p>-->
+            <p>Looking from the perspective of a practitioner</p>
+            <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html">
+                http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html
+            </a></small></p>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/2016_codetalks.html">
-                http://djcordhose.github.io/flow-vs-typescript/2016_codetalks.html
-            </a></small></p>
+        </section>
 
+        <section>
+            <h2>Nothing special about me</h2>
+            <p class="fragment">I am just a practitioner like you</p>
+            <p class="fragment">My knowledge comes from</p>
+            <ol>
+                <li class="fragment">Listening to people who have built TypeScript and Flow (more in Resources)
+                <li class="fragment">Having experience with both of them in real world projects (you can try that yourself)
+            </ol>
         </section>
 
         <section>
@@ -134,14 +142,14 @@
         <!--</section>-->
         <section>
             <h2>Why using type systems?</h2>
-            <h3 class="fragment">IMHO type systems make code easier to maintain</h3>
+            <h3 class="fragment">type systems make code easier to maintain</h3>
             <p class="fragment">type annotations</p>
             <ul class="fragment">
                 <li>can make code more readable
                 <li>can make code easier to analyse
                 <li>can allow for reliable refactoring
                 <li>can allow for generally better IDE support
-                <li>can catch errors early
+                <li>can catch some (type related) errors early
             </ul>
 
             <p class="fragment"><a href="https://channel9.msdn.com/Events/Build/2016/B881" target="_blank">
@@ -376,6 +384,7 @@ fooed!.toString();
         <p class="fragment">More <a target="_blank" href="https://blogs.msdn.microsoft.com/typescript/2016/07/11/announcing-typescript-2-0-beta/">
             Improvements in TypeScript 2.0
         </a></p>
+        <p class="fragment">Catches up with Flow on control flow analysis (needed to make null checks really useful)</p>
         </section>
 
         <section>
@@ -678,9 +687,10 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <section>
             <h3>Should I use a type checker?</h3>
             <ul>
+                <li class="fragment">don't be fooled: checkers do not make your programm error free
                 <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
                 <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
-                <li class="fragment">but: <span class="fragment">a type system is a complex thing</span>
+                <li class="fragment">but a type system is a complex thing, it comes at a cost
             </ul>
             <p class="fragment">My recommendation</p>
             <ul>
@@ -714,6 +724,15 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         <section>
             <h3>Resources</h3>
             <ul>
+                <li><a target="_blank"
+                       href="https://javascriptair.com/episodes/2016-08-31/">
+                    JavaScript Air | Typed JavaScript with TypeScript and Flow
+                </a>
+                <li><a target="_blank"
+                       href="http://blog.namangoel.com/flow-for-typescript-developers">
+                    Flow for TypeScript Developers
+                </a>
+
             <li>Flow
                 <ul>
                     <li><a target="_blank"

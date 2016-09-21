@@ -22,3 +22,10 @@ class Sayer {
         return `Saying: ${this.what}`;
     }
 }
+
+/**
+ * @type {number}
+ */
+let a = 10;
+// a = 'Dog';
+
