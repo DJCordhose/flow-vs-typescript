@@ -20,6 +20,6 @@ if (fooed) {
     fooed.toString();
 }
 
-// or tell the compiler we not better (in this case we actually do)
+// or tell the compiler we know better (in this case we actually do)
 
 fooed!.toString();
