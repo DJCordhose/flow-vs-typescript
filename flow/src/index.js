@@ -2,4 +2,5 @@
 
 // import './mapping-an-object';
 // import './thirdparty-example';
-import './basics';
+// import './basics';
+import './readonly';

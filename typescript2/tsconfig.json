@@ -1,4 +1,5 @@
 {
+  "version": "2",
   "compilerOptions": {
     "outDir": "./dist/",
     "sourceMap": true,
@@ -10,10 +11,14 @@
     "moduleResolution": "node",
     "strictNullChecks": true
   },
+  "files": [
+    "src/index.ts"
+  ],
   "include": [
-    "src/**/*",
+//    "src/**/*",
     "./typings/*.d.ts"
   ],
+
   "exclude": [
     "node_modules"
   ]

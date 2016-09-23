@@ -52,53 +52,47 @@
 /* 1 */
 /***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var obj = void 0;
-	obj = 'yo';
-	// Error: Type 'number' is not assignable to type 'string'.
-	// obj = 10;
+	// https://blogs.msdn.microsoft.com/typescript/2016/09/22/announcing-typescript-2-0/
+	// readonly not supported in flow
+	var Person = function Person(name) {
+	    _classCallCheck(this, Person);
 	
-	// return type can be inferred
-	function sayIt(what) {
-	    return 'Saying: ' + what;
+	    this.name = name;
 	}
-	var said = sayIt(obj);
+	/*readonly*/;
 	
-	var Sayer = function () {
-	    function Sayer(what) {
-	        _classCallCheck(this, Sayer);
+	// private not supported in Flow
 	
-	        this.what = what;
+	
+	var Person2 = function () {
+	    function Person2(name) {
+	        _classCallCheck(this, Person2);
+	
+	        this._name = name;
 	    }
+	    /*private */
 	
-	    // return type if you want to
-	
-	    // mandatory
-	
-	
-	    _createClass(Sayer, [{
-	        key: 'sayIt',
-	        value: function sayIt() {
-	            return 'Saying: ' + this.what;
+	    _createClass(Person2, [{
+	        key: "name",
+	        get: function get() {
+	            return this._name;
 	        }
 	    }]);
 	
-	    return Sayer;
+	    return Person2;
 	}();
 	
-	// flow does not mind
-	/**
-	 * @type {number}
-	 */
+	// ok in flow
 	
 	
-	var a = 10;
-	a = 'Dog';
+	var p = new Person2("Daniel").name = "Dan";
+	console.log(p);
 
 /***/ }
 /******/ ]);
