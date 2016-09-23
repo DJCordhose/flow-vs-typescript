@@ -75,7 +75,6 @@
             <h3><a target="_blank"
                     href="https://www.codetalks.de/2016/programm/flow-vs-typescript-typen-systeme-fuer-javascript">
                 CodeTalks Hamburg 2016</a></h3>
-            <!--<p style="color: red">WORK IN PROGRESS</p>-->
             <p>Looking from the perspective of a practitioner</p>
             <p><small><a href="http://bit.ly/codetalks-types">
                 http://bit.ly/codetalks-types
@@ -88,11 +87,11 @@
 
         <section>
             <h2>Nothing special about me</h2>
-            <p class="fragment">I am just a practitioner like you</p>
-            <p class="fragment">My knowledge comes from</p>
+            <p>I am just a practitioner like you</p>
+            <p>My knowledge comes from</p>
             <ol>
-                <li class="fragment">Listening to people who have built TypeScript and Flow (more in Resources)
-                <li class="fragment">Having experience with both of them in real world projects (you can try that yourself)
+                <li>Listening to people who have built TypeScript and Flow (more in Resources)
+                <li>Having experience with both of them in real world projects (you can try that yourself)
             </ol>
         </section>
 
@@ -177,11 +176,11 @@
                 <li>Based on ES6 (probably ES7/ES8)
                 <li>Adds optional type annotations, visibility, and decorators
                 <li>Compiler checks and removes annotations
-                <li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>
-                <li>External declarations can add type information to pure JavaScript
-                <li>Extensive support in
+                <!--<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>-->
+                <!--<li>External declarations can add type information to pure JavaScript-->
+                <!--<li>Extensive support in-->
 
-                <a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code
+                <!--<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code-->
             </ul>
         </section>
 
@@ -193,15 +192,15 @@
                 <li>By Facebook
                 <li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
                 <li>Not a compiler, but checker
-                <li>Works without any type annotations
-                <li>Very good at inferring types
+                <!--<li>Works without any type annotations-->
+                <!--<li>Very good at inferring types-->
                 <li>If present, type annotations can very easily be removed by babel for runtime
             </ul>
         </section>
 
         <section>
             <h1>Part II: Comparison</h1>
-            <h2 class="fragment">aka what I find most important</h2>
+            <!--<h2 class="fragment">aka what I find most important</h2>-->
         </section>
 
         <section>
@@ -275,12 +274,12 @@ class Sayer {
 
         <section>
             <h2>Right, pretty much the same</h2>
-            <p class="fragment">Those basic features help with documentation, refactoring, and IDE support</p>
+            <p>Those basic features help with documentation, refactoring, and IDE support</p>
         </section>
 
         <section>
             <h2>Non-Nullable Types</h2>
-            <h4 class="fragment">Talking about correctness</h4>
+            <h4>Talking about correctness</h4>
         </section>
 
         <section>
@@ -408,12 +407,12 @@ class Person {
 }
 const olli: Person = new Person();
 </code></pre>
-        <pre><code class="typescript line-numbers" contenteditable data-trim>
+        <pre><code class="typescript line-numbers fragment" contenteditable data-trim>
 // issues error as expected
 const daniel: Person = {
 };
 </code></pre>
-        <p>At least in TypeScript, this won't be fixed:
+        <p class="fragment">At least in TypeScript, this won't be fixed:
             <a href="https://github.com/Microsoft/TypeScript/issues/8476" target="_blank">
                 https://github.com/Microsoft/TypeScript/issues/8476
         </a></p>
@@ -422,8 +421,8 @@ const daniel: Person = {
 
         <section>
             <h2>Generics</h2>
-            <h3 class="fragment">aka Parametric Types</h3>
-            <h4 class="fragment">might be a bit scary...</h4>
+            <h3>aka Parametric Types</h3>
+            <!--<h4 class="fragment">might be a bit scary...</h4>-->
         </section>
 
         <section>
@@ -453,24 +452,24 @@ class Cat extends Animal {
         <h3>Generic Type information</h3>
             <p class="fragment">Types can be parameterized by others</p>
             <p class="fragment">Most common with collection types</p>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let cats: Array&lt;Cat> = []; // can only contain cats
 let animals: Array&lt;Animal> = []; // can only contain animals
 
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
 // nope, no cat
 cats.push(10);
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
 // nope, no cat
 cats.push(new Animal('Fido'));
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
 // cool, is a cat
 cats.push(new Cat('Purry'));
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="9">
 // cool, cat is a sub type of animal
 animals.push(new Cat('Purry'));
            </code></pre>
@@ -486,26 +485,26 @@ animals.push(new Cat('Purry'));
 
         <section>
         <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let cats: Array&lt;Cat> = []; // can only contain cats
 let animals: Array&lt;Animal> = []; // can only contain animals
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
 // error TS2322: Type 'Animal[]' is not assignable to type 'Cat[]'.
 //  Type 'Animal' is not assignable to type 'Cat'.
 //    Property 'purrFactor' is missing in type 'Animal'.
-// cats = animals;
+cats = animals;
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
 // wow, works, but is no longer safe
 animals = cats;
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="9">
 // because those are now all cool
 animals.push(new Dog('Brutus'));
 animals.push(new Animal('Twinky'));
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="12">
 // ouch:
 cats.forEach(cat => console.log(`Cat: ${cat.name}`));
 // Cat: Purry
@@ -516,18 +515,18 @@ cats.forEach(cat => console.log(`Cat: ${cat.name}`));
 
         <section>
         <h3>Flow</h3>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 let cats: Array&lt;Cat> = []; // can only contain cats
 let animals: Array&lt;Animal> = []; // can only contain animals
 </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
 // ERROR
 // property `purrFactor` of Cat. Property not found in Animal
-// cats = animals;
+cats = animals;
            </code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
+           <pre class="fragment"><code class="typescript  line-numbers" contenteditable data-trim data-num-start="6">
 // same ERROR
-// animals = cats;
+animals = cats;
            </code></pre>
             <p class="fragment">End of story for Flow</p>
       </section>
@@ -537,17 +536,17 @@ let animals: Array&lt;Animal> = []; // can only contain animals
             <ul>
                 <li class="fragment">TypeScript
                 <ul>
-                    <li class="fragment">parametric types are compatible if the type to assign from has a more special type parameter</li>
-                    <li class="fragment">seems most intuitive
-                    <li class="fragment">allows for obviously wrong code, though
+                    <li>parametric types are compatible if the type to assign from has a more special type parameter</li>
+                    <li>seems most intuitive
+                    <li>allows for obviously wrong code, though
                 </ul>
             </li>
                 <li class="fragment">Flow
                     <ul>
-                        <li class="fragment">using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>
-                        <li class="fragment">Array in Flow has an invariant parametric type</li>
-                        <li class="fragment">more expressive
-                        <li class="fragment">harder to understand
+                        <li>using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>
+                        <li>Array in Flow has an invariant parametric type</li>
+                        <li>more expressive
+                        <li>harder to understand
                     </ul>
                 </li>
             </ul>
@@ -563,8 +562,8 @@ let animals: Array&lt;Animal> = []; // can only contain animals
                 <li class="fragment">Both
                     <ul>
                         <li>optionally typed / any
-                        <li>type compatibiliy is structural, not nominal
-                        <li>build to match common JavaScript programming patterns
+                        <li>type compatibility is structural, not nominal
+                        <li>built to match common JavaScript programming patterns
                         <li>type systems more expressive
                         <li>type inference
                         <li>control flow based type analysis
@@ -594,6 +593,10 @@ let animals: Array&lt;Animal> = []; // can only contain animals
                 <li><em>abstract</em> classes and methods
                 <li>special shortcut constructors (combined definition of fields and initialization)
                 <li>public, private, protected
+                <li>decorators (aka <a  target="_blank" href="https://msdn.microsoft.com/en-us/library/z0w1kczw(v=vs.80).aspx">
+                Attributes in C#
+                </a> and <a target="_blank" href="https://docs.oracle.com/javase/tutorial/java/annotations/">
+Annotations in Java</a>)
                 <li>
                     <a target="_blank"
                             href="https://blogs.msdn.microsoft.com/typescript/2016/09/22/announcing-typescript-2-0/">
@@ -608,7 +611,7 @@ let animals: Array&lt;Animal> = []; // can only contain animals
         </section>
 
         <section>
-            <h1>Part IV: Integrations</h1>
+            <h1>Part IV: Integrations of raw JavaScript files</h1>
         </section>
 
         <section>
@@ -683,22 +686,22 @@ let animals: Array&lt;Animal> = []; // can only contain animals
             <h1>Part V: Epilogue</h1>
         </section>
 
-        <section>
-            <h3>Why did Facebook build Flow?</h3>
-            <a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
-                <img src="twitter-why-flow.png" height="500px">
-            </a>
-            <p><small><a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
-                https://twitter.com/ReactEurope/status/763337791489146880
-            </a></small></p>
-        </section>
+        <!--<section>-->
+            <!--<h3>Why did Facebook build Flow?</h3>-->
+            <!--<a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">-->
+                <!--<img src="twitter-why-flow.png" height="500px">-->
+            <!--</a>-->
+            <!--<p><small><a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">-->
+                <!--https://twitter.com/ReactEurope/status/763337791489146880-->
+            <!--</a></small></p>-->
+        <!--</section>-->
 
         <section>
             <h3>Should I use a type checker?</h3>
             <ul>
-                <li class="fragment">don't be fooled: checkers do not make your programm error free
+                <li class="fragment">don't be fooled: checkers do not make your program error free
                 <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
-                <li class="fragment">initial effort to introduce a checker is low, though (especially for true for flow)
+                <li class="fragment">initial effort to introduce a checker is low, though (especially true for flow)
                 <li class="fragment">but a type system is a complex thing, it comes at a cost
             </ul>
             <p class="fragment">My recommendation</p>
@@ -713,20 +716,20 @@ let animals: Array&lt;Animal> = []; // can only contain animals
 
         <section>
             <h2>Wrap-Up</h2>
-            <ul>
-                <li class="fragment">TypeScript and Flow have influenced each other heavily
-                <li class="fragment">Basic typings are pretty similar
-                <li class="fragment">Both also support React
-                <li class="fragment">Many more constructs like union, intersection, and array types in both
-                <li class="fragment">Flow can even understand TypeScript declaration files
-                <li class="fragment">TypeScript is a compiler, Flow is a checker
-                <li class="fragment">Flow shoots for soundness, TypeScript for tool support
-                <li class="fragment">Flow has non-nullable types as defaults
-                <li class="fragment">Generics in TypeScript are easier, but less expressive
-                <li class="fragment">Flow's type system is generally more expressive
-                <li class="fragment">Flow written in OCaml, Typescript in Typescript
-                <li class="fragment">Integration with existing 3rd party libraries a PITA in TypeScript 1.x
-                <li class="fragment">Vastly improved in TypeScript 2.x
+            <ul class="fragment">
+                <li>TypeScript and Flow have influenced each other heavily
+                <li>Basic typings are pretty similar
+                <li >Both also support React
+                <li >Many more constructs like union, intersection, and array types in both
+                <!--<li class="fragment">Flow can even understand TypeScript declaration files-->
+                <li >TypeScript is a compiler, Flow is a checker
+                <li >Flow shoots for soundness, TypeScript for tool support
+                <li >Flow has non-nullable types as defaults
+                <li >Generics in TypeScript are easier, but less expressive
+                <li >Flow's type system is generally more expressive
+                <li >Flow is written in OCaml, Typescript in Typescript
+                <li >Integration with existing 3rd party libraries a PITA in TypeScript 1.x
+                <li >Vastly improved in TypeScript 2.x
             </ul>
         </section>
 
