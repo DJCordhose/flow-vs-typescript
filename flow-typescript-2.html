@@ -590,6 +590,7 @@ animals = cats;
             <ul class="fragment">
                 <li><em>abstract</em> classes and methods
                 <li>special shortcut constructors (combined definition of fields and initialization)
+                <li>interfaces
                 <li>public, private, protected
                 <li>decorators (aka <a  target="_blank" href="https://msdn.microsoft.com/en-us/library/z0w1kczw(v=vs.80).aspx">
                 Attributes in C#
@@ -726,6 +727,7 @@ type Test = {
     id: string;
     // ...
 };
+//  error   'string' This type is incompatible with 'number'
 List(tests).sort((t1, t2) => t1.id - t2.id)
 </code></pre>
 
