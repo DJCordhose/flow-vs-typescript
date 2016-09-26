@@ -711,8 +711,28 @@ Annotations in Java</a>)
                 <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
                 <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
                 <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
+                <li class="fragment">you have any amount of algorithmic code: <em class="fragment">yes</em>
             </ul>
         </section>
+
+        <section>
+            <h2>Types do not help you to avoid errors in algorithms?</h2>
+            <p class="fragment">If so, what might be the problem here?</p>
+<pre class="fragment"><code class="typescript" contenteditable data-trim >
+List(tests).sort((t1, t2) => t1.id - t2.id)
+</code></pre>
+            <p class="fragment">Those <code>ids</code> acutally are strings, result always is <code>NaN</code></p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim >
+// this would have saved you
+type Test = {
+    id: string;
+    // ...
+};
+List(tests).sort((t1, t2) => t1.id - t2.id)
+</code></pre>
+
+        </section>
+
 
         <section>
             <h2>Wrap-Up</h2>
