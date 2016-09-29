@@ -395,28 +395,28 @@ fooed!.toString();
                 `strictNullChecks` in `tsconfig.json`</p>
         </section>
 
-    <section>
-        <h3>Caveat</h3>
-        <p>Neither Flow nor TypeScript 2.0 catch this</p>
-           <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Person {
-    name: string;
-    constructor() {
-        // why no error?
-    }
-}
-const olli: Person = new Person();
-</code></pre>
-        <pre><code class="typescript line-numbers fragment" contenteditable data-trim>
-// issues error as expected
-const daniel: Person = {
-};
-</code></pre>
-        <p class="fragment">At least in TypeScript, this won't be fixed:
-            <a href="https://github.com/Microsoft/TypeScript/issues/8476" target="_blank">
-                https://github.com/Microsoft/TypeScript/issues/8476
-        </a></p>
-        </section>
+    <!--<section>-->
+        <!--<h3>Caveat</h3>-->
+        <!--<p>Neither Flow nor TypeScript 2.0 catch this</p>-->
+           <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Person {-->
+    <!--name: string;-->
+    <!--constructor() {-->
+        <!--// why no error?-->
+    <!--}-->
+<!--}-->
+<!--const olli: Person = new Person();-->
+<!--</code></pre>-->
+        <!--<pre><code class="typescript line-numbers fragment" contenteditable data-trim>-->
+<!--// issues error as expected-->
+<!--const daniel: Person = {-->
+<!--};-->
+<!--</code></pre>-->
+        <!--<p class="fragment">At least in TypeScript, this won't be fixed:-->
+            <!--<a href="https://github.com/Microsoft/TypeScript/issues/8476" target="_blank">-->
+                <!--https://github.com/Microsoft/TypeScript/issues/8476-->
+        <!--</a></p>-->
+        <!--</section>-->
 
 
         <section>
@@ -700,7 +700,7 @@ Annotations in Java</a>)
         <section>
             <h3>Should I use a type checker?</h3>
             <ul>
-                <li class="fragment">don't be fooled: checkers do not make your program error free
+                <li class="fragment">don't be fooled: checkers do not make your programs error free
                 <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
                 <li class="fragment">initial effort to introduce a checker is low, though (especially true for flow)
                 <li class="fragment">but a type system is a complex thing, it comes at a cost
@@ -715,26 +715,6 @@ Annotations in Java</a>)
                 <li class="fragment">you have substantial amount of algorithmic code: <em class="fragment">yes</em>
             </ul>
         </section>
-
-        <section>
-            <h2>Types do not help you to avoid errors in algorithms?</h2>
-            <p class="fragment">If so, what might be the problem here?</p>
-<pre class="fragment"><code class="typescript" contenteditable data-trim >
-List(tests).sort((t1, t2) => t1.id - t2.id)
-</code></pre>
-            <p class="fragment">Those <code>ids</code> acutally are strings, result always is <code>NaN</code></p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim >
-// this would have saved you
-type Test = {
-    id: string;
-    // ...
-};
-//  error   'string' This type is incompatible with 'number'
-List(tests).sort((t1, t2) => t1.id - t2.id)
-</code></pre>
-
-        </section>
-
 
         <section>
             <h2>Wrap-Up</h2>
@@ -757,74 +737,6 @@ List(tests).sort((t1, t2) => t1.id - t2.id)
         </section>
 
         <section>
-            <h3>Resources</h3>
-            <ul>
-                <li><a target="_blank"
-                       href="https://javascriptair.com/episodes/2016-08-31/">
-                    JavaScript Air | Typed JavaScript with TypeScript and Flow
-                </a>
-                <li><a target="_blank"
-                       href="http://blog.namangoel.com/flow-for-typescript-developers">
-                    Flow for TypeScript Developers
-                </a>
-
-            <li>Flow
-                <ul>
-                    <li><a target="_blank"
-                           href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.5fhfyngkf">
-                        Flow: Mapping an object
-                    </a>
-                <li><a target="_blank"
-                       href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">
-                    Flow in WebStorm
-                </a>
-                    <li><a target="_blank"
-                           href="https://www.flowtype.org/blog/2016/08/01/Windows-Support.html">
-                        Official Windows binaries since August 2016
-                    </a>
-                    <li><a target="_blank"
-                           href="https://medium.com/@ikai/james-thanks-for-writing-this-795437144d08#.mbd4fyq3l">
-                        Medium uses Flow
-                    </a>
-                    <li><a target="_blank"
-                           href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux-flow/">
-                    Type Checking with Flow in React + Redux
-                    </a>
-                    <li><a target="_blank"
-                           href="https://github.com/flowtype/flow-typed">
-                        External Type Definitions
-                    </a>
-            </ul>
-            </li>
-                <li>TypeScript
-                    <ul>
-                        <li><a target="_blank"
-                               href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">
-                            What's new in TypeScript
-                        </a>
-                        <li><a target="_blank"
-                               href="https://github.com/Microsoft/TypeScript/wiki/Roadmap">
-                        Roadmap
-                        </a>
-                        <li><a target="_blank"
-                               href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-Modern-Compiler-Construction">
-                        Anders Hejlsberg on Modern Compiler Construction
-                        </a>
-                        <li><a target="_blank"
-                               href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-TypeScript-2">
-                        Anders Hejlsberg on TypeScript 2
-                        </a>
-                        <li><a target="_blank"
-                               href="https://vsavkin.com/functional-typescript-316f0e003dc6#.7pooz4sba">
-                        Functional TypeScript
-                        </a>
-
-                    </ul>
-                </li>
-            </ul>
-        </section>
-
-        <section>
             <!--<a href="http://www.embarc.de/"><img src="embarc13.png "-->
                                                  <!--height="150"></a>-->
             <h1>Thank you!</h1>
@@ -840,6 +752,95 @@ List(tests).sort((t1, t2) => t1.id - t2.id)
             </a></p>
 
         </section>
+        <section>
+            <h3>Resources</h3>
+            <ul>
+                <li><a target="_blank"
+                       href="https://javascriptair.com/episodes/2016-08-31/">
+                    JavaScript Air | Typed JavaScript with TypeScript and Flow
+                </a>
+                <li><a target="_blank"
+                       href="http://blog.namangoel.com/flow-for-typescript-developers">
+                    Flow for TypeScript Developers
+                </a>
+
+                <li>Flow
+                    <ul>
+                        <li><a target="_blank"
+                               href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.5fhfyngkf">
+                            Flow: Mapping an object
+                        </a>
+                        <li><a target="_blank"
+                               href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">
+                            Flow in WebStorm
+                        </a>
+                        <li><a target="_blank"
+                               href="https://www.flowtype.org/blog/2016/08/01/Windows-Support.html">
+                            Official Windows binaries since August 2016
+                        </a>
+                        <li><a target="_blank"
+                               href="https://medium.com/@ikai/james-thanks-for-writing-this-795437144d08#.mbd4fyq3l">
+                            Medium uses Flow
+                        </a>
+                        <li><a target="_blank"
+                               href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux-flow/">
+                            Type Checking with Flow in React + Redux
+                        </a>
+                        <li><a target="_blank"
+                               href="https://github.com/flowtype/flow-typed">
+                            External Type Definitions
+                        </a>
+                    </ul>
+                </li>
+                <li>TypeScript
+                    <ul>
+                        <li><a target="_blank"
+                               href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">
+                            What's new in TypeScript
+                        </a>
+                        <li><a target="_blank"
+                               href="https://github.com/Microsoft/TypeScript/wiki/Roadmap">
+                            Roadmap
+                        </a>
+                        <li><a target="_blank"
+                               href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-Modern-Compiler-Construction">
+                            Anders Hejlsberg on Modern Compiler Construction
+                        </a>
+                        <li><a target="_blank"
+                               href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-TypeScript-2">
+                            Anders Hejlsberg on TypeScript 2
+                        </a>
+                        <li><a target="_blank"
+                               href="https://vsavkin.com/functional-typescript-316f0e003dc6#.7pooz4sba">
+                            Functional TypeScript
+                        </a>
+
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+
+        <section>
+            <h2>Types do not help you to avoid errors in algorithms?</h2>
+            <p class="fragment">If so, what might be the problem here?</p>
+            <pre class="fragment"><code class="typescript" contenteditable data-trim >
+List(tests).sort((t1, t2) => t1.id - t2.id)
+</code></pre>
+            <p class="fragment">Those <code>ids</code> acutally are strings, result always is <code>NaN</code></p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim >
+// this would have saved you
+type Test = {
+    id: string;
+    // ...
+};
+//  error   'string' This type is incompatible with 'number'
+List(tests).sort((t1, t2) => t1.id - t2.id)
+</code></pre>
+
+        </section>
+
+
     </div>
 
 </div>
