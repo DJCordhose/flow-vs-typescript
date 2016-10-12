@@ -23,7 +23,9 @@ module.exports = {
         ],
 
         preLoaders: [
-            {test: /\.js$/, loader: "flowtype", exclude: /node_modules/},
+            // {test: /\.js$/, loader: "flowtype", exclude: /node_modules/},
+            { test: /\.js$/, loader: 'eslint', exclude: /node_modules/},
+
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { test: /\.js$/, loader: "source-map-loader" }
         ]

@@ -3,7 +3,8 @@
   "scripts": {
     "weback": "webpack --watch",
     "devserver": "webpack-dev-server --progress --colors --hot --content-base public",
-    "check": "flow"
+    "check": "flow",
+    "eslint": "eslint src"
   },
   "devDependencies": {
     "babel-core": "latest",
@@ -11,6 +12,12 @@
     "babel-plugin-transform-flow-strip-types": "latest",
     "babel-preset-es2015": "latest",
     "babel-preset-es2016": "latest",
+    "eslint": "^3.7.1",
+    "eslint-config-google": "^0.6.0",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-flowtype": "^2.20.0",
+    "eslint-plugin-flowtype-errors": "^1.4.0",
+    "eslint-watch": "^2.1.14",
     "flow-bin": "latest",
     "flowtype-loader": "latest",
     "source-map-loader": "latest",
