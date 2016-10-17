@@ -10,5 +10,5 @@
     // a.toString();
 // }
 
-let a;
-console.log(a.indexOf('f'));
+// let a;
+// console.log(a.indexOf('f'));
