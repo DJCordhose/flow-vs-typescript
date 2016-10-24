@@ -66,12 +66,6 @@
 
 <div class="reveal">
 
-    <!--Todo:-->
-    <!-- - IDE support-->
-    <!-- - have slides to explain named vs structural typing-->
-    <!-- - https://flowtype.org/docs/classes.html#structural-vs-nominal-typing-for-classes-->
-    <!--A word on bounded polymorphism (both Flow and TypeScript have 'extends', but not super-->
-
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
@@ -582,6 +576,18 @@ animals = cats;
         </section>
 
         <section>
+            <h3>Advanced: Bounds in Generics</h3>
+            <p>Both Flow and TypeScript support upper, not not lower bounds</p>
+            <p>Both Flow and TypeScript support
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification">
+                    F-Bounded Polymorphism
+                </a>
+                </p>
+            <p><a target="_blank" href="https://flowtype.org/blog/2015/03/12/Bounded-Polymorphism.html">https://flowtype.org/blog/2015/03/12/Bounded-Polymorphism.html</a></p>
+            <p><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints">https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints</a></p>
+        </section>
+
+        <section>
             <h1>Part III: Are Flow and TypeScript like Java/C++/C#?</h1>
         </section>
 
@@ -591,7 +597,6 @@ animals = cats;
                 <li class="fragment">Both
                     <ul>
                         <li>optionally typed / any
-                        <li>type compatibility is structural, not nominal
                         <li>built to match common JavaScript programming patterns
                         <li>type systems more expressive
                         <li>type inference
@@ -613,6 +618,92 @@ animals = cats;
             </ul>
         </section>
 
+
+        <section>
+            <h2>Structural vs Nominal Typing</h2>
+            <ul>
+                <li>Nominal Typing: types are compatibility when their declared types match
+                <li>Structural Typing: types are compatibility when their structures match
+                <li>Java, C#, C++, C all use nominal typing exclusively
+                <li>Flow classes are also treated as nominal types
+                <li>TypeScript classes are treated as structural types
+                <li>Everything else in both Flow and TypeScript uses structural typing
+            </ul>
+        </section>
+
+
+        <section>
+            <h3>Nominal Typing for Flow classes</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+}
+
+class Dog {
+    name: string;
+}
+
+let dog: Dog = new Dog();
+
+// nope, nominal type compatibility violated
+let person: Person = dog; // ERROR: Dog: This type is incompatible with Person
+
+// same problem
+let person: Person = { // ERROR: object literal: This type is incompatible with Person
+    name: "Olli"
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Structural Typing for TypeScript classes</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+}
+
+class Dog {
+    name: string;
+}
+
+let dog: Dog = new Dog();
+
+// yes, correct, as structurally compatible
+let person: Person = dog;
+
+// same thing, also correct
+let person: Person = {
+    name: "Olli"
+};
+
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Structural Typing for both TypeScript and Flow</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+// this is fine as nominal typing only applies to Flow classes
+let namedObject: NamedObject = dog;
+
+// same thing, also fine
+let namedObject: NamedObject = {
+    name: "Olli"
+};
+
+// not fine in either
+let namedObject: NamedObject = {
+    firstName: "Olli"
+};
+
+// cool in flow, but TypeScript wants perfect match with object literal
+// ERROR: Object literal may only specify known properties,
+// and 'firstName' does not exist in type 'NamedObject'.
+let namedObject: NamedObject = {
+    name: "Olli",
+    firstName: "Olli"
+};
+            </code></pre>
+        </section>
 
         <section>
             <h2>Classes in TypeScript</h2>
@@ -637,7 +728,7 @@ Annotations in Java</a>)
                     like in C#
                 </a>
             </ul>
-            <p class="fragment">Flow does not feature this or any other syntactic sugar, as it is a checker only</p>
+            <p class="fragment">Flow does not feature those or any other syntactic sugar, as it is a checker only</p>
         </section>
 
         <section>
@@ -696,7 +787,8 @@ Annotations in Java</a>)
             <ul>
                 <li><a target="_blank" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>
                 <li>Excellent TypeScript support
-                <li>Directly uses Language Service of TypeScript Compiler
+                <li>Directly uses <a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/Using-the-Language-Service-API">
+                Language Service of TypeScript Compiler</a>
                 <li>Written in TypeScript
             </ul>
         </section>
@@ -730,20 +822,6 @@ Annotations in Java</a>)
                 </li>
             </ul>
         </section>
-
-        <!--<section class="todo">-->
-            <!--<h2>IDE</h2>-->
-            <!--&lt;!&ndash; - Editor: Nuclide vs VSC&ndash;&gt;-->
-<!--
-        https://twitter.com/thejameskyle/status/753637779754455040?s=03
-        If you're using @AtomEditor without https://t.co/JZ5qliSXIi and @flowtype, you're doing it wrong.
-
-        $ apm install nuclide
-
-        go
--->
-
-        <!--</section>-->
 
 
         <!--<section class="todo">-->
@@ -792,6 +870,35 @@ Annotations in Java</a>)
                 <li class="fragment">you have any amount of algorithmic code: <em class="fragment">yes</em>
             </ul>
         </section>
+
+        <section>
+            <h2>Which type checker should you use?</h2>
+            <h4>It depends on your requirements</h4>
+            <h4>Just be sure to be well informed</h4>
+            <h4>Don't let your decision be based on mere opinions or prejudice</h4>
+        </section>
+
+        <section>
+            <h3>One example of an informed descision</h3>
+            <a href="https://twitter.com/DJCordhose/status/790196682097102848" target="_blank">
+                <img src="twitter-choosing-typescript.png">
+            </a>
+            <p><small><a href="https://twitter.com/DJCordhose/status/790196682097102848" target="_blank">
+                https://twitter.com/DJCordhose/status/790196682097102848
+            </a></small></p>
+        </section>
+
+        <section>
+            <h3>One example of an informed doubt</h3>
+            <a href="https://twitter.com/alexeygolev/status/790208311769661440" target="_blank">
+                <img src="twitter-typescript-doubt.png">
+            </a>
+            <p><small><a href="https://twitter.com/alexeygolev/status/790208311769661440" target="_blank">
+                https://twitter.com/alexeygolev/status/790208311769661440
+            </a></small></p>
+        </section>
+
+
 
         <section>
             <h2>Types do not help you to avoid errors in algorithms?</h2>
@@ -933,9 +1040,9 @@ $('section').attr('data-background-image', "backgrounds/dark-sky.jpg")
 </script>
 <script>
     // only presentation version has fragments
-    if (window.location.hostname.indexOf('localhost') === -1) {
+//    if (window.location.hostname.indexOf('localhost') === -1) {
         $('.fragment').removeClass('fragment');
-    }
+//    }
 </script>
 
 <script>
