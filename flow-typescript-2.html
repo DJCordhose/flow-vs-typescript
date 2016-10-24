@@ -1039,10 +1039,13 @@ $('section').attr('data-background-image', "backgrounds/dark-sky.jpg")
 //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
 </script>
 <script>
-    // only presentation version has fragments
-//    if (window.location.hostname.indexOf('localhost') === -1) {
+    Reveal.addEventListener( 'ready', function( event ) {
         $('.fragment').removeClass('fragment');
-//    }
+        // only applies presentation version
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            Reveal.configure({ controls: false });
+        }
+    } );
 </script>
 
 <script>
