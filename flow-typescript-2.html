@@ -162,7 +162,7 @@
 
         <section>
             <a href="http://stateofjs.com/2016/flavors/" target="_blank">
-                <img src="overview-percent.png">
+                <img src="overview-percent.png" height="600px">
             </a>
             <p><small><a href="http://stateofjs.com/2016/flavors/" target="_blank">
                 http://stateofjs.com/2016/flavors/
@@ -1040,6 +1040,7 @@ $('section').attr('data-background-image', "backgrounds/dark-sky.jpg")
 </script>
 <script>
     Reveal.addEventListener( 'ready', function( event ) {
+        // no fragments, never
         $('.fragment').removeClass('fragment');
         // only applies presentation version
         if (window.location.hostname.indexOf('localhost') !== -1) {
