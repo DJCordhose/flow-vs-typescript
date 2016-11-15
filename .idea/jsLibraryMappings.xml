@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/flow" libraries="{flow-vs-typescript/flow/node_modules}" />
+    <file url="file://$PROJECT_DIR$/react-flow" libraries="{flow-vs-typescript/react-flow/node_modules}" />
+    <file url="file://$PROJECT_DIR$/react-typescript" libraries="{flow-vs-typescript/react-typescript/node_modules}" />
+    <file url="file://$PROJECT_DIR$/typescript" libraries="{flow-vs-typescript/typescript/node_modules}" />
+    <file url="file://$PROJECT_DIR$/typescript2" libraries="{flow-vs-typescript/typescript2/node_modules}" />
+    <includedPredefinedLibrary name="ECMAScript 6" />
+  </component>
+</project>

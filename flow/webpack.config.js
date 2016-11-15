@@ -1,4 +1,5 @@
 const path = require('path');
+const FlowtypePlugin = require('flowtype-loader/plugin');
 
 module.exports = {
     entry: "./src/index.js",
@@ -23,13 +24,18 @@ module.exports = {
         ],
 
         preLoaders: [
-            // {test: /\.js$/, loader: "flowtype", exclude: /node_modules/},
-            { test: /\.js$/, loader: 'eslint', exclude: /node_modules/},
+            {test: /\.js$/, loader: "flowtype", exclude: /node_modules/},
+            // { test: /\.js$/, loader: 'eslint', exclude: /node_modules/},
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { test: /\.js$/, loader: "source-map-loader" }
         ]
     },
+    plugins: [
+        new FlowtypePlugin()
+        // new FlowtypePlugin({cwd: '/path/'})
+        // new FlowtypePlugin({failOnError: true})
+    ],
 
     // When importing a module whose path matches one of the following, just
     // assume a corresponding global variable exists and use that instead.
