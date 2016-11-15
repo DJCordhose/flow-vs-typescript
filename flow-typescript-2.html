@@ -140,16 +140,17 @@
         <!--</section>-->
         <section>
             <h2>Why using type systems?</h2>
-            <h3 class="fragment">type systems make code easier to maintain</h3>
-            <p class="fragment">type annotations</p>
-            <ul class="fragment">
-                <li>can make code more readable
-                <li>can make code easier to analyse
-                <li>can allow for reliable refactoring
-                <li>can allow for generally better IDE support
-                <li>can catch some (type related) errors early
-            </ul>
-
+            <div class="fragment">
+                <h3>type systems make code easier to maintain</h3>
+                <p >type annotations</p>
+                <ul >
+                    <li>can make code more readable
+                    <li>can make code easier to analyse
+                    <li>can allow for reliable refactoring
+                    <li>can allow for generally better IDE support
+                    <li>can catch some (type related) errors early
+                </ul>
+            </div>
             <p class="fragment"><a href="https://channel9.msdn.com/Events/Build/2016/B881" target="_blank">
                 Anders Hejlsberg@Build2016: <em>Big JavaScript codebases tend to become "read-only".</em>
             </a></p>
@@ -219,7 +220,7 @@
                 <li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
                 <li>Not a compiler, but checker
                 <!--<li>Works without any type annotations-->
-                <li>Very good at inferring types
+                <!--<li>Very good at inferring types-->
                 <li>If present, type annotations can very easily be removed by babel for runtime
             </ul>
             <br>
@@ -540,6 +541,7 @@ cats.forEach(cat => console.log(`Cat: ${cat.name}`));
 // Cat: Brutus
 // Cat: Twinky
 </code></pre>
+            <p class="fragment">TypeScript allows for birds and dogs to be cats here :)</p>
       </section>
 
         <section>
@@ -781,6 +783,7 @@ Annotations in Java</a>)
                        href="https://flowtype.org/docs/third-party.html">
                     Declarations can be added to flow config files
                 </a>
+                <li>If there are no existing declaration files: still works, but less powerful
             </ul>
         </section>
 
@@ -863,7 +866,7 @@ Annotations in Java</a>)
         <section>
             <h3>Should I use a type checker?</h3>
             <ul>
-                <li class="fragment">don't be fooled: checkers do not make your program error free
+                <li class="fragment">don't be fooled: checkers do not make your programs error free
                 <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
                 <li class="fragment">initial effort to introduce a checker is low, though (especially true for flow)
                 <li class="fragment">but a type system is a complex thing, it comes at a cost
@@ -875,7 +878,7 @@ Annotations in Java</a>)
                 <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
                 <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
                 <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
-                <li class="fragment">you have any amount of algorithmic code: <em class="fragment">yes</em>
+                <li class="fragment">you have substantial amount of algorithmic code: <em class="fragment">yes</em>
             </ul>
         </section>
 

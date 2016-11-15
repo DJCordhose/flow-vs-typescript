@@ -1,4 +1,4 @@
 node_modules
 public/dist
-.idea/*
+.idea/workspace.xml
 npm-debug.log

@@ -73,89 +73,37 @@
             <h1>Flow vs TypeScript</h1>
             <h2>Type Systems for JavaScript</h2>
             <h3>Nordic Coding 2016</a></h3>
-            <p>Looking from the perspective of a practitioner</p>
-            <p><small><a href="http://bit.ly/types-nordic-coding">
-                http://bit.ly/types-nordic-coding
-            </a></small></p>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <h3>Includes TypeScript 2</h3>
-
-        </section>
-
-        <!--<section>-->
-            <!--<h2>Nothing special about me</h2>-->
-            <!--<p>I am just a practitioner like you</p>-->
-            <!--<p>My knowledge comes from</p>-->
-            <!--<ol>-->
-                <!--<li>Listening to people who have built TypeScript and Flow (more in Resources)-->
-                <!--<li>Having experience with both of them in real world projects (you can try that yourself)-->
-            <!--</ol>-->
-        <!--</section>-->
-
-        <!--<section>-->
-            <!--<h1>Part I: Introduction</h1>-->
-        <!--</section>-->
-
-        <!--<section>-->
-            <!--<h2>Motivation: Why a type system in the first place?</h2>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h3>JavaScript is great to create usable solutions quickly</h3>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h2>However...</h2>-->
-            <!--<h3 class="fragment">... if your system ...</h3>-->
-                <!--<ul>-->
-                    <!--<li class="fragment">is large-->
-                    <!--<li class="fragment">is very important or even crucial for the success of your company-->
-                    <!--<li class="fragment">contains substantial amounts of business logic-->
-                    <!--<li class="fragment">lives for a long time-->
-                    <!--<li class="fragment">has a lot of contributors-->
-                <!--</ul>-->
-            <!--</ul>-->
-            <!--<h3 class="fragment">... long term maintainability might be more interesting than short term velocity</h3>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h2>JavaScript is lacking a type system, which might impact this...</h2>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h3>Does a type system make you more productive?</h3>-->
-            <!--<h4 class="fragment">Or less?</h4>-->
-            <!--<ul>-->
-                <!--<li class="fragment">some people claim <a target="_blank"-->
-                                                         <!--href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using-->
-                    <!--a type system is even unethical</a> in this Strangeloop talk-->
-                    <!--<ul>-->
-                        <!--<li class="fragment">(given you have an SLA)-->
-                    <!--</ul>-->
-                <!--</li>-->
-                <!--<li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>-->
-                    <!--elaborates that there is little or no impact-->
-            <!--</ul>-->
-        <!--</section>-->
-        <!--<section>-->
-            <!--<h1>So?</h1>-->
-        <!--</section>-->
-        <section>
-            <h2>Why using type systems?</h2>
-            <div class="fragment">
-                <h3>type systems make code easier to maintain</h3>
-                <p >type annotations</p>
-                <ul >
-                    <li>can make code more readable
-                    <li>can make code easier to analyse
-                    <li>can allow for reliable refactoring
-                    <li>can allow for generally better IDE support
-                    <li>can catch some (type related) errors early
-                </ul>
-            </div>
-            <p class="fragment"><a href="https://channel9.msdn.com/Events/Build/2016/B881" target="_blank">
-                Anders Hejlsberg@Build2016: <em>Big JavaScript codebases tend to become "read-only".</em>
+            <p>Slides: <a href="http://bit.ly/types-nordic-coding">
+                http://bit.ly/types-nordic-coding
             </a></p>
         </section>
+        <section>
+            <h2>http://stateofjs.com</h2>
+            <p>Recently published survey on the state of JavaScript</p>
+        </section>
+
+        <section>
+            <a href="http://stateofjs.com/2016/flavors/" target="_blank">
+                <img src="overview-percent.png" height="600px">
+            </a>
+            <p><small><a href="http://stateofjs.com/2016/flavors/" target="_blank">
+                http://stateofjs.com/2016/flavors/
+            </a></small></p>
+        </section>
+
+        <!--<section>-->
+            <!--<a href="http://stateofjs.com/2016/flavors/" target="_blank">-->
+                <!--<img src="overview-numbers.png" height="600px">-->
+            <!--</a>-->
+            <!--<p><small><a href="http://stateofjs.com/2016/flavors/" target="_blank">-->
+                <!--http://stateofjs.com/2016/flavors/-->
+            <!--</a></small></p>-->
+        <!--</section>-->
+
 
         <!--<section>-->
             <!--<h3>Most important single use case for me</h3>-->
@@ -183,6 +131,9 @@
 
                 <!--<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code-->
             </ul>
+            <br>
+            <br>
+            <h4>supporting people from Java and C# land</h4>
         </section>
 
         <section>
@@ -197,6 +148,9 @@
                 <!--<li>Very good at inferring types-->
                 <li>If present, type annotations can very easily be removed by babel for runtime
             </ul>
+            <br>
+            <br>
+            <h4>proving types for idiomatic JavaScript</h4>
         </section>
 
         <!--<section>-->
@@ -279,283 +233,6 @@ class Sayer {
         </section>
 
         <section>
-            <h2>Non-Nullable Types</h2>
-            <h4>Talking about correctness</h4>
-        </section>
-
-        <section>
-        <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function foo(num: number) {
-    if (num > 10) {
-      return 'cool';
-    }
-}
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// cool
-const result: string = foo(100);
-console.log(result.toString());
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// still cool?
-console.log(foo(1).toString());
-
-</code></pre>
-           <pre class="fragment"><code contenteditable data-trim>
-// error at runtime
-"Cannot read property 'toString' of undefined"
-</code></pre>
-
-        <p class="fragment">TypeScript does not catch this</p>
-      </section>
-
-    <section>
-        <h3>Flow</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function foo(num: number) {
-    if (num > 10) {
-        return 'cool';
-    }
-}
-
-// error: call of method `toString`.
-// Method cannot be called on possibly null value
-console.log(foo(100).toString());
-</code></pre>
-            <p class="fragment">Flow does catch this</p>
-        <p class="fragment">But why?</p>
-        </section>
-
-            <section>
-                <h4>Flow does not infer string as the return type</h4>
-                <p class="fragment">The inferred type is something else</p>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-               // error: return undefined. This type is incompatible with string
-function foo(num: number): string {
-	if (num > 10) {
-		return 'cool';
-	}
-}
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// nullable type: the one inferred
-function foo(num: number): string | void {
-	if (num > 10) {
-		return 'cool';
-	}
-}
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// to fix this, we need to check the result
-const fooed: string|void = foo(100);
-if (fooed) {
-    fooed.toString();
-}
-
-</code></pre>
-      </section>
-
-    <section>
-        <h3>Enter TypeScript 2.x</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function foo(num: number) {
-    if (num > 10) {
-        return 'cool';
-    }
-}
-</code></pre>
-<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// to fix this, we need to check the result
-const fooed: string|void = foo(100);
-if (fooed) {
-    fooed.toString();
-}
-</code></pre>
-<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// or tell the compiler we know better (in this case we actually do)
-fooed!.toString();
-</code></pre>
-        <p class="fragment" style="color: red">Important: Only works when <em>strictNullChecks</em> option is checked</p>
-        <p class="fragment">More <a target="_blank" href="https://blogs.msdn.microsoft.com/typescript/2016/07/11/announcing-typescript-2-0-beta/">
-            Improvements in TypeScript 2.0
-        </a></p>
-        <p class="fragment">Catches up with Flow on control flow analysis (needed to make null checks really useful)</p>
-        </section>
-
-        <section>
-            <h2>Non-nullable types</h2>
-            <p class="fragment">Types are nullable by default in TypeScript 1.x</p>
-            <!--<p class="fragment">Non-nullable are still possible in TypeScript 1.x in a limited way</p>-->
-            <p class="fragment">Types are non-nullable by default in Flow</p>
-            <p class="fragment">TypeScript 2.x makes types non-nullable by default using
-                `strictNullChecks` in `tsconfig.json`</p>
-        </section>
-
-    <!--<section>-->
-        <!--<h3>Caveat</h3>-->
-        <!--<p>Neither Flow nor TypeScript 2.0 catch this</p>-->
-           <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
-<!--class Person {-->
-    <!--name: string;-->
-    <!--constructor() {-->
-        <!--// why no error?-->
-    <!--}-->
-<!--}-->
-<!--const olli: Person = new Person();-->
-<!--</code></pre>-->
-        <!--<pre><code class="typescript line-numbers fragment" contenteditable data-trim>-->
-<!--// issues error as expected-->
-<!--const daniel: Person = {-->
-<!--};-->
-<!--</code></pre>-->
-        <!--<p class="fragment">At least in TypeScript, this won't be fixed:-->
-            <!--<a href="https://github.com/Microsoft/TypeScript/issues/8476" target="_blank">-->
-                <!--https://github.com/Microsoft/TypeScript/issues/8476-->
-        <!--</a></p>-->
-        <!--</section>-->
-
-
-        <section>
-            <h2>Generics</h2>
-            <h3>aka Parametric Types</h3>
-            <!--<h4 class="fragment">might be a bit scary...</h4>-->
-        </section>
-
-        <section>
-        <h3>Consider this type hierarchy</h3>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
-class Animal {
-   name: string;
-   constructor(name: string) {
-       this.name = name;
-   }
-}
-</code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
-class Dog extends Animal {
-    // just to make this different from cat
-    goodBoyFactor: number;
-}
-</code></pre>
-           <pre class="fragment"><code class="typescript" contenteditable data-trim>
-
-class Cat extends Animal {
-    purrFactor: number;
-}
-</code></pre>
-      </section>
-        <section>
-        <h3>Generic Type information</h3>
-            <p class="fragment">Types can be parameterized by others</p>
-            <p class="fragment">Most common with collection types</p>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let cats: Array&lt;Cat> = []; // can only contain cats
-let animals: Array&lt;Animal> = []; // can only contain animals
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
-// nope, no cat
-cats.push(10);
-           </code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
-// nope, no cat
-cats.push(new Animal('Fido'));
-           </code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
-// cool, is a cat
-cats.push(new Cat('Purry'));
-           </code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="9">
-// cool, cat is a sub type of animal
-animals.push(new Cat('Purry'));
-           </code></pre>
-      </section>
-
-        <section>
-            <h3>Up to this point this pretty much works in Flow and TypeScript the same way ...</h3>
-        </section>
-
-        <section>
-            <h3>... but wait</h3>
-        </section>
-
-        <section>
-        <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let cats: Array&lt;Cat> = []; // can only contain cats
-let animals: Array&lt;Animal> = []; // can only contain animals
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
-// error TS2322: Type 'Animal[]' is not assignable to type 'Cat[]'.
-//  Type 'Animal' is not assignable to type 'Cat'.
-//    Property 'purrFactor' is missing in type 'Animal'.
-cats = animals;
-           </code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
-// wow, works, because cats are more special than animals
-animals = cats;
-           </code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="9">
-// but is no longer safe: because those are now all cool
-animals.push(new Dog('Brutus'));
-animals.push(new Animal('Twinky'));
-           </code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="12">
-// ouch:
-cats.forEach(cat => console.log(`Cat: ${cat.name}`));
-// Cat: Purry
-// Cat: Brutus
-// Cat: Twinky
-</code></pre>
-            <p class="fragment">TypeScript allows for birds and dogs to be cats here :)</p>
-      </section>
-
-
-        <section>
-        <h3>Flow</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let cats: Array&lt;Cat> = []; // can only contain cats
-let animals: Array&lt;Animal> = []; // can only contain animals
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
-// ERROR
-// property `purrFactor` of Cat. Property not found in Animal
-cats = animals;
-           </code></pre>
-           <pre class="fragment"><code class="typescript  line-numbers" contenteditable data-trim data-num-start="6">
-// same ERROR
-animals = cats;
-           </code></pre>
-            <p class="fragment">End of story for Flow</p>
-      </section>
-
-        <section>
-            <h2>Why?</h2>
-            <ul>
-                <li class="fragment">TypeScript
-                <ul>
-                    <li>parametric types are compatible if the type to assign from has a more special type parameter</li>
-                    <li>seems most intuitive
-                    <li>allows for obviously wrong code, though
-                </ul>
-            </li>
-                <li class="fragment">Flow
-                    <ul>
-                        <li>using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>
-                        <li>Array in Flow has an invariant parametric type</li>
-                        <li>more expressive
-                        <li>harder to understand
-                    </ul>
-                </li>
-            </ul>
-        </section>
-
-        <section>
             <h1>Are Flow and TypeScript like Java/C++/C#?</h1>
         </section>
 
@@ -565,7 +242,6 @@ animals = cats;
                 <li class="fragment">Both
                     <ul>
                         <li>optionally typed / any
-                        <li>type compatibility is structural, not nominal
                         <li>built to match common JavaScript programming patterns
                         <li>type systems more expressive
                         <li>type inference
@@ -587,6 +263,92 @@ animals = cats;
             </ul>
         </section>
 
+
+        <section>
+            <h2>Structural vs Nominal Typing</h2>
+            <ul>
+                <li>Nominal Typing: types are compatibility when their declared types match
+                <li>Structural Typing: types are compatibility when their structures match
+                <li>Java, C#, C++, C all use nominal typing exclusively
+                <li>Flow classes are also treated as nominal types
+                <li>TypeScript classes are treated as structural types
+                <li>Everything else in both Flow and TypeScript uses structural typing
+            </ul>
+        </section>
+
+
+        <section>
+            <h3>Nominal Typing for Flow classes</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+}
+
+class Dog {
+    name: string;
+}
+
+let dog: Dog = new Dog();
+
+// nope, nominal type compatibility violated
+let person: Person = dog; // ERROR: Dog: This type is incompatible with Person
+
+// same problem
+let person: Person = { // ERROR: object literal: This type is incompatible with Person
+    name: "Olli"
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Structural Typing for TypeScript classes</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+}
+
+class Dog {
+    name: string;
+}
+
+let dog: Dog = new Dog();
+
+// yes, correct, as structurally compatible
+let person: Person = dog;
+
+// same thing, also correct
+let person: Person = {
+    name: "Olli"
+};
+
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Structural Typing for both TypeScript and Flow</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+// this is fine as nominal typing only applies to Flow classes
+let namedObject: NamedObject = dog;
+
+// same thing, also fine
+let namedObject: NamedObject = {
+    name: "Olli"
+};
+
+// not fine in either
+let namedObject: NamedObject = {
+    firstName: "Olli"
+};
+
+// cool in flow, but TypeScript wants perfect match with object literal
+// ERROR: Object literal may only specify known properties,
+// and 'firstName' does not exist in type 'NamedObject'.
+let namedObject: NamedObject = {
+    name: "Olli",
+    firstName: "Olli"
+};
+            </code></pre>
+        </section>
 
         <section>
             <h2>Classes in TypeScript</h2>
@@ -611,7 +373,7 @@ Annotations in Java</a>)
                     like in C#
                 </a>
             </ul>
-            <p class="fragment">Flow does not feature this or any other syntactic sugar, as it is a checker only</p>
+            <p class="fragment">Flow does not feature those or any other syntactic sugar, as it is a checker only</p>
         </section>
 
         <section>
@@ -633,7 +395,7 @@ Annotations in Java</a>)
                         <li>Use <em>allowJs</em> option to include raw JavaScript
                         (<a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What%27s-new-in-TypeScript#including-js-files-with---allowjs">
                         introduced in 1.8</a>)
-                        <li>Write a dummy module declaration (<a href="https://blogs.msdn.microsoft.com/typescript/2016/07/11/announcing-typescript-2-0-beta/">simplified in 2.0</a>)
+                        <li>Write a dummy module declaration (vastly <a href="https://blogs.msdn.microsoft.com/typescript/2016/07/11/announcing-typescript-2-0-beta/">simplified in 2.0</a>)
                     </ul>
                 </li>
             </ul>
@@ -658,20 +420,58 @@ Annotations in Java</a>)
             </ul>
         </section>
 
-        <!--<section class="todo">-->
-            <!--<h2>IDE</h2>-->
-            <!--&lt;!&ndash; - Editor: Nuclide vs VSC&ndash;&gt;-->
-<!--
-        https://twitter.com/thejameskyle/status/753637779754455040?s=03
-        If you're using @AtomEditor without https://t.co/JZ5qliSXIi and @flowtype, you're doing it wrong.
+        <section>
+            <h2>IDE Support</h2>
+        </section>
 
-        $ apm install nuclide
+        <section>
+            <h3>Visual Studio Code</h3>
+            <ul>
+                <li><a target="_blank" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>
+                <li>Excellent TypeScript support
+                <li>Directly uses <a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/Using-the-Language-Service-API">
+                Language Service of TypeScript Compiler</a>
+                <li>Written in TypeScript
+            </ul>
+        </section>
 
-        go
--->
+        <section>
+            <h3>Atom / Nuclide</h3>
+            <ul>
+                <li><a target="_blank" href="https://atom.io/">https://atom.io/</a>
+                <li><a target="_blank" href="https://nuclide.io/">https://nuclide.io/</a> (Atom Package)
+                <li>Probably best Flow support
+            </ul>
+        </section>
 
-        <!--</section>-->
+        <section>
+            <h3>IntelliJ IDEA / Webstorm</h3>
+            <p>Starting from <em>2016.3</em></p>
+            <!--<ul>-->
+                <!--<li>Good TypeScript support-->
+                <!--<li>Flow in preparation-->
+                <!--<li>Inline Flow errors possible as <a target="_blank" href="https://www.npmjs.com/package/eslint-plugin-flowtype-errors">-->
+                    <!--eslint plugin</a>-->
+                    <!--<img src="screenshots/idea_eslint.png">-->
+                <!--<li>Starting from <em>2016.3</em>-->
+                <ul>
+                    <li><a target="_blank" href="https://blog.jetbrains.com/webstorm/2016/08/webstorm-2016-3-early-access-preview/#flow">
+                        Flow: integrated checking and display of messages
+                    </a>
+                        <img src="screenshots/webstorm-flow.png" width="500px">
+                    <li>TypeScript: uses <a target="_blank" href="https://blog.jetbrains.com/webstorm/2016/10/webstorm-2016-3-eap-163-6110/">
+                    Language Service of TypeScript Compiler
+                    </a>
+                </ul>
+                <!--</li>-->
+            <!--</ul>-->
+        </section>
 
+
+        <section>
+            <h1>Demo</h1>
+            <h2>Some hacking in Webstorm</h2>
+        </section>
 
         <!--<section class="todo">-->
             <!--<h2>React support</h2>-->
@@ -721,6 +521,33 @@ Annotations in Java</a>)
         </section>
 
         <section>
+            <h2>Which type checker should you use?</h2>
+            <h4>It depends on your requirements</h4>
+            <h4>Just be sure to be well informed</h4>
+            <h4>Don't let your decision be based on mere opinions or prejudice</h4>
+        </section>
+
+        <section>
+            <h3>One example of an informed descision</h3>
+            <a href="https://twitter.com/DJCordhose/status/790196682097102848" target="_blank">
+                <img src="twitter-choosing-typescript.png">
+            </a>
+            <p><small><a href="https://twitter.com/DJCordhose/status/790196682097102848" target="_blank">
+                https://twitter.com/DJCordhose/status/790196682097102848
+            </a></small></p>
+        </section>
+
+        <section>
+            <h3>One example of an informed doubt</h3>
+            <a href="https://twitter.com/alexeygolev/status/790208311769661440" target="_blank">
+                <img src="twitter-typescript-doubt.png">
+            </a>
+            <p><small><a href="https://twitter.com/alexeygolev/status/790208311769661440" target="_blank">
+                https://twitter.com/alexeygolev/status/790208311769661440
+            </a></small></p>
+        </section>
+
+        <section>
             <h2>Wrap-Up</h2>
             <ul class="fragment">
                 <li>TypeScript and Flow have influenced each other heavily
@@ -734,9 +561,8 @@ Annotations in Java</a>)
                 <li >Generics in TypeScript are easier, but less expressive
                 <li >Flow's type system is generally more expressive
                 <li >Flow is written in OCaml, Typescript in Typescript
-                <li >Typing of existing 3rd party libraries using external declaration files
-                <!--<li >Integration with existing 3rd party libraries a PITA in TypeScript 1.x-->
-                <!--<li >Vastly improved in TypeScript 2.x-->
+                <li >Integration with existing 3rd party libraries a PITA in TypeScript 1.x
+                <li >Vastly improved in TypeScript 2.x
             </ul>
         </section>
 
@@ -766,34 +592,34 @@ Annotations in Java</a>)
                     Flow for TypeScript Developers
                 </a>
 
-                <li>Flow
-                    <ul>
-                        <li><a target="_blank"
-                               href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.5fhfyngkf">
-                            Flow: Mapping an object
-                        </a>
-                        <li><a target="_blank"
-                               href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">
-                            Flow in WebStorm
-                        </a>
-                        <li><a target="_blank"
-                               href="https://www.flowtype.org/blog/2016/08/01/Windows-Support.html">
-                            Official Windows binaries since August 2016
-                        </a>
-                        <li><a target="_blank"
-                               href="https://medium.com/@ikai/james-thanks-for-writing-this-795437144d08#.mbd4fyq3l">
-                            Medium uses Flow
-                        </a>
-                        <li><a target="_blank"
-                               href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux-flow/">
-                            Type Checking with Flow in React + Redux
-                        </a>
-                        <li><a target="_blank"
-                               href="https://github.com/flowtype/flow-typed">
-                            External Type Definitions
-                        </a>
-                    </ul>
-                </li>
+            <li>Flow
+                <ul>
+                    <li><a target="_blank"
+                           href="https://medium.com/@thejameskyle/flow-mapping-an-object-373d64c44592#.5fhfyngkf">
+                        Flow: Mapping an object
+                    </a>
+                <li><a target="_blank"
+                       href="https://www.jetbrains.com/help/webstorm/2016.1/using-the-flow-type-checker.html">
+                    Flow in WebStorm
+                </a>
+                    <li><a target="_blank"
+                           href="https://www.flowtype.org/blog/2016/08/01/Windows-Support.html">
+                        Official Windows binaries since August 2016
+                    </a>
+                    <li><a target="_blank"
+                           href="https://medium.com/@ikai/james-thanks-for-writing-this-795437144d08#.mbd4fyq3l">
+                        Medium uses Flow
+                    </a>
+                    <li><a target="_blank"
+                           href="http://www.robinwieruch.de/the-soundcloud-client-in-react-redux-flow/">
+                    Type Checking with Flow in React + Redux
+                    </a>
+                    <li><a target="_blank"
+                           href="https://github.com/flowtype/flow-typed">
+                        External Type Definitions
+                    </a>
+            </ul>
+            </li>
                 <li>TypeScript
                     <ul>
                         <li><a target="_blank"
@@ -802,46 +628,25 @@ Annotations in Java</a>)
                         </a>
                         <li><a target="_blank"
                                href="https://github.com/Microsoft/TypeScript/wiki/Roadmap">
-                            Roadmap
+                        Roadmap
                         </a>
                         <li><a target="_blank"
                                href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-Modern-Compiler-Construction">
-                            Anders Hejlsberg on Modern Compiler Construction
+                        Anders Hejlsberg on Modern Compiler Construction
                         </a>
                         <li><a target="_blank"
                                href="https://channel9.msdn.com/Blogs/Seth-Juarez/Anders-Hejlsberg-on-TypeScript-2">
-                            Anders Hejlsberg on TypeScript 2
+                        Anders Hejlsberg on TypeScript 2
                         </a>
                         <li><a target="_blank"
                                href="https://vsavkin.com/functional-typescript-316f0e003dc6#.7pooz4sba">
-                            Functional TypeScript
+                        Functional TypeScript
                         </a>
 
                     </ul>
                 </li>
             </ul>
         </section>
-
-
-        <section>
-            <h2>Types do not help you to avoid errors in algorithms?</h2>
-            <p class="fragment">If so, what might be the problem here?</p>
-            <pre class="fragment"><code class="typescript" contenteditable data-trim >
-List(tests).sort((t1, t2) => t1.id - t2.id)
-</code></pre>
-            <p class="fragment">Those <code>ids</code> acutally are strings, result always is <code>NaN</code></p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim >
-// this would have saved you
-type Test = {
-    id: string;
-    // ...
-};
-//  error   'string' This type is incompatible with 'number'
-List(tests).sort((t1, t2) => t1.id - t2.id)
-</code></pre>
-
-        </section>
-
 
     </div>
 
