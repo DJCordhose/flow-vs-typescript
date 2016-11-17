@@ -1,0 +1,1 @@
+-- https://guide.elm-lang.org/types/union_types.html

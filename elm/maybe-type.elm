@@ -12,6 +12,11 @@ main =
 --          Just message -> text message
 --          Nothing -> text ""
     in
+--        text (
+--            case (foo6 11) of
+--                Just message -> message
+--                Nothing -> ""
+--        )
         text (
             case r of
                 Just message -> message

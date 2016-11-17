@@ -23,3 +23,8 @@ function func2(a) {
 // not cool: wrong return type
 // let r22: boolean = func2('wat');
 
+// never infers any
+// either
+// let r21: number = func2(10);
+// or
+let r22: string = func2('wat');

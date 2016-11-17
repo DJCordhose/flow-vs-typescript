@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Flow vs TypeScript</title>
+    <title>Elm, Flow, TypeScript</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
     <meta name="author" content="Hakim El Hattab">
@@ -70,17 +70,73 @@
     <div class="slides">
 
         <section>
-            <h1>Flow vs TypeScript</h1>
             <h2>Type Systems for JavaScript</h2>
-            <h3>Nordic Coding 2016</a></h3>
+            <h3>Elm, Flow, TypeScript</h3>
+            <!--<h3>Looking from the perspective of a practitioner</h3>-->
+            <!--<p style="color: red">WORK IN PROGRESS</p>-->
+            <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html">
+                http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html
+            </a></small></p>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p>Slides: <a href="http://bit.ly/types-nordic-coding">
-                http://bit.ly/types-nordic-coding
-            </a></p>
         </section>
+
+        <!--<section>-->
+            <!--<h2>Nothing special about me</h2>-->
+            <!--<p>I am just a practitioner like you</p>-->
+            <!--<p>My knowledge comes from</p>-->
+            <!--<ol>-->
+                <!--<li>Listening to people who have built TypeScript and Flow (more in Resources)-->
+                <!--<li>Having experience with both of them in real world projects (you can try that yourself)-->
+            <!--</ol>-->
+        <!--</section>-->
+
+        <section>
+            <h1>Part I: Introduction</h1>
+        </section>
+
+        <!--<section>-->
+            <!--<h2>Motivation: Why a type system in the first place?</h2>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h3>JavaScript is great to create usable solutions quickly</h3>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>However...</h2>-->
+            <!--<h3 class="fragment">... if your system ...</h3>-->
+                <!--<ul>-->
+                    <!--<li class="fragment">is large-->
+                    <!--<li class="fragment">is very important or even crucial for the success of your company-->
+                    <!--<li class="fragment">contains substantial amounts of business logic-->
+                    <!--<li class="fragment">lives for a long time-->
+                    <!--<li class="fragment">has a lot of contributors-->
+                <!--</ul>-->
+            <!--</ul>-->
+            <!--<h3 class="fragment">... long term maintainability might be more interesting than short term velocity</h3>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>JavaScript is lacking a type system, which might impact this...</h2>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h3>Does a type system make you more productive?</h3>-->
+            <!--<h4 class="fragment">Or less?</h4>-->
+            <!--<ul>-->
+                <!--<li class="fragment">some people claim <a target="_blank"-->
+                                                         <!--href="https://www.youtube.com/watch?v=SWTWkYbcWU0/">not using-->
+                    <!--a type system is even unethical</a> in this Strangeloop talk-->
+                    <!--<ul>-->
+                        <!--<li class="fragment">(given you have an SLA)-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">http://danluu.com/empirical-pl/</a>-->
+                    <!--elaborates that there is little or no impact-->
+            <!--</ul>-->
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h1>So?</h1>-->
+        <!--</section>-->
         <section>
             <h2>Why using type systems?</h2>
             <div class="fragment">
@@ -143,7 +199,6 @@
                 <li>Based on ES6 (probably ES7/ES8)
                 <li>Adds optional type annotations, visibility, and decorators
                 <li>Compiler checks and removes annotations
-                <li>2.x with major changes released recently
                 <!--<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>-->
                 <!--<li>External declarations can add type information to pure JavaScript-->
                 <!--<li>Extensive support in-->
@@ -166,10 +221,23 @@
             </ul>
         </section>
 
-        <!--<section>-->
-            <!--<h1>Part II: Comparison</h1>-->
-            <!--&lt;!&ndash;<h2 class="fragment">aka what I find most important</h2>&ndash;&gt;-->
-        <!--</section>-->
+        <section class="elm">
+            <h2>Elm</h2>
+            <h3 class="fragment">simplicity, soundness, no runtime exceptions</h3>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://elm-lang.org/">http://elm-lang.org/</a>
+                <li>Language of its own
+                <li>Closer to Haskell than to JavaScript
+                <li>no null, no mutation
+                <li>Geared torwards Web Appliations
+                <li>Compiler creates JavaScript
+            </ul>
+        </section>
+
+        <section>
+            <h1>Part II: Comparison</h1>
+            <!--<h2 class="fragment">aka what I find most important</h2>-->
+        </section>
 
         <section>
             <h2>Basics</h2>
@@ -240,13 +308,60 @@ class Sayer {
 </code></pre>
       </section>
 
+
+        <section class="elm">
+            <h3>Elm</h3>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+let
+    obj : String
+    obj = "yo"
+
+    -- everthing is const, can not re-assign
+    -- Error: `The definition of `obj2` does not match its type annotation.`
+    obj2 : String
+    obj2 = 10
+</code></pre>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+// types optional
+sayIt : String -> String
+sayIt what =
+    "Saying: " ++ what
+
+let
+    said : String
+    said = sayIt obj
+</code></pre>
+            <p class="fragment">No classes and methods in elm</p>
+        </section>
+
         <section>
-            <h2>Right, pretty much the same</h2>
+            <h2>Flow and TypeScript pretty similar</h2>
             <p>Those basic features help with documentation, refactoring, and IDE support</p>
         </section>
 
         <section>
             <h2>Nullability</h2>
+        </section>
+
+        <section class="elm">
+            <h3>Elm</h3>
+            <p class="fragment">There neither is <code>null</code> nor <code>undefined</code> in elm</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+foo : Int -> Maybe String
+foo num =
+    if num > 10 then
+        Just "cool"
+    else
+        Nothing
+</code></pre>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+text (
+    case (foo 11) of
+        Just message -> message
+        Nothing -> ""
+)
+</code></pre>
+            <p class="fragment">Rather <code>Maybe</code> plus pattern matching</p>
         </section>
 
         <section class="flow">
@@ -257,11 +372,7 @@ function foo(num: number) {
         return 'cool';
     }
 }
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-console.log(foo(100).toString());
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+
 // error: call of method `toString`.
 // Method cannot be called on possibly null value
 console.log(foo(100).toString());
@@ -301,84 +412,210 @@ fooed!.toString();
             <p class="fragment">All types nullable by default in TypeScript 1.x</p>
         </section>
 
-        <section>
-            <h3>`any` type</h3>
-            <p class="fragment">can be anything, not specified</p>
-            <p class="fragment">can selectively disable type checking</p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function func(a: any) {
-    return a + 5;
-}
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// cool
-let r1: string = func(10);
 
-// cool
-let r2: boolean = func('wat');
-</code></pre>
-
+        <section class="elm">
+            <h3>Mutation, const</h3>
             <ul>
-                <li class="fragment"><em>flow</em>: explicit any supported, but any never inferred
-                <li class="fragment"><em>TypeScript</em>: explicit any supported
-                <li class="fragment"><em>TypeScript 1.x</em>: any inferred if no type specified and no direct inference possible
-                <li class="fragment"><em>TypeScript 2.x</em>: inference much smarter
+                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
+                <li class="fragment"><em>elm</em>: everthing always immtuable and const
             </ul>
         </section>
 
         <section>
-            <h3>Generic Type information</h3>
-            <p class="fragment">Types can be parameterized by others</p>
-            <p class="fragment">Most common with collection types</p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let cats: Array&lt;Cat> = []; // can only contain cats
-let animals: Array&lt;Animal> = []; // can only contain animals
+            <h3>`any` type</h3>
+            <p class="fragment">can be anything, not specified</p>
+            <p class="fragment">can selectively disable type checking</p>
+            <ul>
+                <li class="fragment"><em>TypeScript</em>: explicit any supported
+                <li class="fragment"><em>TypeScript 1.x</em>: inferred if no type specified and no direct inference possible
+                <li class="fragment"><em>TypeScript 2.x</em>: inference much smarter
+                <li class="fragment"><em>flow</em>: explicit any supported, but any never inferred
+                <li class="fragment elm"><em>elm</em>: does not exist, everything has exact type
+            </ul>
+        </section>
 
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
-// nope, no cat
-cats.push(10);
-           </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
-// nope, no cat
-cats.push(new Animal('Fido'));
-           </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
-// cool, is a cat
-cats.push(new Cat('Purry'));
-           </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="9">
-// cool, cat is a sub type of animal
-animals.push(new Cat('Purry'));
-           </code></pre>
+        <section class="todo">
+            <h3>Tagged Unions</h3>
+            <ul>
+                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
+                <li class="fragment"><em>elm</em>: everthing always immtuable and const
+            </ul>
+        </section>
+
+        <section class="elm">
+            <h3>Type Compatibility</h3>
+            <ul>
+                <li class="fragment"><em>elm</em>: exact type match only
+                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (plus parametric types)
+            </ul>
         </section>
 
         <section>
-            <h3>Up to this point this pretty much works in Flow and TypeScript the same way ...</h3>
-        </section>
-
-        <section>
-            <h3>Differences in Generic Types</h3>
+            <h3>Generics (aka Parametric Types)</h3>
             <ul>
                 <li class="fragment">TypeScript
                     <ul>
                         <li>parametric types are compatible if the type to assign from has a more special type parameter</li>
-                        <li>seems most intuitive, allows for obviously wrong code, though
+                        <li>seems most intuitive
+                        <li>allows for obviously wrong code, though
                     </ul>
                 </li>
                 <li class="fragment">Flow
                     <ul>
                         <li>using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>
-                        <li>Array in Flow has an invariant parametric type
-                        <li>more expressive, harder to master
+                        <li>Array in Flow has an invariant parametric type</li>
+                        <li>more expressive
+                        <li>harder to master
                     </ul>
                 </li>
+                <li class="fragment elm">Elm: does not apply
             </ul>
             <p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>
         </section>
 
+        <!--<section>-->
+        <!--<h3>Consider this type hierarchy</h3>-->
+           <!--<pre class="fragment"><code class="typescript" contenteditable data-trim>-->
+<!--class Animal {-->
+   <!--name: string;-->
+   <!--constructor(name: string) {-->
+       <!--this.name = name;-->
+   <!--}-->
+<!--}-->
+<!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript" contenteditable data-trim>-->
+<!--class Dog extends Animal {-->
+    <!--// just to make this different from cat-->
+    <!--goodBoyFactor: number;-->
+<!--}-->
+<!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript" contenteditable data-trim>-->
+
+<!--class Cat extends Animal {-->
+    <!--purrFactor: number;-->
+<!--}-->
+<!--</code></pre>-->
+      <!--</section>-->
+
+        <!--<section>-->
+        <!--<h3>Generic Type information</h3>-->
+            <!--<p class="fragment">Types can be parameterized by others</p>-->
+            <!--<p class="fragment">Most common with collection types</p>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--let cats: Array&lt;Cat> = []; // can only contain cats-->
+<!--let animals: Array&lt;Animal> = []; // can only contain animals-->
+
+<!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">-->
+<!--// nope, no cat-->
+<!--cats.push(10);-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">-->
+<!--// nope, no cat-->
+<!--cats.push(new Animal('Fido'));-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">-->
+<!--// cool, is a cat-->
+<!--cats.push(new Cat('Purry'));-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="9">-->
+<!--// cool, cat is a sub type of animal-->
+<!--animals.push(new Cat('Purry'));-->
+           <!--</code></pre>-->
+      <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Up to this point this pretty much works in Flow and TypeScript the same way ...</h3>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>... but wait</h3>-->
+        <!--</section>-->
+
+        <!--<section>-->
+        <!--<h3>TypeScript</h3>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--let cats: Array&lt;Cat> = []; // can only contain cats-->
+<!--let animals: Array&lt;Animal> = []; // can only contain animals-->
+<!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">-->
+<!--// error TS2322: Type 'Animal[]' is not assignable to type 'Cat[]'.-->
+<!--//  Type 'Animal' is not assignable to type 'Cat'.-->
+<!--//    Property 'purrFactor' is missing in type 'Animal'.-->
+<!--cats = animals;-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">-->
+<!--// wow, works, but is no longer safe-->
+<!--animals = cats;-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="9">-->
+<!--// because those are now all cool-->
+<!--animals.push(new Dog('Brutus'));-->
+<!--animals.push(new Animal('Twinky'));-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="12">-->
+<!--// ouch:-->
+<!--cats.forEach(cat => console.log(`Cat: ${cat.name}`));-->
+<!--// Cat: Purry-->
+<!--// Cat: Brutus-->
+<!--// Cat: Twinky-->
+<!--</code></pre>-->
+            <!--<p class="fragment">TypeScript allows for birds and dogs to be cats here :)</p>-->
+      <!--</section>-->
+
+        <!--<section>-->
+        <!--<h3>Flow</h3>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--let cats: Array&lt;Cat> = []; // can only contain cats-->
+<!--let animals: Array&lt;Animal> = []; // can only contain animals-->
+<!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">-->
+<!--// ERROR-->
+<!--// property `purrFactor` of Cat. Property not found in Animal-->
+<!--cats = animals;-->
+           <!--</code></pre>-->
+           <!--<pre class="fragment"><code class="typescript  line-numbers" contenteditable data-trim data-num-start="6">-->
+<!--// same ERROR-->
+<!--animals = cats;-->
+           <!--</code></pre>-->
+            <!--<p class="fragment">End of story for Flow</p>-->
+      <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Why?</h2>-->
+            <!--<ul>-->
+                <!--<li class="fragment">TypeScript-->
+                <!--<ul>-->
+                    <!--<li>parametric types are compatible if the type to assign from has a more special type parameter</li>-->
+                    <!--<li>seems most intuitive-->
+                    <!--<li>allows for obviously wrong code, though-->
+                <!--</ul>-->
+            <!--</li>-->
+                <!--<li class="fragment">Flow-->
+                    <!--<ul>-->
+                        <!--<li>using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>-->
+                        <!--<li>Array in Flow has an invariant parametric type</li>-->
+                        <!--<li>more expressive-->
+                        <!--<li>harder to understand-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>Advanced: Bounds in Generics</h3>-->
+            <!--<p>Both Flow and TypeScript support upper, but not lower bounds</p>-->
+            <!--<p>Both Flow and TypeScript support-->
+                <!--<a target="_blank" href="https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification">-->
+                    <!--F-Bounded Polymorphism-->
+                <!--</a>-->
+                <!--</p>-->
+            <!--<p><a target="_blank" href="https://flowtype.org/blog/2015/03/12/Bounded-Polymorphism.html">https://flowtype.org/blog/2015/03/12/Bounded-Polymorphism.html</a></p>-->
+            <!--<p><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints">https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints</a></p>-->
+        <!--</section>-->
+
         <section>
-            <h1>Are Flow and TypeScript like Java/C++/C#?</h1>
+            <h1>Part III: Are Flow and TypeScript like Java/C++/C#?</h1>
         </section>
 
         <section>
@@ -412,12 +649,12 @@ animals.push(new Cat('Purry'));
         <section>
             <h2>Structural vs Nominal Typing</h2>
             <ul>
-                <li class="fragment">Nominal Typing: types are compatibility when their declared types match
-                <li class="fragment">Structural Typing: types are compatibility when their structures match
-                <li class="fragment">Java, C#, C++, C all use nominal typing exclusively
-                <li class="fragment">Flow classes are also treated as nominal types
-                <li class="fragment">TypeScript classes are treated as structural types
-                <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
+                <li>Nominal Typing: types are compatibility when their declared types match
+                <li>Structural Typing: types are compatibility when their structures match
+                <li>Java, C#, C++, C all use nominal typing exclusively
+                <li>Flow classes are also treated as nominal types
+                <li>TypeScript classes are treated as structural types
+                <li>Everything else in both Flow and TypeScript uses structural typing
             </ul>
         </section>
 
@@ -522,7 +759,11 @@ Annotations in Java</a>)
         </section>
 
         <section>
-            <h1>Integrations of raw JavaScript files</h1>
+            <h1>Part IV: Integrations</h1>
+        </section>
+
+        <section>
+            <h2>Integrations of raw JavaScript files</h2>
         </section>
 
         <section>
@@ -612,9 +853,100 @@ Annotations in Java</a>)
             <!--</ul>-->
         </section>
 
+
+        <!--<section class="todo">-->
+            <!--<h2>React support</h2>-->
+            <!--&lt;!&ndash;Using with React&ndash;&gt;-->
+            <!--&lt;!&ndash; - https://www.typescriptlang.org/docs/handbook/react-&-webpack.html&ndash;&gt;-->
+
+        <!--</section>-->
+        <!--<section>-->
+            <!--<h2>Advanced types</h2>-->
+        <!--</section>-->
+    <!-- - union-->
+    <!-- - intersection-->
+    <!-- - array types-->
+        <!-- - checker capabilities or TypeScript-->
+
         <section>
-            <h1>Demo</h1>
-            <h2>Some hacking in Webstorm</h2>
+            <h1>Part V: Epilogue</h1>
+        </section>
+
+        <section>
+            <h3>Why did Facebook build Flow?</h3>
+            <a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
+                <img src="twitter-why-flow.png" height="500px">
+            </a>
+            <p><small><a href="https://twitter.com/ReactEurope/status/763337791489146880" target="_blank">
+                https://twitter.com/ReactEurope/status/763337791489146880
+            </a></small></p>
+        </section>
+
+        <section>
+            <h3>Should I use a type checker?</h3>
+            <ul>
+                <li class="fragment">don't be fooled: checkers do not make your programs error free
+                <li class="fragment"><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
+                <li class="fragment">initial effort to introduce a checker is low, though (especially true for flow)
+                <li class="fragment">but a type system is a complex thing, it comes at a cost
+            </ul>
+            <p class="fragment">My recommendation</p>
+            <ul>
+                <li class="fragment">if your project does not live for long: <em class="fragment">no</em>
+                <li class="fragment">if your project is really simple: <em class="fragment">no</em>
+                <li class="fragment">if there is a chance you will need to refactor the thing: <em class="fragment">yes</em>
+                <li class="fragment">if your system is very important or even crucial for the success of your company: <em class="fragment">yes</em>
+                <li class="fragment">if people enter or leave your team frequently: <em class="fragment">yes</em>
+                <li class="fragment">you have substantial amount of algorithmic code: <em class="fragment">yes</em>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Which type checker should you use?</h2>
+            <h4>It depends on your requirements</h4>
+            <h4>Just be sure to be well informed</h4>
+            <h4>Don't let your decision be based on mere opinions or prejudice</h4>
+        </section>
+
+        <section>
+            <h3>One example of an informed descision</h3>
+            <a href="https://twitter.com/DJCordhose/status/790196682097102848" target="_blank">
+                <img src="twitter-choosing-typescript.png">
+            </a>
+            <p><small><a href="https://twitter.com/DJCordhose/status/790196682097102848" target="_blank">
+                https://twitter.com/DJCordhose/status/790196682097102848
+            </a></small></p>
+        </section>
+
+        <section>
+            <h3>One example of an informed doubt</h3>
+            <a href="https://twitter.com/alexeygolev/status/790208311769661440" target="_blank">
+                <img src="twitter-typescript-doubt.png">
+            </a>
+            <p><small><a href="https://twitter.com/alexeygolev/status/790208311769661440" target="_blank">
+                https://twitter.com/alexeygolev/status/790208311769661440
+            </a></small></p>
+        </section>
+
+
+
+        <section>
+            <h2>Types do not help you to avoid errors in algorithms?</h2>
+            <p class="fragment">If so, what might be the problem here?</p>
+<pre class="fragment"><code class="typescript" contenteditable data-trim >
+List(tests).sort((t1, t2) => t1.id - t2.id)
+</code></pre>
+            <p class="fragment">Those <code>ids</code> acutally are strings, result always is <code>NaN</code></p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim >
+// this would have saved you
+type Test = {
+    id: string;
+    // ...
+};
+//  error   'string' This type is incompatible with 'number'
+List(tests).sort((t1, t2) => t1.id - t2.id)
+</code></pre>
+
         </section>
 
         <section>
@@ -635,6 +967,13 @@ Annotations in Java</a>)
                         <li>nominal typing for classes
                     </ul>
                 </li>
+                <li class="fragment">Elm: <em>Haskell like alternative for everyone</em>
+                    <ul>
+                        <li>simplicity of type system
+                        <li>typing not optional (no any)
+                        <li>everything immutable always and everywhere
+                    </ul>
+                </li>
             </ul>
         </section>
 
@@ -652,24 +991,11 @@ Annotations in Java</a>)
                 <li >Generics in TypeScript are easier, but less expressive
                 <li >Flow's type system is generally more expressive
                 <li >Flow is written in OCaml, Typescript in Typescript
-                <li >Integration with existing 3rd party libraries a PITA in TypeScript 1.x (improved in TypeScript 2.x)
+                <li >Integration with existing 3rd party libraries a PITA in TypeScript 1.x
+                <li >Vastly improved in TypeScript 2.x
             </ul>
         </section>
 
-        <section>
-            <h1>Thank you!</h1>
-
-            <h2>Questions / Discussion</h2>
-
-            <p>
-                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
-
-            </p>
-            <p><a href="http://bit.ly/types-nordic-coding">
-                http://bit.ly/types-nordic-coding
-            </a></p>
-
-        </section>
         <section>
             <h3>Resources</h3>
             <ul>
@@ -738,6 +1064,22 @@ Annotations in Java</a>)
             </ul>
         </section>
 
+        <section>
+            <!--<a href="http://www.embarc.de/"><img src="embarc13.png "-->
+                                                 <!--height="150"></a>-->
+            <h1>Thank you!</h1>
+
+            <h2>Questions / Discussion</h2>
+
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </p>
+            <p><a href="http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html">
+                http://djcordhose.github.io/flow-vs-typescript/flow-typescript-2.html
+            </a></p>
+
+        </section>
     </div>
 
 </div>
@@ -752,13 +1094,24 @@ $('section').attr('data-background-image', "backgrounds/dark-sky.jpg")
 //$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
 //$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
 //    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
-//$('section').attr('data-background-image', "backgrounds/light-sky.jpg")
 </script>
 <script>
-    // only presentation version has fragments
-    if (window.location.hostname.indexOf('localhost') === -1) {
-        $('.fragment').removeClass('fragment');
-    }
+    Reveal.addEventListener( 'ready', function( event ) {
+        // only applies presentation version
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            Reveal.configure({ controls: false });
+        } else {
+            $('.fragment').removeClass('fragment');
+        }
+    } );
+//    document.addEventListener("DOMContentLoaded", function () {
+//        var elmElements = document.querySelectorAll(".elm");
+//        var elmArray = Array.prototype.slice.call(elmElements);
+//        elmArray.forEach(function (elm) {
+//            elm.style.display = 'none';
+//        });
+//    });
+
 </script>
 
 <script>
