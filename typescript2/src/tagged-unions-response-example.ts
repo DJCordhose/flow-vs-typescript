@@ -1,6 +1,6 @@
+// https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#tagged-union-types
 // https://flowtype.org/docs/disjoint-unions.html
-
-/* @flow */
+// https://guide.elm-lang.org/types/union_types.html
 
 type Resp = Res | Err; // a disjoint union type with two cases
 type Res = { status: 'done', payload: Object };
@@ -10,7 +10,6 @@ function callback(response: Resp) {
     // given by code compeletion
     switch (response.status) {
         case 'done':
-            // this is the special thing: we now know, this is a Response
             const result: Res = response;
             console.log(result.payload);
             break;

@@ -87,15 +87,15 @@
     <div class="slides">
 
         <section>
-            <h1>Flow vs TypeScript</h1>
-            <h2>Type Systems for JavaScript</h2>
+            <h1>Type Systems for JavaScript</h1>
+            <h2>Flow and TypeScript</h2>
             <h3><a target="_blank" href="https://www.microsoft.com/germany/technical-summit">Technical Summit 2016</a></h3>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p>Slides: <a href="http://djcordhose.github.io/flow-vs-typescript/2016_ms_technical_summit.html">
-                http://djcordhose.github.io/flow-vs-typescript/2016_ms_technical_summit.html
+            <p>Slides: <a href="http://bit.ly/ms-typescript">
+                http://bit.ly/ms-typescript
             </a></p>
         </section>
         <section>
@@ -148,11 +148,6 @@
             </ul>
         </section>
 
-        <!--<section>-->
-            <!--<h1>Part II: Comparison</h1>-->
-            <!--&lt;!&ndash;<h2 class="fragment">aka what I find most important</h2>&ndash;&gt;-->
-        <!--</section>-->
-
         <section>
             <h2>Basics</h2>
         </section>
@@ -164,15 +159,15 @@
 
         <section>
         <h3>TypeScript as hacked in VS Code</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable>let obj: string;
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable  data-trim>let obj: string;
 obj = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
 obj = 10;
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 
-// types can be inferred (return type)
-function sayIt(what: string) {
+
+function sayIt(what: string) { // types can be inferred (return type)
     return `Saying: ${what}`;
 }
 const said: string = sayIt(obj);
@@ -180,56 +175,22 @@ const said: string = sayIt(obj);
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
-    // mandatory
-    what: string;
+    what: string; // mandatory
 
     constructor(what: string) {
         this.what = what;
     }
 
-    // return type if you want to
-    sayIt(): string {
+    sayIt(): string { // return type if you want to
         return `Saying: ${this.what}`;
     }
 }
 </code></pre>
+            <p class="fragment">Flow looks the same for those examples</p>
       </section>
 
         <section>
-        <h3>The same thing in Flow</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let obj: string;
-obj = 'yo';
-// Error: number: This type is incompatible with string
-obj = 10;
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function sayIt(what: string) {
-    return `Saying: ${what}`;
-}
-const said: string = sayIt(obj);
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-class Sayer {
-    what: string;
-
-    constructor(what: string) {
-        this.what = what;
-    }
-
-    sayIt(): string {
-        return `Saying: ${this.what}`;
-    }
-}
-
-</code></pre>
-      </section>
-
-        <section>
-            <h2>Right, pretty much the same</h2>
-            <p>Those basic features help with documentation, refactoring, and IDE support</p>
+            <h2>Those basic features help with documentation, refactoring, and IDE support</h2>
         </section>
 
         <section>
@@ -246,16 +207,16 @@ function foo(num: number) {
 }
 </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-console.log(foo(100).toString());
+console.log(foo(9).toString());
 </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // error: call of method `toString`.
 // Method cannot be called on possibly null value
-console.log(foo(100).toString());
+console.log(foo(9).toString());
 </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // to fix this, we need to check the result
-const fooed: string|void = foo(100);
+const fooed: string|void = foo(9);
 if (fooed) {
     fooed.toString();
 }
@@ -274,7 +235,7 @@ function foo(num: number) {
 </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // same as flow
-const fooed: string|void = foo(100);
+const fooed: string|void = foo(9);
 if (fooed) {
     fooed.toString();
 }
@@ -592,7 +553,7 @@ Annotations in Java</a>)
         </section>
 
         <section>
-            <h1>Integrations of raw JavaScript files</h1>
+            <h2>Integrations of raw JavaScript files</h2>
         </section>
 
         <section>
@@ -712,8 +673,8 @@ Annotations in Java</a>)
                 <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
 
             </p>
-            <p><a href="http://djcordhose.github.io/flow-vs-typescript/2016_ms_technical_summit.html">
-                http://djcordhose.github.io/flow-vs-typescript/2016_ms_technical_summit.html
+            <p><a href="http://bit.ly/ms-typescript">
+                http://bit.ly/ms-typescript
             </a></p>
 
         </section>

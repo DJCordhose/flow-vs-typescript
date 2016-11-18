@@ -5,4 +5,5 @@
 // import './sandbox';
 // import './any';
 // import './sandbox';
-import './type-literals';
+// import './type-literals';
+import './tagged-unions-response-example';

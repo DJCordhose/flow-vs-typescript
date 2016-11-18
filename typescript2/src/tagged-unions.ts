@@ -43,18 +43,3 @@ if (shape.kind === 'square') {
     // yes
     console.log(shape.size);
 }
-
-type formatType = { strikeThrough: true, underline: false } | { strikeThrough: false, underline: true}
-                | { strikeThrough: false, underline: false };
-
-function format(text: string, format: {
-    strikeThrough: boolean,
-    underline: boolean
-}) {
-    const {strikeThrough, underline} = format;
-    if (strikeThrough && underline) {
-        throw new Error('Illegal format');
-    }
-}
-
-format('my text', {strikeThrough: true, underline: true});

@@ -4,7 +4,6 @@
 -- - http://elm-lang.org/
 -- - http://elm-lang.org/try
 -- - https://www.manning.com/books/elm-in-action
--- - http://elm-lang.org:8018/assets/blog/0.18/todomvc.html
 -- - https://www.youtube.com/watch?v=DSjbTC-hvqQ
 -- - https://terezka.github.io/elm-plot/
 -- - http://outreach.mcmaster.ca/index.html
