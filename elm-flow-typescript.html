@@ -238,7 +238,7 @@ let
     obj2 = 10
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-// explicit types optional, can be inferred
+-- explicit types optional, can be inferred
 sayIt : String -> String
 sayIt what =
     "Saying: " ++ what
@@ -755,6 +755,20 @@ Annotations in Java</a>)
                     Declarations can be added to flow config files
                 </a>
                 <li>If there are no existing declaration files: still works, but less powerful
+            </ul>
+        </section>
+
+        <section class="elm">
+            <h3>Using JavaScript Code in Elm</h3>
+            <ul>
+                <li>without interacting with JavaScript and the browser Elm might be quite useless
+                <li>integration works via messages through ports (<a target="_blank"
+                       href="https://guide.elm-lang.org/interop/javascript.html">
+                https://guide.elm-lang.org/interop/javascript.html
+                </a>)
+                <li>Only part of the app where there can still be runtime exceptions
+                <li>data from JavaScript sent like JSON
+                <li>needs to be converted and typed in Elm
             </ul>
         </section>
 
