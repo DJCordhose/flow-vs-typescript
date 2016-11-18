@@ -4,10 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Elm, Flow, TypeScript</title>
-
-    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
-    <meta name="author" content="Hakim El Hattab">
+    <title>Type Systems for JavaScript</title>
 
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
@@ -71,8 +68,8 @@
 
         <section>
             <h1>Type Systems for JavaScript</h1>
-            <h2>Elm, Flow, and TypeScript</h2>
-            <p style="color: red">WORK IN PROGRESS</p>
+            <h2><span class="elm">Elm, </span>Flow, and TypeScript</h2>
+            <!--<p style="color: red">WORK IN PROGRESS</p>-->
             <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html">
                 http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html
             </a></small></p>
@@ -228,7 +225,6 @@ class Sayer {
 </code></pre>
       </section>
 
-
         <section class="elm">
             <h3>Elm</h3>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
@@ -242,7 +238,7 @@ let
     obj2 = 10
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-// types optional
+// explicit types optional, can be inferred
 sayIt : String -> String
 sayIt what =
     "Saying: " ++ what
@@ -465,7 +461,7 @@ animals = cats;
         <section class="elm">
             <h3>Elm</h3>
             <p class="fragment">Elm does not have classes or subtypes</p>
-            <p class="fragment">Elm has Records (like JavaScript Objects) and generic data structures</p>
+            <p class="fragment">Elm has Records (like JavaScript Objects) and generic data structures (e.g. List)</p>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 type alias Animal = { name : String }
 type alias Cat = { name : String, coatColor : String }
@@ -490,7 +486,7 @@ catAnimals = cats
 animalCats : List Cat
 animalCats = animals
            </code></pre>
-            <p class="fragment">Types always have to match exactly (closest to Flow)</p>
+            <p class="fragment">Types always have to match exactly</p>
         </section>
 
         <section>

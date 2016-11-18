@@ -1,17 +1,12 @@
 import Html exposing (div, p, text)
 
---main =
---    let
---        r : String
---        r = callback (Res "response")
---        e : String
---        e = callback (Err 404)
---    in
---        div []
---            [
---                p [] [text r],
---                p [] [text e]
---            ]
+main =
+    let
+        cats : List Cat
+        cats = [ cat1, cat2 ]
+    in
+        div []
+            (List.map (\cat -> p [] [text (.name cat)]) cats )
 
 type alias LivingThing a = { a | lifeExpectancy : Int }
 
