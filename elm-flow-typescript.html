@@ -149,7 +149,7 @@
             <ul class="fragment">
                 <li><a target="_blank" href="http://elm-lang.org/">http://elm-lang.org/</a>
                 <li>Language of its own
-                <li>Closer to Haskell than to JavaScript
+                <li>functional, not object-oriented
                 <li>no null, no mutation
                 <li>Geared torwards Web Appliations
                 <li>Compiler creates JavaScript
@@ -162,10 +162,10 @@
 
         <section>
         <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable>let obj: string;
-obj = 'yo';
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable>let foo: string;
+foo = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
-obj = 10;
+foo = 10;
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 
@@ -196,10 +196,10 @@ class Sayer {
         <section>
         <h3>Flow</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-let obj: string;
-obj = 'yo';
+let foo: string;
+foo = 'yo';
 // Error: number: This type is incompatible with string
-obj = 10;
+foo = 10;
 
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
@@ -229,16 +229,16 @@ class Sayer {
             <h3>Elm</h3>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 let
-    obj : String
-    obj = "yo"
+    foo : String
+    foo = "yo"
 
     -- everthing is const, can not re-assign
     -- Error: `The definition of `obj2` does not match its type annotation.`
-    obj2 : String
-    obj2 = 10
+    foo2 : String
+    foo2 = 10
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
--- explicit types optional, can be inferred
+-- type annotations are optional, can be inferred
 sayIt : String -> String
 sayIt what =
     "Saying: " ++ what
@@ -761,7 +761,7 @@ Annotations in Java</a>)
         <section class="elm">
             <h3>Using JavaScript Code in Elm</h3>
             <ul>
-                <li>without interacting with JavaScript and the browser Elm might be quite useless
+                <li>in practice, most production Elm projects end up wanting to access the JS ecosystem
                 <li>integration works via messages through ports (<a target="_blank"
                        href="https://guide.elm-lang.org/interop/javascript.html">
                 https://guide.elm-lang.org/interop/javascript.html
@@ -839,7 +839,7 @@ Annotations in Java</a>)
                         <li>nominal typing for classes
                     </ul>
                 </li>
-                <li class="fragment elm">Elm: <em>Haskell like alternative for everyone</em>
+                <li class="fragment elm">Elm: <em>functional language deliberately different from JavaScript</em>
                     <ul>
                         <li>simplicity of type system (no JavaScript legacy)
                         <li>always completely typed (no any)
