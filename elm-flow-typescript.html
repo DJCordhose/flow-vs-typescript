@@ -162,7 +162,7 @@
 
         <section>
         <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable>let foo: string;
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>let foo: string;
 foo = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
 foo = 10;
@@ -511,7 +511,19 @@ animalCats = animals
                         <li>all types have to match exactly
                     </ul>
             </ul>
-            <p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>
+            <!--<p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>-->
+        </section>
+
+        <section>
+            <h3>Advanced: Bounds in Generics</h3>
+            <p>Both Flow and TypeScript support upper, not not lower bounds</p>
+            <p>Both Flow and TypeScript support
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Bounded_quantification#F-bounded_quantification">
+                    F-Bounded Polymorphism
+                </a>
+            </p>
+            <p><a target="_blank" href="https://flowtype.org/blog/2015/03/12/Bounded-Polymorphism.html">https://flowtype.org/blog/2015/03/12/Bounded-Polymorphism.html</a></p>
+            <p><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints">https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints</a></p>
         </section>
 
         <section>
