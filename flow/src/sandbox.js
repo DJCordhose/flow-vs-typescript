@@ -20,3 +20,14 @@ function callback(response: Resp) {
             break;
     }
 }
+
+// let aha: Resp;
+// if (aha.status === 'done') {
+//     const oho: Res = Resp;
+// }
+
+function mach(): string {
+    return true;
+}
+//
+// mach();

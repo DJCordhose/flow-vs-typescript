@@ -2,6 +2,7 @@
   "name": "typescript2-playground",
   "version": "2.0.0",
   "scripts": {
+    "start": "npm run devserver",
     "weback": "webpack --watch",
     "devserver": "webpack-dev-server --progress --colors --hot --content-base public"
   },

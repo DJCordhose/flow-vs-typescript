@@ -1,17 +1,23 @@
-class Sayer {
-    // mandatory
-    what: string;
+import {saySomething} from './util';
 
-    constructor(what: string) {
-        this.what = what;
+let foo: string = 'olli';
+saySomething(foo);
+
+class Programmer {
+_name: string;
+    constructor(_name: string) {
+        this._name = _name;
     }
 
-    // return type if you want to
-    sayIt(): string {
-        return `Saying: ${this.what}`;
+    print() {
+        saySomething(`${this._name} programs`);
     }
+
+    format() {
+        
+    }
+
 }
 
-const sayer = new Sayer('Huhu');
-const it = sayer.sayIt();
-console.log(it);
+const prog = new Programmer('Olli');
+prog.print();
