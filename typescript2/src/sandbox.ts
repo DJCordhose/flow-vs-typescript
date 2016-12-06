@@ -1,23 +1,26 @@
 import {saySomething} from './util';
 
-let foo: string = 'olli';
-saySomething(foo);
+let a: string = "" + 10;
+saySomething(a);
 
-class Programmer {
-_name: string;
-    constructor(_name: string) {
-        this._name = _name;
+function mach(p1: number): number {
+    return p1 + 100;
+}
+
+const result:number = mach(10);
+
+interface HasName {
+    name: string;
+}
+
+class Programmer implements HasName {
+    constructor(public name: string) {
     }
 
     print() {
-        saySomething(`${this._name} programs`);
+        saySomething(this.name);
     }
-
-    format() {
-        
-    }
-
 }
 
-const prog = new Programmer('Olli');
-prog.print();
+let oma = new Programmer('Oma');
+oma.print();

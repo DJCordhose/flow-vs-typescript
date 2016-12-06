@@ -447,7 +447,7 @@ function callback(response: Response) {
 
         <section>
             <h3>Nominal Typing for Flow classes</h3>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
+            <pre><code class="typescript line-numbers" contenteditable data-trim style="max-height: 800px">
 class Person {
     name: string;
 }
@@ -459,10 +459,12 @@ class Dog {
 let dog: Dog = new Dog();
 
 // nope, nominal type compatibility violated
-let person: Person = dog; // ERROR: Dog: This type is incompatible with Person
+// ERROR: Dog: This type is incompatible with Person
+let person: Person = dog;
 
 // same problem
-let person: Person = { // ERROR: object literal: This type is incompatible with Person
+// ERROR: object literal: This type is incompatible with Person
+let person: Person = {
     name: "Olli"
 };
             </code></pre>
