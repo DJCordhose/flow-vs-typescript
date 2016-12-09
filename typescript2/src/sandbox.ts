@@ -1,26 +1,24 @@
 import {saySomething} from './util';
 
-let a: string = "" + 10;
+let a = "10";
+
 saySomething(a);
 
-function mach(p1: number): number {
-    return p1 + 100;
+function mach(param) {
+    if (param > 10) {
+        return param - 10;
+    }
 }
 
-const result:number = mach(10);
+let res = mach(20);
+if (res) {
+    res.toString();
+}
 
-interface HasName {
+class Person {
     name: string;
-}
 
-class Programmer implements HasName {
-    constructor(public name: string) {
-    }
-
-    print() {
-        saySomething(this.name);
+    constructor(name: string) {
+        this.name = name;
     }
 }
-
-let oma = new Programmer('Oma');
-oma.print();
