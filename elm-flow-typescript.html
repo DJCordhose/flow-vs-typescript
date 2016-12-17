@@ -69,9 +69,8 @@
         <section>
             <h1>Type Systems for JavaScript</h1>
             <h2><span class="elm">Elm, </span>Flow, and TypeScript</h2>
-            <!--<p style="color: red">WORK IN PROGRESS</p>-->
-            <p><small><a href="http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html">
-                http://djcordhose.github.io/flow-vs-typescript/elm-flow-typescript.html
+            <p><small><a href="http://bit.ly/js-types">
+                http://bit.ly/js-types
             </a></small></p>
             <p>
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
@@ -873,6 +872,25 @@ Annotations in Java</a>)
                     </a>
                     <li>Basic Elm support via Plugin
                 </ul>
+        </section>
+
+        <section>
+            <h3 style="top: -30px; position: relative">Should you use a type checker?</h3>
+            <ul class="fragment" style="top: -30px; position: relative">
+                <li>don't be fooled: checkers do not make your programs error free
+                <li><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>
+                <li>initial effort to introduce a checker is low, though
+                <li>but a type system is a complex thing, it comes at a cost
+            </ul>
+            <p class="fragment" style="top: -30px; position: relative">My recommendation</p>
+            <ul class="fragment" style="top: -40px; position: relative">
+                <li >if your project does not live for long: <em >no</em>
+                <li >if your project is really simple: <em >no</em>
+                <li >if there is a chance you will need to refactor the thing: <em >yes</em>
+                <li >if your system is very important or even crucial for the success of your company: <em >yes</em>
+                <li >if people enter or leave your team frequently: <em >yes</em>
+                <li >you have substantial amount of algorithmic code: <em >yes</em>
+            </ul>
         </section>
 
         <section>
