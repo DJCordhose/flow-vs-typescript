@@ -26,7 +26,7 @@ function callback(response: Resp) {
 //     const oho: Res = Resp;
 // }
 
-function mach(): string {
+function mach(): boolean {
     return true;
 }
 //

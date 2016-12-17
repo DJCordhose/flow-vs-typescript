@@ -3,3 +3,4 @@ public/dist
 .idea/workspace.xml
 npm-debug.log
 .vscode/symbols.json
+bin

@@ -65,4 +65,10 @@ let brutus: Dog = {
 animals.push(twinky);
 animals.push(brutus);
 
+// that works: but what is the inferred type?
+function logAnimals(animals) {
+// function logAnimals(animals: Array<Animal>) {
+    animals.forEach(animal => console.log(`Animal: ${animal.name}`));
+}
 
+logAnimals(cats);

@@ -11,8 +11,9 @@ function sayIt(what: string) {
 }
 const said: string = sayIt(obj);
 
-class Sayer {
-    // mandatory
+// https://flowtype.org/docs/classes.html
+// field declarations and methods need to be annotated when exported
+export class Sayer {
     what: string;
 
     constructor(what: string) {
