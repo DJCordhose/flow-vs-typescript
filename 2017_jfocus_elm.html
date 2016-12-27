@@ -496,7 +496,11 @@ logAnimals(cats);
             </ul>
             <div class="fragment">
 
-            <p>much despised Java generics excel here as they can actually make that code safe</p>
+            <p>much despised Java generics excel here as they can actually make that code safe (another difference:
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#Comparing_declaration-site_and_use-site_annotations">
+                    Use-site variance
+                </a>)
+            </p>
             <pre><code class="java line-numbers" contenteditable data-trim>
 // Java
 void logAnimals(List&lt;? extends Animal> animals) {
