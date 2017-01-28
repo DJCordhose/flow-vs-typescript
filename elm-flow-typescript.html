@@ -66,6 +66,17 @@
     <!-- Any section element inside of this container is displayed as a slide -->
     <div class="slides">
 
+        <!--Sources and additional ideas-->
+        <!-- - https://medium.com/@raxwunter/secret-flow-types-86b2ebb30951#.tkhjhdhf1-->
+        <!-- - Add D3 V4 TypeScript declarations as example for subsequent talks with emphasis on Java-->
+        <!-- - Consider React vs A2: https://blog.mariusschulz.com/2017/01/13/typescript-vs-flow-->
+        <!-- - http://blog.cleancoder.com/uncle-bob/2017/01/11/TheDarkPath.html-->
+        <!-- - Include more stuff from sources-->
+        <!-- - https://blogs.msdn.microsoft.com/typescript/2016/12/14/writing-dts-files-for-types/-->
+        <!-- - https://medium.com/@danvdk/a-typed-pluck-exploring-typescript-2-1s-mapped-types-c15f72bf4ca8#.yshmb6m67-->
+        <!-- - https://blogs.msdn.microsoft.com/premier_developer/2016/12/28/unit-testing-using-typescript-mocha-chai-sinon-and-karma/-->
+        <!-- - https://www.youtube.com/watch?v=IwVyroc__bM-->
+
         <section>
             <h1>Type Systems for JavaScript</h1>
             <h2><span class="elm">Elm, </span>Flow, and TypeScript</h2>
@@ -79,6 +90,7 @@
 
             <p><small><strong>If you are looking for the most recent and up-to-date version of my comparisons on Typed JavaScript you have just found it :)</strong></small></p>
         </section>
+
 
         <section>
             <h2>Why using type systems?</h2>
@@ -225,16 +237,22 @@ class Sayer {
 </code></pre>
       </section>
 
+        <section>
+            <h2>Flow and TypeScript basics are pretty similar</h2>
+            <p>Those basic features help with documentation, refactoring, and IDE support</p>
+        </section>
+
         <section class="elm">
-            <h3>Elm</h3>
+            <h3>Elm: a totally different story</h3>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 let
     foo : String
     foo = "yo"
+    -- Error: everthing is const, can not re-assign
+    foo = "yo yo"
 
-    -- everthing is const, can not re-assign
-    -- Error: `The definition of `obj2` does not match its type annotation.`
     foo2 : String
+    -- Error: `The definition of `obj2` does not match its type annotation.`
     foo2 = 10
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
@@ -251,12 +269,9 @@ let
         </section>
 
         <section>
-            <h2>Flow and TypeScript pretty similar</h2>
-            <p>Those basic features help with documentation, refactoring, and IDE support</p>
-        </section>
-
-        <section>
             <h2>Nullability</h2>
+            <p>One of my main sources of runtime exceptions when programming Java</p>
+            <p><small>Even after many years it is still surprising how many corner cases I miss in complex code</small></p>
         </section>
 
         <section class="elm">
@@ -327,18 +342,19 @@ if (fooed) {
 // or tell the compiler we know better (in this case we actually do)
 fooed!.toString();
 </code></pre>
-            <p class="fragment">Only applies to TypeScript 2.x</p>
-            <p class="fragment">Only works when <em>strictNullChecks</em> option is checked</p>
-            <p class="fragment">All types nullable by default in TypeScript 1.x</p>
+            <div class="fragment">
+                <p>Only applies to TypeScript 2.x</p>
+                <p>Only works when <em>strictNullChecks</em> option is checked</p>
+                <p>All types nullable by default in TypeScript 1.x</p>
+            </div>
         </section>
-
 
         <section class="elm">
             <h3>Mutation, const</h3>
             <ul>
                 <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
                 <li class="fragment"><em>TypeScript</em>: readonly for properties
-                <li class="fragment"><em>elm</em>: everything always immutable and const
+                <li class="fragment"><em>Elm</em>: everything always immutable and const
             </ul>
         </section>
 
@@ -364,15 +380,7 @@ let r2: boolean = func('wat');
                 <li class="fragment"><em>TypeScript</em>: explicit any supported
                 <li class="fragment"><em>TypeScript 1.x</em>: any inferred if no type specified and no direct inference possible
                 <li class="fragment"><em>TypeScript 2.x</em>: inference much smarter
-                <li class="fragment elm"><em>elm</em>: does not exist, everything has exact type
-            </ul>
-        </section>
-
-        <section class="elm">
-            <h3>Type Compatibility</h3>
-            <ul>
-                <li class="fragment"><em>elm</em>: exact type match only
-                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (plus parametric types)
+                <li class="fragment elm"><em>Elm</em>: does not exist, everything has exact type
             </ul>
         </section>
 
@@ -469,10 +477,10 @@ function logAnimals(animals: Array&lt;Animal>) {
 
 logAnimals(cats);
 </code></pre>
-            <ul>
-                <li class="fragment">This works in TypeScript (and it should)</li>
-            <li class="fragment">however, potentially not safe, there is nothing from keeping us to still write to cats</li>
-            <li class="fragment">Flow does not allow this, even though it is safe</li>
+            <ul  class="fragment">
+                <li>This works in TypeScript (and it should)</li>
+                <li>however, potentially not safe, there is nothing to keep us from writing to cats</li>
+                <li>Flow does not allow this, even though it is safe</li>
             </ul>
             <div class="fragment">
 
@@ -529,7 +537,8 @@ animalCats = animals
             <ul>
                 <li class="fragment">TypeScript
                     <ul>
-                        <li>parametric types are compatible if the type to assign from has a more special type parameter</li>
+                        <li><a target="_blank" href="https://twitter.com/ahejlsberg/status/822882400724131841?s=03">always covariant</a> (more special):<br>
+                            parametric types are compatible if the type to assign from has a more special type parameter</li>
                         <li>seems most intuitive, allows for obviously wrong code, though
                     </ul>
                 </li>
@@ -563,18 +572,22 @@ animalCats = animals
 
         <section>
             <h3>Some Type Inference Magic</h3>
-            <p>Works in both TypeScript and Flow</p>
+            <p>Consider</p>
             <pre><code class="typescript line-numbers" contenteditable data-trim>
 class Dog { woof() { } }
 
 const animals = [];
 animals.push(new Dog());
-
+</code></pre>
+            <div class="fragment">
+                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
 animals.forEach((animal: Dog) => animal.woof());
 </code></pre>
-            <p>both know this is safe, as we have only added Dogs so far</p>
+
+            </div>
             <div class="fragment">
-            <p>Adding Cats later and thus changing array type later</p>
+                <p>Adding Cats <em>later</em> and thus changing array type later</p>
             <pre><code class="typescript line-numbers" contenteditable data-trim>
 class Cat { meow() { } }
 animals.push(new Cat());
@@ -588,11 +601,13 @@ animals.push(new Cat());
             <h2>Union Types</h2>
             <p class="fragment">aka Disjoint Unions aka Tagged Unions aka Algebraic data types</p>
             <p class="fragment">to describe data with weird shapes</p>
-            <p class="fragment">Depending on some data other data might apply or not</p>
+            <p class="fragment">depending on some data other data might apply or not</p>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-type Response = Result | Error; // a disjoint union type with two cases
-type Result = { status: 'done', payload: Object };
-type Error = { status: 'error', message: string };
+ // a disjoint union type with two cases
+type Response = Result | Failure;
+
+type Result = { status: 'done', payload: Object }; // all good, we have the data
+type Failure = { status: 'error', message: string }; // error, we get a message
            </code></pre>
         </section>
 
@@ -600,22 +615,22 @@ type Error = { status: 'error', message: string };
             <h3>Implementation both in Flow and TypeScript</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 function callback(response: Response) {
-    // given by code completion
+    // works, as this is present in both
     console.log(response.status);
     // does not work,
     // as we do not know if it exists, just yet
-    console.log(result.payload); // ERROR
+    console.log(response.payload); // ERROR
+    console.log(response.message); // ERROR
            </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-num-start="7">    switch (response.status) {
         case 'done':
             // this is the special thing:
-            // type system now knows, this is a Response
-            const result: Result = response;
-            console.log(result.payload);
+            // type system now knows, this is a Result
+            console.log(response.payload);
             break;
         case 'error':
-            const error: Error = response;
-            console.log(error.message);
+            // and this is a Failure
+            console.log(response.message);
             break;
     }
 }           </code></pre>
@@ -732,7 +747,7 @@ let person: Person = {
                 <li class="fragment">Flow classes are also treated as nominal types
                 <li class="fragment">TypeScript classes are treated as structural types
                 <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
-                <li class="elm">Elm always uses structural typing with exact matches on Records
+                <li class="fragment elm">Elm always uses structural typing with exact matches on Records
             </ul>
         </section>
 
@@ -765,7 +780,6 @@ let namedObject: NamedObject = {
             <ul class="fragment">
                 <li><em>abstract</em> classes and methods
                 <li>special shortcut constructors (combined definition of fields and initialization)
-                <li>interfaces (that you can implement)
                 <li>public, private, protected
                 <li>decorators (aka <a  target="_blank" href="https://msdn.microsoft.com/en-us/library/z0w1kczw(v=vs.80).aspx">
                 Attributes in C#
@@ -785,7 +799,7 @@ Annotations in Java</a>)
         </section>
 
         <section>
-            <h2>Integrations of raw JavaScript files</h2>
+            <h2>Integration with raw JavaScript</h2>
         </section>
 
         <section>
@@ -881,6 +895,31 @@ Annotations in Java</a>)
         </section>
 
         <section>
+            <h1>Barrier to entry for JavaScript people</h1>
+            <ul>
+                <li class="fragment"><strong>Flow</strong>: low
+                    <ul>
+                        <li>fits seamlessly in standard JavaScript build chain
+                        <li>can be enabled file by file
+                        <li><a href="https://flowtype.org/docs/existing.html#weak-mode" target="_blank">weak mode</a> only shows clear errors in order not to overwhelm people
+                    </ul>
+                </li>
+                <li class="fragment"><strong>TypeScript</strong>: medium
+                    <ul>
+                        <li>different build chain (tsc compiler)
+                        <li>can include plain JavaScript, but entry point must be TypeScript
+                    </ul>
+                </li>
+                <li class="fragment"><strong>Elm</strong>: high
+                    <ul>
+                        <li>different syntax, semantics, and tool chain
+                    </ul>
+                </li>
+            </ul>
+
+        </section>
+
+        <section>
             <h3 style="top: -30px; position: relative">Should you use a type checker?</h3>
             <ul class="fragment" style="top: -30px; position: relative">
                 <li>don't be fooled: checkers do not make your programs error free
@@ -927,6 +966,15 @@ Annotations in Java</a>)
             </ul>
         </section>
 
+        <section>
+            <h1>General observations / Trivia</h1>
+            <ul>
+                <li>If it is Angular it will be TypeScript
+                <li>If people come from a JavaScript background and use React, they are more likely to choose flow
+                <li>TypeScript has better tooling support
+                <li>TypeScript 2.x has caught up with so many features previously only available in flow, so people are likely to choose TypeScript 2.x when they can start from scratch
+            </ul>
+        </section>
         <section>
             <h3>Special thanks for giving feedback and helping with this presentation</h3>
             <ul>
