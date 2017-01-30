@@ -85,7 +85,10 @@
             <!--<ul>-->
                 <!--<li><a target="_blank"-->
                        <!--href="https://javascriptair.com/episodes/2016-08-31/">-->
-                    <!--JavaScript Air | Typed JavaScript with TypeScript and Flow-->
+                    <!--JavaScript Air | Typed JavaScript with TypeScript and 
+
+
+-->
                 <!--</a>-->
                 <!--<li><a target="_blank"-->
                        <!--href="http://blog.namangoel.com/flow-for-typescript-developers">-->
@@ -246,14 +249,15 @@
 
         <section>
         <h3>TypeScript</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>let foo: string;
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// variables can have type information
+let foo: string;
 foo = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
 foo = 10;
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-
-// types can be inferred (return type)
+// types can be explicit (parameter) or inferred (return type)
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
@@ -279,6 +283,7 @@ class Sayer {
         <section>
         <h3>Flow</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// variables can have type information
 let foo: string;
 foo = 'yo';
 // Error: number: This type is incompatible with string
@@ -286,6 +291,7 @@ foo = 10;
 
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// types can be explicit (parameter) or inferred (return type)
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
@@ -294,12 +300,13 @@ const said: string = sayIt(obj);
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
-    what: string; // also mandatory
+    what: string; // type also mandatory
 
     constructor(what: string) {
         this.what = what;
     }
 
+    // return type if you want to
     sayIt(): string {
         return `Saying: ${this.what}`;
     }
