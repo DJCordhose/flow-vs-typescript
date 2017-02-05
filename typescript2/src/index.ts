@@ -5,8 +5,8 @@
 // import './structural-nominal';
 // import './sandbox';
 // import './any';
-// import './sandbox';
+import './sandbox';
 // import './type-literals';
 // import './allowJS';
 // import './generics-covariant';
-import './controlFlow';
+// import './controlFlow';

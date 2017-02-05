@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "source-map-loader": "^0.1.5",
-    "ts-loader": "^0.8.2",
+    "ts-loader": "latest",
     "ts-node": "latest",
     "tslint-microsoft-contrib": "^2.0.8",
     "typescript": "next",

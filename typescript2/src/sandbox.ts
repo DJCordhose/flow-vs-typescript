@@ -22,3 +22,6 @@ class Person {
         this.name = name;
     }
 }
+
+const olli = new Person('Olli')
+olli.name;

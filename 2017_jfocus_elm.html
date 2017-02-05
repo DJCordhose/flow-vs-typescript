@@ -103,18 +103,18 @@
             </a></p>
         </section>
 
-        <section>
-            <h2>Disclaimer</h2>
-            <p>I am a practitioner, using both TypeScript and Flow in my projects</p>
-            <p>I am no type theory expert</p>
-            <p>I have not used Elm in any real world project, yet</p>
-        </section>
+        <!--<section>-->
+            <!--<h2>Disclaimer</h2>-->
+            <!--<p>I am a practitioner, using both TypeScript and Flow in my projects</p>-->
+            <!--<p>I am no type theory expert</p>-->
+            <!--<p>I have not used Elm in any real world project, yet</p>-->
+        <!--</section>-->
 
         <section>
             <h2>Why using type systems?</h2>
             <div class="fragment">
                 <h3>type systems make code easier to maintain</h3>
-                <p >type annotations</p>
+                <p >type annotations / inferred types</p>
                 <ul >
                     <li>can make code more readable
                     <li>can make code easier to analyse
@@ -169,7 +169,7 @@
                 <li>Language of its own
                 <li>functional, not object-oriented
                 <li>no null, no mutation
-                <li>Geared torwards Web Appliations
+                <li>Geared towards Web Applications
                 <li>Compiler creates JavaScript
             </ul>
         </section>
@@ -179,7 +179,12 @@
         </section>
 
         <section>
-        <h3>TypeScript</h3>
+            <h2>Demo</h2>
+            <h3>Some basic TypeScript 2.2 hacking in Visual Studio Code 1.10</h3>
+        </section>
+
+        <section>
+        <h3>TypeScript (similar to what we just hacked)</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>let foo: string;
 foo = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
@@ -251,6 +256,7 @@ class Sayer {
             <h3>Elm: a totally different story</h3>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 let
+    -- declaration using type
     foo : String
     foo = "yo"
     -- Error: everthing is const, can not re-assign
@@ -282,6 +288,13 @@ let
         <section class="elm">
             <h3>Elm</h3>
             <p class="fragment">There neither is <code>null</code> nor <code>undefined</code> in elm</p>
+            <p class="fragment">Rather
+                <a target="_blank" href="https://guide.elm-lang.org/error_handling/maybe.html">Maybe</a> plus pattern matching</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+-- Maybe is predefined
+-- http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe
+type Maybe a = Nothing | Just a
+</code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 foo : Int -> Maybe String
 foo num =
@@ -291,13 +304,11 @@ foo num =
         Nothing
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-text (
-    case (foo 11) of
-        Just message -> message
-        Nothing -> ""
-)
+-- pattern matching (need to match all cases)
+case (foo 11) of
+    Just message -> message
+    Nothing -> ""
 </code></pre>
-            <p class="fragment">Rather <code>Maybe</code> plus pattern matching</p>
         </section>
 
         <section class="flow">
@@ -609,7 +620,7 @@ animals.push(new Cat());
 type Response = Result | Failure;
 
 type Result = { status: 'done', payload: Object }; // all good, we have the data
-type Failure = { status: 'error', message: string }; // error, we get a message
+type Failure = { status: 'error', code: number}; // error, we get the error code
            </code></pre>
         </section>
 
@@ -622,7 +633,7 @@ function callback(response: Response) {
     // does not work,
     // as we do not know if it exists, just yet
     console.log(response.payload); // ERROR
-    console.log(response.message); // ERROR
+    console.log(response.code); // ERROR
            </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-num-start="7">    switch (response.status) {
         case 'done':
@@ -632,7 +643,7 @@ function callback(response: Response) {
             break;
         case 'error':
             // and this is a Failure
-            console.log(response.message);
+            console.log(response.code);
             break;
     }
 }           </code></pre>
@@ -642,14 +653,14 @@ function callback(response: Response) {
             <h3>Elm</h3>
             <p class="fragment">simple and concise union types</p>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-type Resp = Res String | Err Int
+type Response = Result String | Failure Int
 
-callback : Resp -> String
+callback : Response -> String
 callback response =
     -- pattern matching
     case response of
-        Res payload -> payload
-        Err code ->
+        Result payload -> payload
+        Failure code ->
                 if code >= 400 && code < 500 then "you messed up" else "we messed up"
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
@@ -663,21 +674,13 @@ callback (Err 404)
         </section>
 
         <section>
-            <h2>Structural vs Nominal Typing</h2>
-            <ul>
-                <li class="fragment">Nominal Typing: types are compatible when their declared types match
-                <li class="fragment">Structural Typing: types are compatible when their structures match
-                <li class="fragment">Java, C#, C++, C all use nominal typing exclusively
-                <li class="fragment">Flow classes are also treated as nominal types
-                <li class="fragment">TypeScript classes are treated as structural types
-                <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
-                <li class="fragment elm">Elm always uses structural typing with exact matches on Records
-            </ul>
-        </section>
-
-        <section>
             <h3>Structural Typing for both TypeScript and Flow</h3>
             <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Dog {
+  name: string
+  woof() {...}
+}
+
 interface NamedObject {
     name: string;
 }
@@ -695,6 +698,19 @@ let namedObject: NamedObject = {
     firstName: "Olli"
 };
             </code></pre>
+        </section>
+
+        <section>
+            <h2>Structural vs Nominal Typing</h2>
+            <ul>
+                <li class="fragment">Nominal Typing: types are compatible when their declared types match
+                <li class="fragment">Structural Typing: types are compatible when their structures match
+                <li class="fragment">Java, C#, C++, C all use nominal typing exclusively
+                <li class="fragment">Flow classes are also treated as nominal types
+                <li class="fragment">TypeScript classes are treated as structural types
+                <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
+                <li class="fragment elm">Elm always uses structural typing with exact matches on Records
+            </ul>
         </section>
 
         <section>
