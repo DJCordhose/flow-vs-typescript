@@ -128,55 +128,55 @@
             </a></p>
         </section>
 
-        <section>
-            <h2>TypeScript</h2>
-            <h3 class="fragment">ease of use and tool support over soundness</h3>
-            <ul class="fragment">
-                <li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
-                <li>By Microsoft (Anders Hejlsberg)
-                <li>Based on ES6 (probably ES7/ES8)
-                <li>Adds optional type annotations, visibility, and decorators
-                <li>Compiler checks and removes annotations
-                <li>2.x with major changes released recently
-                <!--<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>-->
-                <!--<li>External declarations can add type information to pure JavaScript-->
-                <!--<li>Extensive support in-->
+        <!--<section>-->
+            <!--<h2>TypeScript</h2>-->
+            <!--<h3 class="fragment">ease of use and tool support over soundness</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>-->
+                <!--<li>By Microsoft (Anders Hejlsberg)-->
+                <!--<li>Based on ES6 (probably ES7/ES8)-->
+                <!--<li>Adds optional type annotations, visibility, and decorators-->
+                <!--<li>Compiler checks and removes annotations-->
+                <!--<li>2.x with major changes released recently-->
+                <!--&lt;!&ndash;<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>External declarations can add type information to pure JavaScript&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Extensive support in&ndash;&gt;-->
 
-                <!--<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code-->
-            </ul>
-            <p class="fragment"><strong>We restrict ourselves to version 2 here</strong></p>
-        </section>
+                <!--&lt;!&ndash;<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code&ndash;&gt;-->
+            <!--</ul>-->
+            <!--<p class="fragment"><strong>We restrict ourselves to version 2 here</strong></p>-->
+        <!--</section>-->
 
-        <section>
-            <h2>Flow</h2>
-            <h3 class="fragment">soundness, no runtime exceptions as goal</h3>
-            <ul class="fragment">
-                <li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>
-                <li>By Facebook
-                <li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
-                <li>Not a compiler, but checker
-                <!--<li>Works without any type annotations-->
-                <!--<li>Very good at inferring types-->
-                <li>If present, type annotations can very easily be removed by babel for runtime
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h2>Flow</h2>-->
+            <!--<h3 class="fragment">soundness, no runtime exceptions as goal</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>-->
+                <!--<li>By Facebook-->
+                <!--<li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>-->
+                <!--<li>Not a compiler, but checker-->
+                <!--&lt;!&ndash;<li>Works without any type annotations&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Very good at inferring types&ndash;&gt;-->
+                <!--<li>If present, type annotations can very easily be removed by babel for runtime-->
+            <!--</ul>-->
+        <!--</section>-->
 
-        <section class="elm">
-            <h2>Elm</h2>
-            <h3 class="fragment">simplicity, soundness, no runtime exceptions</h3>
-            <ul class="fragment">
-                <li><a target="_blank" href="http://elm-lang.org/">http://elm-lang.org/</a>
-                <li>Language of its own
-                <li>functional, not object-oriented
-                <li>no null, no mutation
-                <li>Geared towards Web Applications
-                <li>Compiler creates JavaScript
-            </ul>
-        </section>
+        <!--<section class="elm">-->
+            <!--<h2>Elm</h2>-->
+            <!--<h3 class="fragment">simplicity, soundness, no runtime exceptions</h3>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://elm-lang.org/">http://elm-lang.org/</a>-->
+                <!--<li>Language of its own-->
+                <!--<li>functional, not object-oriented-->
+                <!--<li>no null, no mutation-->
+                <!--<li>Geared towards Web Applications-->
+                <!--<li>Compiler creates JavaScript-->
+            <!--</ul>-->
+        <!--</section>-->
 
-        <section>
-            <h2>Basics</h2>
-        </section>
+        <!--<section>-->
+            <!--<h2>Basics</h2>-->
+        <!--</section>-->
 
         <section>
             <h2>Demo</h2>
@@ -280,47 +280,60 @@ let
         </section>
 
         <section>
+            <h3>Structural Typing for both TypeScript and Flow</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim data-leftpad>
+class Dog {
+  name: string;
+  woof() {...}
+}
+
+interface NamedObject {
+    name: string;
+}
+// this is fine class does not need to explicitly implement it
+let namedObject: NamedObject = dog;
+            </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="11">
+// same thing, also fine
+let namedObject: NamedObject = {
+    name: "Olli"
+};
+
+// not fine in either, missing name
+let namedObject: NamedObject = {
+    firstName: "Olli"
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Structural vs Nominal Typing</h2>
+            <ul>
+                <li class="fragment">Nominal Typing: types are compatible when their declared types match
+                <li class="fragment">Structural Typing: types are compatible when their structures match
+                <li class="fragment">Java, C#, C++, C all use nominal typing exclusively
+                <li class="fragment">Flow classes are also treated as nominal types
+                <li class="fragment">TypeScript classes are treated as structural types
+                <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
+                <li class="fragment elm">Elm always uses structural typing with exact matches on Records
+            </ul>
+        </section>
+
+        <section>
             <h2>Nullability</h2>
             <p>One of my main sources of runtime exceptions when programming Java</p>
             <p><small>Even after many years it is still surprising how many corner cases I miss in complex code</small></p>
         </section>
 
-        <section class="elm">
-            <h3>Elm</h3>
-            <p class="fragment">There neither is <code>null</code> nor <code>undefined</code> in elm</p>
-            <p class="fragment">Rather
-                <a target="_blank" href="https://guide.elm-lang.org/error_handling/maybe.html">Maybe</a> plus pattern matching</p>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
--- Maybe is predefined
--- http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe
-type Maybe a = Nothing | Just a
-</code></pre>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-foo : Int -> Maybe String
-foo num =
-    if num > 10 then
-        Just "cool"
-    else
-        Nothing
-</code></pre>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
--- pattern matching (need to match all cases)
-case (foo 11) of
-    Just message -> message
-    Nothing -> ""
-</code></pre>
-        </section>
-
         <section class="flow">
             <h3>Flow</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function foo(num: number) {
+function foo(num) {
     if (num > 10) {
         return 'cool';
     }
 }
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// what is the result here in pure JavaScript?
 console.log(foo(9).toString());
 </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
@@ -366,35 +379,29 @@ fooed!.toString();
         </section>
 
         <section class="elm">
-            <h3>Mutation, const</h3>
-            <ul>
-                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
-                <li class="fragment"><em>TypeScript</em>: readonly for properties
-                <li class="fragment"><em>Elm</em>: everything always immutable and const
-            </ul>
-        </section>
-
-        <section>
-            <h3>`any` type</h3>
-            <p class="fragment">can be anything, not specified</p>
-            <p class="fragment">can selectively disable type checking</p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function func(a: any) {
-    return a + 5;
-}
+            <h3>Elm</h3>
+            <p class="fragment">There neither is <code>null</code> nor <code>undefined</code> in elm</p>
+            <p class="fragment">Rather
+                <a target="_blank" href="https://guide.elm-lang.org/error_handling/maybe.html">Maybe</a> plus pattern matching</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+-- Maybe is predefined
+-- http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe
+type Maybe a = Nothing | Just a
 </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// cool
-let r1: string = func(10);
-
-// cool
-let r2: boolean = func('wat');
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+foo : Int -> Maybe String
+foo num =
+    if num > 10 then
+        Just "cool"
+    else
+        Nothing
 </code></pre>
-
-            <ul>
-                <li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred
-                <li class="fragment elm"><em>Elm</em>: does not exist, everything has exact type
-            </ul>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+-- pattern matching (need to match all cases)
+case (foo 11) of
+    Just message -> message
+    Nothing -> ""
+</code></pre>
         </section>
 
         <section>
@@ -514,6 +521,33 @@ void logAnimals(List&lt;? extends Animal> animals) {
 
         </section>
 
+        <section>
+            <h3>Some Type Inference Magic</h3>
+            <p>Consider</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Dog { woof() { } }
+
+const animals = [];
+animals.push(new Dog());
+</code></pre>
+            <div class="fragment">
+                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
+animals.forEach((animal: Dog) => animal.woof());
+</code></pre>
+
+            </div>
+            <div class="fragment">
+                <p>Adding Cats <em>later</em> and thus changing array type later</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Cat { meow() { } }
+animals.push(new Cat());
+</code></pre>
+                <p>does not affect TypeScript (correct), but makes Flow fail</p>
+
+            </div>
+        </section>
+
         <section class="elm">
             <h3>Elm</h3>
             <p class="fragment">Elm does not have classes or subtypes</p>
@@ -521,9 +555,10 @@ void logAnimals(List&lt;? extends Animal> animals) {
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 type alias Animal = { name : String }
 type alias Cat = { name : String, coatColor : String }
+someCat1 = { name = "Purry", coatColor = "gray"}
 
 cats : List Cat -- generic data structure
-cats = [ someCat1, someCat2 ]
+cats = [ someCat1, someCat2, ... ]
 
 animals : List Animal
 animals = [ someAnimal1, someAnimal2]
@@ -583,31 +618,71 @@ animalCats = animals
             <!--<p><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints">https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints</a></p>-->
         <!--</section>-->
 
-        <section>
-            <h3>Some Type Inference Magic</h3>
-            <p>Consider</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Dog { woof() { } }
-
-const animals = [];
-animals.push(new Dog());
-</code></pre>
-            <div class="fragment">
-                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
-animals.forEach((animal: Dog) => animal.woof());
+        <section class="elm">
+            <h3>Mutation, const</h3>
+            <ul>
+                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
+                <li class="fragment"><em>TypeScript</em>: readonly for properties
+                <li class="fragment"><em>Elm</em>: everything always immutable and const
+            </ul>
+            <div>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+type alias Cat = { name : String, coatColor : String, age: 2}
+someCat = { name = "Purry", coatColor = "gray"}
 </code></pre>
 
             </div>
-            <div class="fragment">
-                <p>Adding Cats <em>later</em> and thus changing array type later</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Cat { meow() { } }
-animals.push(new Cat());
-</code></pre>
-                <p>does not affect TypeScript (correct), but makes Flow fail</p>
+        </section>
 
-    </div>
+        <section class="elm">
+            <h3>`Changing` records in Elm</h3>
+            <p class="fragment">Central Question: If everything always immutable and const, how do you make modifications?</p>
+            <p class="fragment">Answer:</p>
+            <ul class="fragment">
+                <li>you do not really make mutations
+                <li>instead create a new record
+                <li>taking over some of the properties of the old record and
+                <li>setting some new properties
+            </ul>
+            <div>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+type alias Cat = { name : String, coatColor : String, age: Int}
+someCat = { name = "Purry", age = 2, coatColor = "gray"}
+</code></pre>
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
+haveBirthday : Cat -> Cat
+haveBirthday cat =
+  -- make a copy, but with changed age
+  { cat | age = cat.age + 1 }
+</code></pre>
+                <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="6">
+agedCat : Cat
+agedCat = haveBirthday someCat
+</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h3>`any` type</h3>
+            <p class="fragment">can be anything, not specified</p>
+            <p class="fragment">can selectively disable type checking</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function func(a: any) {
+    return a + 5;
+}
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// cool
+let r1: string = func(10);
+
+// cool
+let r2: boolean = func('wat');
+</code></pre>
+
+            <ul>
+                <li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred
+                <li class="fragment elm"><em>Elm</em>: does not exist, everything has exact type
+            </ul>
         </section>
 
         <section>
@@ -674,46 +749,6 @@ callback (Err 404)
         </section>
 
         <section>
-            <h3>Structural Typing for both TypeScript and Flow</h3>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Dog {
-  name: string
-  woof() {...}
-}
-
-interface NamedObject {
-    name: string;
-}
-
-// this is fine as nominal typing only applies to Flow classes
-let namedObject: NamedObject = dog;
-
-// same thing, also fine
-let namedObject: NamedObject = {
-    name: "Olli"
-};
-
-// not fine in either, missing name
-let namedObject: NamedObject = {
-    firstName: "Olli"
-};
-            </code></pre>
-        </section>
-
-        <section>
-            <h2>Structural vs Nominal Typing</h2>
-            <ul>
-                <li class="fragment">Nominal Typing: types are compatible when their declared types match
-                <li class="fragment">Structural Typing: types are compatible when their structures match
-                <li class="fragment">Java, C#, C++, C all use nominal typing exclusively
-                <li class="fragment">Flow classes are also treated as nominal types
-                <li class="fragment">TypeScript classes are treated as structural types
-                <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
-                <li class="fragment elm">Elm always uses structural typing with exact matches on Records
-            </ul>
-        </section>
-
-        <section>
             <h2>Integration with raw JavaScript</h2>
         </section>
 
@@ -768,6 +803,25 @@ let namedObject: NamedObject = {
                 <li>needs to be converted and typed in Elm
             </ul>
         </section>
+
+        <!--<section>-->
+            <!--<h3 style="top: -30px; position: relative">Should you use a type checker?</h3>-->
+            <!--<ul class="fragment" style="top: -30px; position: relative">-->
+                <!--<li>don't be fooled: checkers do not make your programs error free-->
+                <!--<li><a target="_blank" href="http://danluu.com/empirical-pl/">there seems to be little or no impact on productivity</a>-->
+                <!--<li>initial effort to introduce a checker is low, though-->
+                <!--<li>but a type system is a complex thing, it comes at a cost (of getting understanding and getting types right)-->
+            <!--</ul>-->
+            <!--<p class="fragment" style="top: -30px; position: relative">My recommendation</p>-->
+            <!--<ul class="fragment" style="top: -40px; position: relative">-->
+                <!--<li >if your project does not live for long: <em >no</em>-->
+                <!--<li >if your project is really simple: <em >no</em>-->
+                <!--<li >if there is a chance you will need to refactor the thing: <em >yes</em>-->
+                <!--<li >if your system is very important or even crucial for the success of your company: <em >yes</em>-->
+                <!--<li >if people enter or leave your team frequently: <em >yes</em>-->
+                <!--<li >you have substantial amount of algorithmic code: <em >yes</em>-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h2>Where do they excel?</h2>

@@ -1,27 +1,33 @@
-import {saySomething} from './util';
+// npm start
+// open in http://localhost:8080/webpack-dev-server/
 
-let a = "10";
 
-saySomething(a);
+let a: string = "10";
+// a = 10;
 
-function mach(param) {
-    if (param > 10) {
-        return param - 10;
-    }
+function doIt(name: string) {
+    return name + "aha";
 }
 
-let res = mach(20);
-if (res) {
-    res.toString();
-}
+let res: string = doIt("olli");
 
 class Person {
     name: string;
 
-    constructor(name: string) {
+    constructor(name) {
         this.name = name;
+    }    
+}
+
+class Programmer extends Person {
+    // constructor(name) {
+    //     super("olli")
+    // }
+
+    sayName(): string {
+        return this.name;
     }
 }
 
-const olli = new Person('Olli')
-olli.name;
+const olli = new Programmer("Olli");
+console.log(olli.name);
