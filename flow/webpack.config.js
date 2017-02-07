@@ -15,20 +15,17 @@ module.exports = {
 
     resolve: {
         // Add '.ts' and '.tsx' as resolvable extensions.
-        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+        extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
     },
 
     module: {
         loaders: [
-            { test: /\.js$/, loader: "babel" }
-        ],
-
-        preLoaders: [
-            {test: /\.js$/, loader: "flowtype", exclude: /node_modules/},
+            {test: /\.js$/, loader: "flowtype-loader", exclude: /node_modules/, enforce: 'pre'},
             // { test: /\.js$/, loader: 'eslint', exclude: /node_modules/},
 
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-            { test: /\.js$/, loader: "source-map-loader" }
+            { test: /\.js$/, loader: "source-map-loader", enforce: 'pre' },
+            { test: /\.js$/, loader: "babel-loader" }
         ]
     },
     plugins: [

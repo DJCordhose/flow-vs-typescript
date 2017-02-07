@@ -4,9 +4,9 @@
 // import './thirdparty-example';
 // import './basics';
 // import './readonly';
-// import './sandbox';
+import './sandbox';
 // import './structural-nominal';
 // import './any';
 // import './jsConsumer';
-import './controlFlow';
+// import './controlFlow';
 // import './generics-invariant';

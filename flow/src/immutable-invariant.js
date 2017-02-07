@@ -1,5 +1,8 @@
 /* @flow */
 
+// it is strange from my perspective that List is not covariant
+// https://github.com/facebook/immutable-js/issues/1052
+
 import {List} from 'immutable';
 
 const list: List<number> = List.of(1, 2);

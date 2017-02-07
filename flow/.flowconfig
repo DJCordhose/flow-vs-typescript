@@ -1,9 +1,8 @@
 [ignore]
-.*/node_modules/.*
 
 [include]
 
 [libs]
-flow-typed/npm
+flow-typed/npm/.*
 
 [options]
