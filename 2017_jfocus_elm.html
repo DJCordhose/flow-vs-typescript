@@ -776,61 +776,61 @@ callback (Failure 404)
             </code></pre>
         </section>
 
-        <section>
-            <h2>Integration with raw JavaScript</h2>
-        </section>
+        <!--<section>-->
+            <!--<h2>Integration with raw JavaScript</h2>-->
+        <!--</section>-->
 
-        <section>
-            <h3>3rd Party Libraries in Flow</h3>
-            <ul>
-                <li>Core Declarations come with Flow Checker, includes React
-                <li>Other external declarations are optional
-                <li><a target="_blank"
-                       href="https://github.com/flowtype/flow-typed">
-                    External Flow Type Definitions
-                </a>
-                <li>some libraries even come with added flow type declarations (e.g. immutable.js)
-                <li><a target="_blank"
-                       href="https://flowtype.org/docs/third-party.html">
-                    Declarations can be added to flow config files
-                </a>
-                <li>If there are no existing declaration files: still works, but less powerful
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>3rd Party Libraries in Flow</h3>-->
+            <!--<ul>-->
+                <!--<li>Core Declarations come with Flow Checker, includes React-->
+                <!--<li>Other external declarations are optional-->
+                <!--<li><a target="_blank"-->
+                       <!--href="https://github.com/flowtype/flow-typed">-->
+                    <!--External Flow Type Definitions-->
+                <!--</a>-->
+                <!--<li>some libraries even come with added flow type declarations (e.g. immutable.js)-->
+                <!--<li><a target="_blank"-->
+                       <!--href="https://flowtype.org/docs/third-party.html">-->
+                    <!--Declarations can be added to flow config files-->
+                <!--</a>-->
+                <!--<li>If there are no existing declaration files: still works, but less powerful-->
+            <!--</ul>-->
+        <!--</section>-->
 
-        <section>
-            <h3>TypeScript Declaration files</h3>
-            <ul>
-                <li>Much larger base for external declarations <a href="https://github.com/DefinitelyTyped/DefinitelyTyped" target="_blank">DefinitelyTyped</a>
-                <li>TypeScript 1.x
-                <ul>
-                    <li>needed External Type Declarations for 3rd party libraries</li>
-                    <li>turned out to be a major PITA</li>
-                </ul>
-                </li>
-                <li>TypeScript 2.x
-                    <ul>
-                        <li>like Flow</li>
-                        <li>install external type declarations transparently <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">using npm</a>
-                            (e.g.<em>npm install @types/react --save</em>)
-                    </ul>
-                </li>
-            </ul>
-        </section>
+        <!--<section>-->
+            <!--<h3>TypeScript Declaration files</h3>-->
+            <!--<ul>-->
+                <!--<li>Much larger base for external declarations <a href="https://github.com/DefinitelyTyped/DefinitelyTyped" target="_blank">DefinitelyTyped</a>-->
+                <!--<li>TypeScript 1.x-->
+                <!--<ul>-->
+                    <!--<li>needed External Type Declarations for 3rd party libraries</li>-->
+                    <!--<li>turned out to be a major PITA</li>-->
+                <!--</ul>-->
+                <!--</li>-->
+                <!--<li>TypeScript 2.x-->
+                    <!--<ul>-->
+                        <!--<li>like Flow</li>-->
+                        <!--<li>install external type declarations transparently <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">using npm</a>-->
+                            <!--(e.g.<em>npm install @types/react &#45;&#45;save</em>)-->
+                    <!--</ul>-->
+                <!--</li>-->
+            <!--</ul>-->
+        <!--</section>-->
 
-        <section class="elm">
-            <h3>Using JavaScript Code in Elm</h3>
-            <ul>
-                <li>in practice, most production Elm projects end up wanting to access the JS ecosystem
-                <li>integration works via messages through ports (<a target="_blank"
-                       href="https://guide.elm-lang.org/interop/javascript.html">
-                https://guide.elm-lang.org/interop/javascript.html
-                </a>)
-                <li>Only part of the app where there can still be runtime exceptions
-                <li>data from JavaScript sent like JSON
-                <li>needs to be converted and typed in Elm
-            </ul>
-        </section>
+        <!--<section class="elm">-->
+            <!--<h3>Using JavaScript Code in Elm</h3>-->
+            <!--<ul>-->
+                <!--<li>in practice, most production Elm projects end up wanting to access the JS ecosystem-->
+                <!--<li>integration works via messages through ports (<a target="_blank"-->
+                       <!--href="https://guide.elm-lang.org/interop/javascript.html">-->
+                <!--https://guide.elm-lang.org/interop/javascript.html-->
+                <!--</a>)-->
+                <!--<li>Only part of the app where there can still be runtime exceptions-->
+                <!--<li>data from JavaScript sent like JSON-->
+                <!--<li>needs to be converted and typed in Elm-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <!--<section>-->
             <!--<h3 style="top: -30px; position: relative">Should you use a type checker?</h3>-->
