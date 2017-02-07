@@ -170,7 +170,7 @@
             <h2>Why using type systems?</h2>
             <div class="fragment">
                 <h3>type systems make code easier to maintain</h3>
-                <p >type annotations</p>
+                <p >type annotations / inferred types</p>
                 <ul >
                     <li>can make code more readable
                     <li>can make code easier to analyse
@@ -257,7 +257,8 @@ foo = 'yo';
 foo = 10;
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// types can be explicit (parameter) or inferred (return type)
+
+// types can be inferred (return type)
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
@@ -324,6 +325,7 @@ class Sayer {
             <h3>Elm: a totally different story</h3>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 let
+    -- declaration using type
     foo : String
     foo = "yo"
     -- Error: everthing is const, can not re-assign
@@ -334,12 +336,12 @@ let
     foo2 = 10
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
--- type annotations are optional, can be inferred
-sayIt : String -> String
-sayIt what =
-    "Saying: " ++ what
-
 let
+    -- type annotations are optional, can be inferred
+    sayIt : String -> String
+    sayIt what =
+        "Saying: " ++ what
+
     said : String
     said = sayIt obj
 </code></pre>
@@ -352,57 +354,48 @@ let
             <p><small>Even after many years it is still surprising how many corner cases I miss in complex code</small></p>
         </section>
 
-        <section class="elm">
-            <h3>Elm</h3>
-            <p class="fragment">There neither is <code>null</code> nor <code>undefined</code> in elm</p>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-foo : Int -> Maybe String
-foo num =
-    if num > 10 then
-        Just "cool"
-    else
-        Nothing
-</code></pre>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-text (
-    case (foo 11) of
-        Just message -> message
-        Nothing -> ""
-)
-</code></pre>
-            <p class="fragment">Rather <code>Maybe</code> plus pattern matching</p>
-        </section>
-
         <section class="flow">
             <h3>Flow</h3>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function foo(num: number) {
+            <div class="fragment">
+                <p>what is the result here in pure JavaScript?</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
+function foo(num) {
     if (num > 10) {
         return 'cool';
     }
 }
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 console.log(foo(9).toString());
 </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+
+            </div>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+"Uncaught TypeError: Cannot read property 'toString' of undefined"
+</code></pre>
+            <div class="fragment">
+                <p>What the flow checker thinks about this</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
 // error: call of method `toString`.
 // Method cannot be called on possibly null value
 console.log(foo(9).toString());
 </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// to fix this, we need to check the result
-const fooed: string|void = foo(9);
+            </div>
+            <div class="fragment">
+            <p>To fix this, we need to check the result</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+const fooed = foo(9);
 if (fooed) {
     fooed.toString();
 }
 </code></pre>
+            </div>
             <p class="fragment">Types are non-nullable by default in flow</p>
         </section>
 
         <section class="typescript">
             <h3>TypeScript</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// both TypeScript and flow allow
+// to put the type annotation here instead of using inference
 function foo(num: number) {
     if (num > 10) {
         return 'cool';
@@ -428,38 +421,29 @@ fooed!.toString();
         </section>
 
         <section class="elm">
-            <h3>Mutation, const</h3>
-            <ul>
-                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
-                <li class="fragment"><em>TypeScript</em>: readonly for properties
-                <li class="fragment"><em>Elm</em>: everything always immutable and const
-            </ul>
-        </section>
-
-        <section>
-            <h3>`any` type</h3>
-            <p class="fragment">can be anything, not specified</p>
-            <p class="fragment">can selectively disable type checking</p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function func(a: any) {
-    return a + 5;
-}
+            <h3>Elm</h3>
+            <p class="fragment">There neither is <code>null</code> nor <code>undefined</code> in elm</p>
+            <p class="fragment">Rather
+                <a target="_blank" href="https://guide.elm-lang.org/error_handling/maybe.html">Maybe</a> plus pattern matching</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+-- Maybe is predefined
+-- http://package.elm-lang.org/packages/elm-lang/core/latest/Maybe
+type Maybe a = Nothing | Just a
 </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// cool
-let r1: string = func(10);
-
-// cool
-let r2: boolean = func('wat');
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+foo : Int -> Maybe String
+foo num =
+    if num > 10 then
+        Just "cool"
+    else
+        Nothing
 </code></pre>
-
-            <ul>
-                <li class="fragment"><em>flow</em>: explicit any supported, but any never inferred
-                <li class="fragment"><em>TypeScript</em>: explicit any supported
-                <li class="fragment"><em>TypeScript 1.x</em>: any inferred if no type specified and no direct inference possible
-                <li class="fragment"><em>TypeScript 2.x</em>: inference much smarter
-                <li class="fragment elm"><em>Elm</em>: does not exist, everything has exact type
-            </ul>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+-- pattern matching (need to match all cases)
+case (foo 11) of
+    Just message -> message
+    Nothing -> ""
+</code></pre>
         </section>
 
         <section>
@@ -542,7 +526,7 @@ cats = animals;
 // same ERROR
 animals = cats;
            </code></pre>
-            <p class="fragment">End of story for Flow</p>
+            <p class="fragment">Flow does not have have this caveat</p>
       </section>
 
         <section>
@@ -579,35 +563,64 @@ void logAnimals(List&lt;? extends Animal> animals) {
 
         </section>
 
+        <section>
+            <h3>Some Type Inference Magic</h3>
+            <p>Consider</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Dog { woof() { } }
+
+const animals = [];
+animals.push(new Dog());
+</code></pre>
+            <div class="fragment">
+                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
+animals.forEach((animal: Dog) => animal.woof());
+</code></pre>
+
+            </div>
+            <div class="fragment">
+                <p>Adding Cats <em>later</em> and thus changing array type later</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Cat { meow() { } }
+animals.push(new Cat());
+</code></pre>
+                <p>does not affect TypeScript (correct), but makes Flow fail</p>
+
+            </div>
+        </section>
+
         <section class="elm">
             <h3>Elm</h3>
-            <p class="fragment">Elm does not have classes or subtypes</p>
-            <p class="fragment">Elm has Records (like JavaScript Objects) and generic data structures (e.g. List)</p>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+            <p class="fragment">does not have classes or subtypes</p>
+            <p class="fragment">has Records (like JavaScript Objects) and generic data structures (e.g. List)</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-leftpad>
 type alias Animal = { name : String }
+someAnimal1 = { name = "Patrick"}
+
+animals : List Animal -- generic data structure
+animals = [ someAnimal1, someAnimal2, ... ]
+           </code></pre>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-leftpad data-num-start="4">
 type alias Cat = { name : String, coatColor : String }
 
-cats : List Cat -- generic data structure
-cats = [ someCat1, someCat2 ]
+cats : List Cat
+cats = [ someCat1, someCat2, ... ]
 
-animals : List Animal
-animals = [ someAnimal1, someAnimal2]
            </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 -- sure
 moreAnimals : List Animal
 moreAnimals = animals
 
--- nope
 -- Error: Looks like a record is missing the `coatColor` field.
-catAnimals : List Animal
-catAnimals = cats
+evenMoreAnimals : List Animal
+evenMoreAnimals = cats
 
 -- nope, same problem
-animalCats : List Cat
-animalCats = animals
+moreCats : List Cat
+moreCats = animals
            </code></pre>
-            <p class="fragment">Types always have to match exactly</p>
         </section>
 
         <section>
@@ -622,7 +635,10 @@ animalCats = animals
                 </li>
                 <li class="fragment">Flow
                     <ul>
-                        <li>using generic types you can choose from invariant (exact match), covariant (more special), and contravariant (more common)</li>
+                        <li>
+                            <a href="https://flowtype.org/docs/classes.html#polymorphism-and-type-parameter-variance"
+                            target="_blank">
+                                using generic types you can choose from invariant (exact match), covariant <em>+</em> (more special), and contravariant <em>-</em> (more common)</a></li>
                         <li>Array in Flow has an invariant parametric type
                         <li>more expressive, harder to master, disallows some correct code
                     </ul>
@@ -648,31 +664,62 @@ animalCats = animals
             <p><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints">https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript#type-parameters-as-constraints</a></p>
         </section>
 
-        <section>
-            <h3>Some Type Inference Magic</h3>
-            <p>Consider</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Dog { woof() { } }
+        <section class="elm">
+            <h3>Mutation, const</h3>
+            <p class="fragment"><strong>TypeScript and flow</strong>: same as JavaScript (const optional, immutable via lib)</p>
+            <p class="fragment"><strong>TypeScript</strong>: readonly for properties</p>
+            <p class="fragment"><strong>Elm</strong>: everything always immutable and const</p>
+        </section>
 
-const animals = [];
-animals.push(new Dog());
+        <section class="elm">
+            <h3>`Changing` records in Elm</h3>
+            <p class="fragment">Central Question: If everything always immutable and const, how do you make modifications?</p>
+            <p class="fragment">Answer:</p>
+            <ul class="fragment">
+                <li>you do not really make mutations
+                <li>instead create a new record
+                <li>taking over some of the properties of the old record and
+                <li>setting some new properties
+            </ul>
+            <div>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+type alias Cat = { name : String, coatColor : String, age: Int}
+someCat = { name = "Purry", age = 2, coatColor = "gray"}
 </code></pre>
-            <div class="fragment">
-                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
-animals.forEach((animal: Dog) => animal.woof());
+        <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
+haveBirthday : Cat -> Cat
+haveBirthday cat =
+  -- make a copy, but with changed age
+  { cat | age = cat.age + 1 }
 </code></pre>
-
+                <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="6">
+agedCat : Cat
+agedCat = haveBirthday someCat
+</code></pre>
             </div>
-            <div class="fragment">
-                <p>Adding Cats <em>later</em> and thus changing array type later</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Cat { meow() { } }
-animals.push(new Cat());
-</code></pre>
-                <p>does not affect TypeScript (correct), but makes Flow fail</p>
+        </section>
 
-    </div>
+        <section>
+            <h3>`any` type</h3>
+            <p class="fragment">can be anything, not specified</p>
+            <p class="fragment">can selectively disable type checking</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function func(a: any) {
+    return a + 5;
+}
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// cool
+let r1: string = func(10);
+
+// cool
+let r2: boolean = func('wat');
+</code></pre>
+
+            <ul>
+                <li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred
+                <li class="fragment elm"><em>Elm</em>: does not exist, everything has exact type
+            </ul>
         </section>
 
         <section>
@@ -685,7 +732,7 @@ animals.push(new Cat());
 type Response = Result | Failure;
 
 type Result = { status: 'done', payload: Object }; // all good, we have the data
-type Failure = { status: 'error', message: string }; // error, we get a message
+type Failure = { status: 'error', code: number}; // error, we get the error code
            </code></pre>
         </section>
 
@@ -698,7 +745,7 @@ function callback(response: Response) {
     // does not work,
     // as we do not know if it exists, just yet
     console.log(response.payload); // ERROR
-    console.log(response.message); // ERROR
+    console.log(response.code); // ERROR
            </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-num-start="7">    switch (response.status) {
         case 'done':
@@ -708,7 +755,7 @@ function callback(response: Response) {
             break;
         case 'error':
             // and this is a Failure
-            console.log(response.message);
+            console.log(response.code);
             break;
     }
 }           </code></pre>
@@ -717,25 +764,28 @@ function callback(response: Response) {
         <section class="elm">
             <h3>Elm</h3>
             <p class="fragment">simple and concise union types</p>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-type Resp = Res String | Err Int
-
-callback : Resp -> String
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-leftpad>
+type Response = Result String | Failure Int
+</code></pre>
+            <p class="fragment">switching over union type alternatives using pattern matching</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-num-start="3" data-leftpad>
+callback : Response -> String
 callback response =
     -- pattern matching
     case response of
-        Res payload -> payload
-        Err code ->
-                if code >= 400 && code < 500 then "you messed up" else "we messed up"
+        Result payload -> payload
+        Failure code ->
+                if code >= 400 && code < 500 then "you messed up"
+                else "we messed up"
 </code></pre>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-callback (Res "response")
+            <p class="fragment">usage</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-num-start="10" >
+callback (Result "response")
 -- response
 
-callback (Err 404)
+callback (Failure 404)
 -- you messed up
             </code></pre>
-            <p class="fragment">switching over union type alternatives using pattern matching</p>
         </section>
 
         <section>

@@ -104,6 +104,13 @@
         </section>
 
         <section>
+            <h2>Disclaimer</h2>
+            <p>I am a practitioner, using both TypeScript and Flow in my projects</p>
+            <p>I am no type theory expert</p>
+            <p>I have not used Elm in any real world project, yet</p>
+        </section>
+
+        <section>
             <h3>Not a single cat image in this talk</h3>
             <h4 class="fragment">Even worse: not even any image</h4>
             <div class="fragment" >
@@ -114,13 +121,6 @@
             </div>
 
         </section>
-
-        <!--<section>-->
-            <!--<h2>Disclaimer</h2>-->
-            <!--<p>I am a practitioner, using both TypeScript and Flow in my projects</p>-->
-            <!--<p>I am no type theory expert</p>-->
-            <!--<p>I have not used Elm in any real world project, yet</p>-->
-        <!--</section>-->
 
         <section>
             <h2>Why using type systems?</h2>
@@ -198,6 +198,8 @@
         <section>
         <h3>TypeScript (similar to what we just hacked)</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>let foo: string;
+// variables can have type information
+let foo: string;
 foo = 'yo';
 // Error: Type 'number' is not assignable to type 'string'.
 foo = 10;
@@ -230,6 +232,7 @@ class Sayer {
         <section>
         <h3>Flow</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// variables can have type information
 let foo: string;
 foo = 'yo';
 // Error: number: This type is incompatible with string
@@ -237,6 +240,7 @@ foo = 10;
 
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// types can be explicit (parameter) or inferred (return type)
 function sayIt(what: string) {
     return `Saying: ${what}`;
 }
@@ -245,12 +249,13 @@ const said: string = sayIt(obj);
 </code></pre>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 class Sayer {
-    what: string; // also mandatory
+    what: string; // type also mandatory
 
     constructor(what: string) {
         this.what = what;
     }
 
+    // return type if you want to
     sayIt(): string {
         return `Saying: ${this.what}`;
     }
