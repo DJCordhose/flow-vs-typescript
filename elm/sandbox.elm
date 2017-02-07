@@ -1,69 +1,28 @@
-import Html exposing (text)
-
---main =
---    text (foo2 9)
+import Html exposing (div, p, text)
 
 main =
     let
-        r : Maybe String
-        r = foo6 11
---    in
---        case r of
---          Just message -> text message
---          Nothing -> text ""
+        obj : String
+        obj = "yo"
+        -- everything is const
+        -- obj = 10
+
+--        Error: `The definition of `obj2` does not match its type annotation.`
+        -- obj2 : String
+        obj2 : number
+        obj2 = 10
+
+        sayIt : String -> String
+        sayIt what =
+        "Saying: " ++ what
+
+        said : String
+        said = sayIt obj
+
     in
-        text (
-            case r of
-                Just message -> message
-                Nothing -> ""
-        )
-
--- Version 1: if needs an else
---foo num =
---    if num > 10 then
---        "cool"
-
--- Version 2: works, but there is no way not to return something on else
-foo2 num =
-    if num > 10 then
-        "cool"
-    else
-        "not cool"
-
--- Version 3: inferred type made explicit
-foo3 : Int -> String
-foo3 num =
-    if num > 10 then
-        "cool"
-    else
-        "not cool"
-
-
--- Version 4: Maybe type not compatible with String (which is really returned)
--- `The definition of `foo4` does not match its type annotation.`
-
---foo4 : Int -> Maybe String
---foo4 num =
---    if num > 10 then
---        "cool"
---    else
---        "not cool"
-
--- Version 5: if and else produce differnt types
---`The branches of this `if` produce different types of values.`
---foo5 : Int -> Maybe String
---foo5 num =
---    if num > 10 then
-----        Just "cool"
---        "cool"
---    else
---        Nothing
-
-foo6 : Int -> Maybe String
-foo6 num =
-    if num > 10 then
-        Just "cool"
-    else
-        Nothing
-
-
+        div []
+            [
+                p [] [text ("Text1:" ++ obj)],
+                p [] [text (toString obj2)],
+                p [] [text said]
+            ]

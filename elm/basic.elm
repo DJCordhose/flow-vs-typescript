@@ -1,8 +1,3 @@
--- let obj: string;
---2  obj = 'yo';
---3  // Error: Type 'number' is not assignable to type 'string'.
---4  obj = 10;
-
 import Html exposing (div, p, text)
 
 main =
@@ -19,6 +14,11 @@ main =
 
         said : String
         said = sayIt obj
+
+        sayIt : String -> String
+        sayIt what =
+        "Saying: " ++ what
+
     in
         div []
             [
@@ -26,7 +26,3 @@ main =
                 p [] [text (toString obj2)],
                 p [] [text said]
             ]
-
-sayIt : String -> String
-sayIt what =
-    "Saying: " ++ what

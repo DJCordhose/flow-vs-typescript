@@ -103,6 +103,18 @@
             </a></p>
         </section>
 
+        <section>
+            <h3>Not a single cat image in this talk</h3>
+            <h4 class="fragment">Even worse: not even any image</h4>
+            <div class="fragment" >
+                <p>My compensation to make this a valid talk</p>
+                <img src="cat.jpg" height="400">
+                <br>
+                <small><a href="https://twitter.com/Creatuluw/status/749151998415634432">https://twitter.com/Creatuluw/status/749151998415634432</a></small>
+            </div>
+
+        </section>
+
         <!--<section>-->
             <!--<h2>Disclaimer</h2>-->
             <!--<p>I am a practitioner, using both TypeScript and Flow in my projects</p>-->
@@ -267,12 +279,12 @@ let
     foo2 = 10
 </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
--- type annotations are optional, can be inferred
-sayIt : String -> String
-sayIt what =
-    "Saying: " ++ what
-
 let
+    -- type annotations are optional, can be inferred
+    sayIt : String -> String
+    sayIt what =
+        "Saying: " ++ what
+
     said : String
     said = sayIt obj
 </code></pre>
@@ -327,33 +339,46 @@ let namedObject: NamedObject = {
 
         <section class="flow">
             <h3>Flow</h3>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+            <div class="fragment">
+                <p>what is the result here in pure JavaScript?</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
 function foo(num) {
     if (num > 10) {
         return 'cool';
     }
 }
-// what is the result here in pure JavaScript?
 console.log(foo(9).toString());
 </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+
+            </div>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+"Uncaught TypeError: Cannot read property 'toString' of undefined"
+</code></pre>
+            <div class="fragment">
+                <p>What the flow checker thinks about this</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
 // error: call of method `toString`.
 // Method cannot be called on possibly null value
 console.log(foo(9).toString());
 </code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// to fix this, we need to check the result
-const fooed: string|void = foo(9);
+            </div>
+            <div class="fragment">
+            <p>To fix this, we need to check the result</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+const fooed = foo(9);
 if (fooed) {
     fooed.toString();
 }
 </code></pre>
+            </div>
             <p class="fragment">Types are non-nullable by default in flow</p>
         </section>
 
         <section class="typescript">
             <h3>TypeScript</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// both TypeScript and flow allow
+// to put the type annotation here instead of using inference
 function foo(num: number) {
     if (num > 10) {
         return 'cool';
@@ -484,7 +509,7 @@ cats = animals;
 // same ERROR
 animals = cats;
            </code></pre>
-            <p class="fragment">End of story for Flow</p>
+            <p class="fragment">Flow does not have have this caveat</p>
       </section>
 
         <section>
@@ -550,34 +575,35 @@ animals.push(new Cat());
 
         <section class="elm">
             <h3>Elm</h3>
-            <p class="fragment">Elm does not have classes or subtypes</p>
-            <p class="fragment">Elm has Records (like JavaScript Objects) and generic data structures (e.g. List)</p>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+            <p class="fragment">does not have classes or subtypes</p>
+            <p class="fragment">has Records (like JavaScript Objects) and generic data structures (e.g. List)</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-leftpad>
 type alias Animal = { name : String }
-type alias Cat = { name : String, coatColor : String }
-someCat1 = { name = "Purry", coatColor = "gray"}
+someAnimal1 = { name = "Patrick"}
 
-cats : List Cat -- generic data structure
+animals : List Animal -- generic data structure
+animals = [ someAnimal1, someAnimal2, ... ]
+           </code></pre>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-leftpad data-num-start="4">
+type alias Cat = { name : String, coatColor : String }
+
+cats : List Cat
 cats = [ someCat1, someCat2, ... ]
 
-animals : List Animal
-animals = [ someAnimal1, someAnimal2]
            </code></pre>
             <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
 -- sure
 moreAnimals : List Animal
 moreAnimals = animals
 
--- nope
 -- Error: Looks like a record is missing the `coatColor` field.
-catAnimals : List Animal
-catAnimals = cats
+evenMoreAnimals : List Animal
+evenMoreAnimals = cats
 
 -- nope, same problem
-animalCats : List Cat
-animalCats = animals
+moreCats : List Cat
+moreCats = animals
            </code></pre>
-            <p class="fragment">Types always have to match exactly</p>
         </section>
 
         <section>
@@ -623,18 +649,9 @@ animalCats = animals
 
         <section class="elm">
             <h3>Mutation, const</h3>
-            <ul>
-                <li class="fragment"><em>TypeScript and flow</em>: same as JavaScript (const optional, immutable via lib)
-                <li class="fragment"><em>TypeScript</em>: readonly for properties
-                <li class="fragment"><em>Elm</em>: everything always immutable and const
-            </ul>
-            <div>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-type alias Cat = { name : String, coatColor : String, age: 2}
-someCat = { name = "Purry", coatColor = "gray"}
-</code></pre>
-
-            </div>
+            <p class="fragment"><strong>TypeScript and flow</strong>: same as JavaScript (const optional, immutable via lib)</p>
+            <p class="fragment"><strong>TypeScript</strong>: readonly for properties</p>
+            <p class="fragment"><strong>Elm</strong>: everything always immutable and const</p>
         </section>
 
         <section class="elm">
@@ -730,25 +747,28 @@ function callback(response: Response) {
         <section class="elm">
             <h3>Elm</h3>
             <p class="fragment">simple and concise union types</p>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-leftpad>
 type Response = Result String | Failure Int
-
+</code></pre>
+            <p class="fragment">switching over union type alternatives using pattern matching</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-num-start="3" data-leftpad>
 callback : Response -> String
 callback response =
     -- pattern matching
     case response of
         Result payload -> payload
         Failure code ->
-                if code >= 400 && code < 500 then "you messed up" else "we messed up"
+                if code >= 400 && code < 500 then "you messed up"
+                else "we messed up"
 </code></pre>
-            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim>
-callback (Res "response")
+            <p class="fragment">usage</p>
+            <pre class="fragment"><code class="elm line-numbers" contenteditable data-trim data-num-start="10" >
+callback (Result "response")
 -- response
 
-callback (Err 404)
+callback (Failure 404)
 -- you messed up
             </code></pre>
-            <p class="fragment">switching over union type alternatives using pattern matching</p>
         </section>
 
         <section>
