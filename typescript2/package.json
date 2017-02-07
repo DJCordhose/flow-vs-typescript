@@ -9,8 +9,11 @@
   "author": "Oliver Zeigermann",
   "license": "MIT",
   "dependencies": {
+    "underscore": "^1.8.3",
+    "unexpected": "^10.25.0"
   },
   "devDependencies": {
+    "@types/underscore": "^1.7.36",
     "source-map-loader": "^0.1.5",
     "ts-loader": "latest",
     "ts-node": "latest",
