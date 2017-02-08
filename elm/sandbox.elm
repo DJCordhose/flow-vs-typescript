@@ -14,7 +14,7 @@ main =
 
         sayIt : String -> String
         sayIt what =
-        "Saying: " ++ what
+            "Saying: " ++ what
 
         said : String
         said = sayIt obj
