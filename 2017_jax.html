@@ -84,12 +84,10 @@
         </section>
 
 
-<section class="todo">
-<pre>
-- https://medium.com/@forbeslindesay/covariance-and-contravariance-c3b43d805611#.rpd2otjo8
-</pre>
-
-</section>
+<!--<section class="todo">-->
+<!--<pre>-->
+<!--</pre>-->
+<!--</section>-->
         <section>
             <img src="what_is_a_type_system.png">
             <p><small>
@@ -154,35 +152,35 @@
             </small></p>
         </section>
 
-        <!--<section>-->
-            <!--<h2>TypeScript</h2>-->
-            <!--<ul class="fragment">-->
-                <!--<li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>-->
-                <!--<li>By Microsoft (Anders Hejlsberg)-->
-                <!--<li>Based on ES6 (probably ES7/ES8)-->
-                <!--<li>Adds optional type annotations, visibility, and decorators-->
-                <!--<li>Compiler checks and removes annotations-->
-                <!--<li>2.x with major changes released recently-->
-                <!--&lt;!&ndash;<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>External declarations can add type information to pure JavaScript&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>Extensive support in&ndash;&gt;-->
+        <section>
+            <h2>TypeScript</h2>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>
+                <li>By Microsoft (Anders Hejlsberg)
+                <li>Based on ES6 (probably ES7/ES8)
+                <li>Adds optional type annotations, visibility, and decorators
+                <li>Compiler checks and removes annotations
+                <li>2.x with major changes released recently
+                <!--<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>-->
+                <!--<li>External declarations can add type information to pure JavaScript-->
+                <!--<li>Extensive support in-->
 
-                <!--&lt;!&ndash;<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code&ndash;&gt;-->
-            <!--</ul>-->
-        <!--</section>-->
+                <!--<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code-->
+            </ul>
+        </section>
 
-        <!--<section>-->
-            <!--<h2>Flow</h2>-->
-            <!--<ul class="fragment">-->
-                <!--<li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>-->
-                <!--<li>By Facebook-->
-                <!--<li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>-->
-                <!--<li>Not a compiler, but checker-->
-                <!--&lt;!&ndash;<li>Works without any type annotations&ndash;&gt;-->
-                <!--&lt;!&ndash;<li>Very good at inferring types&ndash;&gt;-->
-                <!--<li>If present, type annotations can very easily be removed by babel for runtime-->
-            <!--</ul>-->
-        <!--</section>-->
+        <section>
+            <h2>Flow</h2>
+            <ul class="fragment">
+                <li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>
+                <li>By Facebook
+                <li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>
+                <li>Not a compiler, but checker
+                <!--<li>Works without any type annotations-->
+                <!--<li>Very good at inferring types-->
+                <li>If present, type annotations can very easily be removed by babel for runtime
+            </ul>
+        </section>
 
         <section>
             <h2>Demo</h2>
@@ -503,66 +501,66 @@ animals.push(new Cat());
             <!--<p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>-->
         </section>
 
-        <!--<section>-->
-            <!--<h3>`any` type</h3>-->
-            <!--<p class="fragment">can be anything, not specified</p>-->
-            <!--<p class="fragment">can selectively disable type checking</p>-->
-            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
-<!--function func(a: any) {-->
-    <!--return a + 5;-->
-<!--}-->
-<!--</code></pre>-->
-            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
-<!--// cool-->
-<!--let r1: string = func(10);-->
+        <section>
+            <h3>`any` type</h3>
+            <p class="fragment">can be anything, not specified</p>
+            <p class="fragment">can selectively disable type checking</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function func(a: any) {
+    return a + 5;
+}
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// cool
+let r1: string = func(10);
 
-<!--// cool-->
-<!--let r2: boolean = func('wat');-->
-<!--</code></pre>-->
+// cool
+let r2: boolean = func('wat');
+</code></pre>
 
-            <!--<ul>-->
-                <!--<li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred-->
-            <!--</ul>-->
-        <!--</section>-->
+            <ul>
+                <li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred
+            </ul>
+        </section>
 
-        <!--<section>-->
-            <!--<h2>Union Types</h2>-->
-            <!--<p class="fragment">aka Disjoint Unions aka Tagged Unions aka Algebraic data types</p>-->
-            <!--<p class="fragment">to describe data with weird shapes</p>-->
-            <!--<p class="fragment">depending on some data other data might apply or not</p>-->
-            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
- <!--// a disjoint union type with two cases-->
-<!--type Response = Result | Failure;-->
+        <section>
+            <h2>Union Types</h2>
+            <p class="fragment">aka Disjoint Unions aka Tagged Unions aka Algebraic data types</p>
+            <p class="fragment">to describe data with weird shapes</p>
+            <p class="fragment">depending on some data other data might apply or not</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+ // a disjoint union type with two cases
+type Response = Result | Failure;
 
-<!--type Result = { status: 'done', payload: Object }; // all good, we have the data-->
-<!--type Failure = { status: 'error', code: number}; // error, we get the error code-->
-           <!--</code></pre>-->
-        <!--</section>-->
+type Result = { status: 'done', payload: Object }; // all good, we have the data
+type Failure = { status: 'error', code: number}; // error, we get the error code
+           </code></pre>
+        </section>
 
-        <!--<section>-->
-            <!--<h3>Implementation both in Flow and TypeScript</h3>-->
-            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
-<!--function callback(response: Response) {-->
-    <!--// works, as this is present in both-->
-    <!--console.log(response.status);-->
-    <!--// does not work,-->
-    <!--// as we do not know if it exists, just yet-->
-    <!--console.log(response.payload); // ERROR-->
-    <!--console.log(response.code); // ERROR-->
-           <!--</code></pre>-->
-            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-num-start="7">    switch (response.status) {-->
-        <!--case 'done':-->
-            <!--// this is the special thing:-->
-            <!--// type system now knows, this is a Result-->
-            <!--console.log(response.payload);-->
-            <!--break;-->
-        <!--case 'error':-->
-            <!--// and this is a Failure-->
-            <!--console.log(response.code);-->
-            <!--break;-->
-    <!--}-->
-<!--}           </code></pre>-->
-        <!--</section>-->
+        <section>
+            <h3>Implementation both in Flow and TypeScript</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function callback(response: Response) {
+    // works, as this is present in both
+    console.log(response.status);
+    // does not work,
+    // as we do not know if it exists, just yet
+    console.log(response.payload); // ERROR
+    console.log(response.code); // ERROR
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-num-start="7">    switch (response.status) {
+        case 'done':
+            // this is the special thing:
+            // type system now knows, this is a Result
+            console.log(response.payload);
+            break;
+        case 'error':
+            // and this is a Failure
+            console.log(response.code);
+            break;
+    }
+}           </code></pre>
+        </section>
 
         <section>
             <h1>Are Flow and TypeScript like Java/C++/C#?</h1>
