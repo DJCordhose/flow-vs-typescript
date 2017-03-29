@@ -1,0 +1,924 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Type Systems for JavaScript</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="reveal.js/css/reveal.css">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/white.css" id="theme">-->
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/black.css" id="theme">-->
+    <link rel="stylesheet" href="reveal.js/css/theme/night.css" id="theme">
+    <!--<link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">-->
+
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+    <style>
+        /*pre code {*/
+            /*display: block;*/
+            /*padding: 0.5em;*/
+            /*background: #FFFFFF !important;*/
+            /*color: #000000 !important;*/
+        /*}*/
+
+        .right-img {
+            margin-left: 10px !important;
+            float: right;
+            height: 500px;
+        }
+        .todo:before {
+            content: 'TODO: ';
+        }
+        .todo {
+            color: red !important;
+        }
+        code span.line-number {
+            color: lightcoral;
+        }
+    </style>
+
+    <!-- Printing and PDF exports -->
+    <script>
+        var link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match(/print-pdf/gi) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+        document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="reveal.js/lib/js/html5shiv.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <!-- Any section element inside of this container is displayed as a slide -->
+    <div class="slides">
+        <section>
+            <h1>Typed JavaScript using TypeScript and Flow</h1>
+            <p><a href="https://jax.de/session/typescript-und-flow-javascript-fuer-java-entwickler/" target="_blank">
+                JAX 2017
+            </a></p>
+
+            <p>Slides for this talk: <a href="http://djcordhose.github.io/flow-vs-typescript/2017_jax.html">
+                http://djcordhose.github.io/flow-vs-typescript/2017_jax.html
+            </a></p>
+            <p>
+                <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+                </small>
+            </p>
+            <p>Extended Version (constantly updated): <a href="http://bit.ly/js-types">
+                http://bit.ly/js-types
+            </a></p>
+        </section>
+
+        <section>
+            <h1>TL'DR Part I</h1>
+            <ul>
+                <li class="fragment">Flow and TypeScript both supply a Type System on top of JavaScript
+                <li class="fragment">A Type System is a prerequisite for JavaScript to catch up (and even exceed) Java in terms of maintainability
+                <li class="fragment">Their Type Systems used to have significant differences
+                <li class="fragment">This, however, has become a thing of the past
+                <li class="fragment">They mainly differ in tooling and initial effort
+                <li class="fragment">TypeScript has the better tooling
+                <li class="fragment">Flow can be incrementally introduced in an existing project with ease
+            </ul>
+        </section>
+
+        <!--<section class="todo">-->
+<!--<pre>-->
+<!-- - https://medium.com/@forbeslindesay/covariance-and-contravariance-c3b43d805611#.rpd2otjo8-->
+<!--</pre>-->
+
+<!--</section>-->
+
+        <!--<section>-->
+            <!--<img src="what_is_a_type_system.png">-->
+            <!--<p><small>-->
+                <!--<a href="Notes-on-Type-Theory-for-beginners.pdf" target="_blank">-->
+                    <!--https://www.jfokus.se/jfokus17/preso/Notes-on-Type-Theory-for-beginners.pdf-->
+                <!--</a>-->
+            <!--</small></p>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<img src="data_and_operations.png">-->
+            <!--<p><small>-->
+                <!--<a href="Notes-on-Type-Theory-for-beginners.pdf" target="_blank">-->
+                    <!--https://www.jfokus.se/jfokus17/preso/Notes-on-Type-Theory-for-beginners.pdf-->
+                <!--</a>-->
+            <!--</small></p>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Why using type systems?</h2>
+            <!--<div class="fragment">-->
+                <!--<h3>type systems make code easier to maintain</h3>-->
+                <!--<p >type annotations / inferred types</p>-->
+                <!--<ul >-->
+                    <!--<li>can make code more readable-->
+                    <!--<li>can make code easier to analyse-->
+                    <!--<li>can allow for reliable refactoring-->
+                    <!--<li>can allow for generally better IDE support-->
+                    <!--<li>can catch some (type related) errors early-->
+                <!--</ul>-->
+            <!--</div>-->
+            <h3 class="fragment"><a href="https://channel9.msdn.com/Events/Build/2016/B881" target="_blank">
+                Anders Hejlsberg@Build2016: <em>Big JavaScript codebases tend to become "read-only".</em>
+            </a></h3>
+        </section>
+
+        <!--<section>-->
+            <!--<h2>How to add a Type System to JavaScript?</h2>-->
+            <!--<p class="fragment">Those are the two solutions you can choose from</p>-->
+            <!--<ol>-->
+                <!--<li class="fragment"><strong>TypeScript</strong>: ease of use and tool support over soundness</li>-->
+                <!--<li class="fragment"><strong>Flow</strong>: soundness, no runtime exceptions as goal</li>-->
+            <!--</ol>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h3>weak to strong and dynamic to static</h3>-->
+            <!--<div style="height: 520px">-->
+                <!--<a href="https://twitter.com/DJCordhose/status/829242451294552066" target="_blank">-->
+                    <!--<img src="type-stragegies-twitter.png">-->
+                <!--</a>-->
+            <!--</div>-->
+            <!--<p><small>-->
+                <!--<a href="https://twitter.com/DJCordhose/status/829242451294552066" target="_blank">-->
+                    <!--https://twitter.com/DJCordhose/status/829242451294552066-->
+                <!--</a>-->
+            <!--</small></p>-->
+            <!--<p><small>-->
+                <!--<a href="Notes-on-Type-Theory-for-beginners.pdf" target="_blank">-->
+                    <!--https://www.jfokus.se/jfokus17/preso/Notes-on-Type-Theory-for-beginners.pdf-->
+                <!--</a>-->
+            <!--</small></p>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>TypeScript</h2>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://www.typescriptlang.org/">http://www.typescriptlang.org/</a>-->
+                <!--<li>By Microsoft (Anders Hejlsberg)-->
+                <!--<li>Based on ES6 (probably ES7/ES8)-->
+                <!--<li>Adds optional type annotations, visibility, and decorators-->
+                <!--<li>Compiler checks and removes annotations-->
+                <!--<li>2.x with major changes released recently-->
+                <!--&lt;!&ndash;<li><a target="_blank" href="https://github.com/Microsoft/TypeScript/wiki/What's-new-in-TypeScript">Latest 1.8 release adds more general sane checks</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>External declarations can add type information to pure JavaScript&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Extensive support in&ndash;&gt;-->
+
+                <!--&lt;!&ndash;<a target="_blank" href="https://youtu.be/uceWBKISaF8">WebStorm</a> and Visual Studio Code&ndash;&gt;-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <!--<section>-->
+            <!--<h2>Flow</h2>-->
+            <!--<ul class="fragment">-->
+                <!--<li><a target="_blank" href="http://flowtype.org/">http://flowtype.org/</a>-->
+                <!--<li>By Facebook-->
+                <!--<li><em>Flow is a static type checker, designed to quickly find errors in JavaScript applications</em>-->
+                <!--<li>Not a compiler, but checker-->
+                <!--&lt;!&ndash;<li>Works without any type annotations&ndash;&gt;-->
+                <!--&lt;!&ndash;<li>Very good at inferring types&ndash;&gt;-->
+                <!--<li>If present, type annotations can very easily be removed by babel for runtime-->
+            <!--</ul>-->
+        <!--</section>-->
+
+        <section>
+            <h2>Introductory Demonstration</h2>
+            <h3>Some basic TypeScript hacking in Visual Studio Code</h3>
+        </section>
+
+        <section>
+        <h3>TypeScript (similar to what we just hacked)</h3>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// variables can have type information
+let foo: string;
+foo = 'yo';
+// Error: Type 'number' is not assignable to type 'string'.
+foo = 10;
+</code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+
+// types can be inferred (return type)
+function sayIt(what: string) {
+    return `Saying: ${what}`;
+}
+const said: string = sayIt(obj);
+
+</code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Sayer {
+    what: string; // mandatory
+
+    constructor(what: string) {
+        this.what = what;
+    }
+
+    // return type if you want to
+    sayIt(): string {
+        return `Saying: ${this.what}`;
+    }
+}
+</code></pre>
+      </section>
+
+        <section>
+        <h3>Flow</h3>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// variables can have type information
+let foo: string;
+foo = 'yo';
+// Error: number: This type is incompatible with string
+foo = 10;
+
+</code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// types can be explicit (parameter) or inferred (return type)
+function sayIt(what: string) {
+    return `Saying: ${what}`;
+}
+const said: string = sayIt(obj);
+
+</code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Sayer {
+    what: string; // type also mandatory
+
+    constructor(what: string) {
+        this.what = what;
+    }
+
+    // return type if you want to
+    sayIt(): string {
+        return `Saying: ${this.what}`;
+    }
+}
+
+</code></pre>
+      </section>
+
+        <section>
+            <h2>Flow and TypeScript basics are pretty similar</h2>
+            <p>Those basic features help with documentation, refactoring, and IDE support</p>
+        </section>
+
+        <section>
+            <h2>Nullability</h2>
+            <p>One of my main sources of runtime exceptions when programming Java</p>
+            <p><small>Even after many years it is still surprising how many corner cases I miss in complex code</small></p>
+        </section>
+
+        <section class="flow">
+            <h3>Flow</h3>
+            <div class="fragment">
+                <p>what is the result here in pure JavaScript?</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
+function foo(num) {
+    if (num > 10) {
+        return 'cool';
+    }
+}
+console.log(foo(9).toString());
+</code></pre>
+
+            </div>
+<pre class="fragment"><code class="javascript" contenteditable data-trim>
+"Uncaught TypeError: Cannot read property 'toString' of undefined"
+</code></pre>
+            <div class="fragment">
+                <p>What the flow checker thinks about this</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
+// error: call of method `toString`.
+// Method cannot be called on possibly null value
+console.log(foo(9).toString());
+</code></pre>
+            </div>
+            <div class="fragment">
+            <p>To fix this, we need to check the result</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+const fooed = foo(9);
+if (fooed) {
+    fooed.toString();
+}
+</code></pre>
+            </div>
+            <p class="fragment">Types are non-nullable by default in flow</p>
+        </section>
+
+        <section class="typescript">
+            <h3>TypeScript</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// both TypeScript and flow allow
+// to put the type annotation here instead of using inference
+function foo(num: number) {
+    if (num > 10) {
+        return 'cool';
+    }
+}
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// same as flow
+const fooed: string|void = foo(9);
+if (fooed) {
+    fooed.toString();
+}
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// or tell the compiler we know better (might be a bad idea)
+fooed!.toString();
+</code></pre>
+            <div class="fragment">
+                <p>Only applies to TypeScript 2.x</p>
+                <p>Only works when <em>strictNullChecks</em> option is checked</p>
+                <p>All types nullable by default in TypeScript 1.x</p>
+            </div>
+        </section>
+
+        <section>
+            <h3>Generic Type information</h3>
+            <p class="fragment">Types can be parameterized by others</p>
+            <p class="fragment">Most common with collection types</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+let cats: Array&lt;Cat> = []; // can only contain cats
+let animals: Array&lt;Animal> = []; // can only contain animals
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
+// nope, no cat
+cats.push(10);
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
+// nope, no cat
+cats.push(new Animal('Fido'));
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
+// cool, is a cat
+cats.push(new Cat('Purry'));
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="9">
+// cool, cat is a sub type of animal
+animals.push(new Cat('Purry'));
+           </code></pre>
+        </section>
+
+        <section>
+            <h3>Up to this point this pretty much works in Flow and TypeScript the same way ...</h3>
+        </section>
+
+        <section>
+            <h3>... but wait</h3>
+            <p>Consider these classes</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Animal {
+   name: string;
+}
+
+class Dog extends Animal {
+    goodBoyFactor: number;
+}
+
+class Cat extends Animal {
+    purrFactor: number;
+}
+           </code></pre>
+        </section>
+
+        <section>
+        <h3>TypeScript</h3>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+let cats: Array&lt;Cat> = []; // can only contain cats
+let animals: Array&lt;Animal> = []; // can only contain animals
+</code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
+// error TS2322: Type 'Animal[]' is not assignable to type 'Cat[]'.
+//  Type 'Animal' is not assignable to type 'Cat'.
+//    Property 'purrFactor' is missing in type 'Animal'.
+cats = animals;
+           </code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="7">
+// wow, works, but is no longer safe
+animals = cats;
+           </code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="9">
+// because those are now all cool
+animals.push(new Dog('Brutus'));
+animals.push(new Animal('Twinky'));
+           </code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim  data-num-start="12">
+// ouch:
+cats.forEach(cat => console.log(`Cat: ${cat.name}`));
+// Cat: Purry
+// Cat: Brutus
+// Cat: Twinky
+</code></pre>
+            <p class="fragment">TypeScript allows for birds and dogs to be cats here :)</p>
+      </section>
+
+        <section>
+        <h3>Flow</h3>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+let cats: Array&lt;Cat> = []; // can only contain cats
+let animals: Array&lt;Animal> = []; // can only contain animals
+</code></pre>
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim data-num-start="3">
+// ERROR
+// property `purrFactor` of Cat. Property not found in Animal
+cats = animals;
+           </code></pre>
+           <pre class="fragment"><code class="typescript  line-numbers" contenteditable data-trim data-num-start="6">
+// same ERROR
+animals = cats;
+           </code></pre>
+            <p class="fragment">Flow does not have have this caveat</p>
+      </section>
+
+        <section>
+            <h2>The flipside</h2>
+            <p>This code is safe (as we access cats in a readonly fashion)</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+function logAnimals(animals: Array&lt;Animal>) {
+    animals.forEach(animal => console.log(`Animal: ${animal.name}`));
+}
+
+logAnimals(cats);
+</code></pre>
+            <ul  class="fragment">
+                <li>This works in TypeScript (and it should)</li>
+                <li>however, potentially not safe, there is nothing to keep us from writing to cats</li>
+                <li>Flow does not allow this, even though it is safe</li>
+            </ul>
+            <div class="fragment">
+
+            <p>much despised Java generics excel here as they can actually make that code safe (another difference:
+                <a target="_blank" href="https://en.wikipedia.org/wiki/Covariance_and_contravariance_(computer_science)#Comparing_declaration-site_and_use-site_annotations">
+                    Use-site variance
+                </a>)
+            </p>
+            <pre><code class="java line-numbers" contenteditable data-trim>
+// Java
+void logAnimals(List&lt;? extends Animal> animals) {
+    animals.forEach(animal -> System.out.println("Animal: " + animal.name));
+    // illegal:
+    animals.add(new Animal("Twinky"));
+}
+</code></pre>
+            </div>
+
+        </section>
+
+        <!--ONLY FOR JAX-->
+
+        <section>
+            <h3>Some Type Inference Magic</h3>
+            <p>Consider</p>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Dog { woof() { } }
+
+const animals = [];
+animals.push(new Dog());
+</code></pre>
+            <div class="fragment">
+                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
+animals.forEach((animal: Dog) => animal.woof());
+</code></pre>
+
+            </div>
+            <div class="fragment">
+                <p>Adding Cats <em>later</em> and thus changing array type later</p>
+                <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Cat { meow() { } }
+animals.push(new Cat());
+</code></pre>
+                <p>does not affect TypeScript (correct), but makes Flow fail</p>
+
+            </div>
+        </section>
+
+        <section>
+            <h3>Differences in Generic Types</h3>
+            <ul>
+                <li class="fragment">TypeScript
+                    <ul>
+                        <li><a target="_blank" href="https://twitter.com/ahejlsberg/status/822882400724131841?s=03">always covariant</a> (more special):<br>
+                            parametric types are compatible if the type to assign from has a more special type parameter</li>
+                        <li>seems most intuitive, allows for obviously wrong code, though
+                    </ul>
+                </li>
+                <li class="fragment">Flow
+                    <ul>
+                        <li>
+                            <a href="https://flowtype.org/docs/classes.html#polymorphism-and-type-parameter-variance"
+                            target="_blank">
+                                using generic types you can choose from invariant (exact match), covariant <em>+</em> (more special), and contravariant <em>-</em> (more common)</a></li>
+                        <li>Array in Flow has an invariant parametric type
+                        <li>more expressive, harder to master, disallows some correct code
+                    </ul>
+                </li>
+            </ul>
+            <!--<p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>-->
+        </section>
+
+        <section>
+            <h3>Immutable Data Structures can be Covariant in Flow</h3>
+            <pre><code class="fragment javascript line-numbers" contenteditable data-trim>
+// https://facebook.github.io/immutable-js/
+import {List} from 'immutable';
+
+let animals: List&lt;Animal> = List.of();
+let dogs: List&lt;Dog> = List.of();
+
+// cool, as all data structures from immutable.js are read-only
+animals = dogs;
+</code></pre>
+            <pre><code class="fragment javascript line-numbers" contenteditable data-trim>
+class List<+T> extends IndexedCollection&lt;T> {
+  // ...
+}
+</code></pre>
+            <div class="fragment">
+                <p><a href="https://github.com/facebook/immutable-js/issues/1052" target="_blank">https://github.com/facebook/immutable-js/issues/1052</a></p>
+                <p><a href="https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45" target="_blank">https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45</a></p>
+            </div>
+        </section>
+
+
+        <section>
+            <h3>`any` type</h3>
+            <p class="fragment">can be anything, not specified</p>
+            <p class="fragment">can selectively disable type checking</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function func(a: any) {
+    return a + 5;
+}
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// cool
+let r1: string = func(10);
+
+// cool
+let r2: boolean = func('wat');
+</code></pre>
+
+            <ul>
+                <li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred
+            </ul>
+        </section>
+
+        <section>
+            <h2>Union Types</h2>
+            <p class="fragment">aka Disjoint Unions aka Tagged Unions aka Algebraic data types</p>
+            <p class="fragment">to describe data with weird shapes</p>
+            <p class="fragment">depending on some data other data might apply or not</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+ // a disjoint union type with two cases
+type Response = Result | Failure;
+
+type Result = { status: 'done', payload: Object }; // all good, we have the data
+type Failure = { status: 'error', code: number}; // error, we get the error code
+           </code></pre>
+        </section>
+
+        <section>
+            <h3>Implementation both in Flow and TypeScript</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+type Result = { status: 'done', payload: Object };
+type Failure = { status: 'error', code: number};
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function callback(response: Result | Failure) {
+    // works, as this is present in both
+    console.log(response.status);
+    // does not work,
+    // as we do not know if it exists, just yet
+    console.log(response.payload); // ERROR
+    console.log(response.code); // ERROR
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-num-start="7">    switch (response.status) {
+        case 'done':
+            // this is the special thing:
+            // type system now knows, this is a Result
+            console.log(response.payload);
+            break;
+        case 'error':
+            // and this is a Failure
+            console.log(response.code);
+            break;
+    }
+}           </code></pre>
+        </section>
+
+        <section>
+            <h1>Are Flow and TypeScript like Java/C++/C#?</h1>
+        </section>
+
+        <section>
+            <h2>Not really</h2>
+            <ul>
+                <li class="fragment">Both
+                    <ul>
+                        <li>optionally typed / any
+                        <li>built to match common JavaScript programming patterns
+                        <li>type systems more expressive
+                        <li>type inference
+                        <li>control flow based type analysis
+                    </ul>
+                </li>
+                <li class="fragment">TypeScript
+                    <ul>
+                        <li>semantically compatible with JavaScript
+                    </ul>
+                </li>
+                <li class="fragment">Flow
+                    <ul>
+                        <li>just a checker
+                        <li>not even a language of its own
+                        <li>non-nullability as default
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h3>Nominal Typing for Flow classes</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+}
+
+class Dog {
+    name: string;
+}
+
+let dog: Dog = new Dog();
+
+// nope, nominal type compatibility violated
+let person: Person = dog; // ERROR: Dog: This type is incompatible with Person
+
+// same problem
+let person: Person = { // ERROR: object literal: This type is incompatible with Person
+    name: "Olli"
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Structural Typing for TypeScript classes</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+class Person {
+    name: string;
+}
+
+class Dog {
+    name: string;
+}
+
+let dog: Dog = new Dog();
+
+// yes, correct, as structurally compatible
+let person: Person = dog;
+
+// same thing, also correct
+let person: Person = {
+    name: "Olli"
+};
+
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Structural vs Nominal Typing</h2>
+            <ul>
+                <li class="fragment">Nominal Typing: types are compatible when their declared types match
+                <li class="fragment">Structural Typing: types are compatible when their structures match
+                <li class="fragment">Java, C#, C++, C all use nominal typing exclusively
+                <li class="fragment">Flow classes are also treated as nominal types
+                <li class="fragment">TypeScript classes are treated as structural types
+                <li class="fragment">Everything else in both Flow and TypeScript uses structural typing
+            </ul>
+        </section>
+
+        <section>
+            <h3>Structural Typing for both TypeScript and Flow</h3>
+            <pre><code class="typescript line-numbers" contenteditable data-trim>
+interface NamedObject {
+    name: string;
+}
+
+// this is fine as nominal typing only applies to Flow classes
+let namedObject: NamedObject = dog;
+
+// same thing, also fine
+let namedObject: NamedObject = {
+    name: "Olli"
+};
+
+// not fine in either, missing name
+let namedObject: NamedObject = {
+    firstName: "Olli"
+};
+            </code></pre>
+        </section>
+
+        <section>
+            <h2>Classes in TypeScript</h2>
+            <p class="fragment">TypeScript has special support for classes</p>
+            <p class="fragment">Similar features can be found in Java/C++/C#</p>
+            <ul class="fragment">
+                <li><em>abstract</em> classes and methods
+                <li>special shortcut constructors (combined definition of fields and initialization)
+                <li>public, private, protected
+                <li>decorators (aka <a  target="_blank" href="https://msdn.microsoft.com/en-us/library/z0w1kczw(v=vs.80).aspx">
+                Attributes in C#
+                </a> and <a target="_blank" href="https://docs.oracle.com/javase/tutorial/java/annotations/">
+Annotations in Java</a>)
+                <li>
+                    <a target="_blank"
+                            href="https://blogs.msdn.microsoft.com/typescript/2016/09/22/announcing-typescript-2-0/">
+                        readonly properties
+            </a>
+                 (TypeScript 2)
+                <a target="_blank" href="https://msdn.microsoft.com/en-us/library/acdd6hb7.aspx">
+                    like in C#
+                </a>
+            </ul>
+            <p class="fragment">Flow does not feature those or any other syntactic sugar, as it is a checker only</p>
+        </section>
+
+        <section>
+            <h2>Integration with raw JavaScript</h2>
+        </section>
+
+        <section>
+            <h3>3rd Party Libraries in Flow</h3>
+            <ul>
+                <li>Core Declarations come with Flow Checker, includes React
+                <li>Other external declarations are optional
+                <li><a target="_blank"
+                       href="https://github.com/flowtype/flow-typed">
+                    External Flow Type Definitions
+                </a>
+                <li>some libraries even come with added flow type declarations (e.g. immutable.js)
+                <li><a target="_blank"
+                       href="https://flowtype.org/docs/third-party.html">
+                    Declarations can be added to flow config files
+                </a>
+                <li>If there are no existing declaration files: still works, but less powerful
+            </ul>
+        </section>
+
+        <section>
+            <h3>TypeScript Declaration files</h3>
+            <ul>
+                <li>Much larger base for external declarations <a href="https://github.com/DefinitelyTyped/DefinitelyTyped" target="_blank">DefinitelyTyped</a>
+                <li>TypeScript 1.x
+                <ul>
+                    <li>needed External Type Declarations for 3rd party libraries</li>
+                    <li>turned out to be a major PITA</li>
+                </ul>
+                </li>
+                <li>TypeScript 2.x
+                    <ul>
+                        <li>like Flow</li>
+                        <li>install external type declarations transparently <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">using npm</a>
+                            (e.g.<em>npm install @types/react --save</em>)
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Final Demo: Does it work in real live?</h1>
+            <h2>Using React with TypeScript</h2>
+            <p><a target="_blank" href="https://github.com/DJCordhose/react-workshop/tree/master/code/sandbox/typescript">https://github.com/DJCordhose/react-workshop/tree/master/code/sandbox/typescript</a></p>
+        </section>
+
+        <section>
+            <h1>TL'DR Part II</h1>
+            <ul>
+                <li class="fragment">Flow: <strong>Easy to incrementally add to existing projects</strong>
+                    <ul>
+                        <li class="fragment">you can choose which file to check, turn on one by one
+                        <li class="fragment">which level of checking (weak/full)
+                        <li class="fragment">have type annotations for IDE only without extra tooling
+                        <li class="fragment"><em>additionally</em> and optionally use checker
+                    </ul>
+                </li>
+                <li class="fragment">TypeScript: <strong>Superior tooling</strong>
+                    <ul>
+                        <li class="fragment">Language Server is part of compiler
+                        <li class="fragment">Enables any IDE to deliver supreme support without much effort
+                        <li class="fragment">WebStorm / IDEA support is close to what you can do in Java (but not quite there, yet)
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h1>Thank you!</h1>
+
+            <h2>Questions / Discussion</h2>
+
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+
+            </p>
+            <p><a href="http://djcordhose.github.io/flow-vs-typescript/2017_javaland.html">
+                http://djcordhose.github.io/flow-vs-typescript/2017_javaland.html
+            </a></p>
+
+        </section>
+
+    </div>
+
+</div>
+
+<script src="reveal.js/lib/js/head.min.js"></script>
+<script src="reveal.js/js/reveal.js"></script>
+<script src="lib/jquery-2.2.4.js"></script>
+<script>
+//    $('section').attr('data-background-image', "backgrounds/dark-saddle.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-blue.jpg")
+$('section').attr('data-background-image', "backgrounds/dark-sky.jpg")
+//$('section').attr('data-background-image', "backgrounds/dark-case.jpg")
+//$('section').attr('data-background-image', "backgrounds/dark-grid.jpg")
+//    $('section').attr('data-background-image', "backgrounds/dark-fish.jpg")
+</script>
+<script>
+    Reveal.addEventListener( 'ready', function( event ) {
+        // only applies presentation version
+        if (window.location.hostname.indexOf('localhost') !== -1) {
+            Reveal.configure({ controls: false });
+        } else {
+            $('.fragment').removeClass('fragment');
+        }
+    } );
+//    document.addEventListener("DOMContentLoaded", function () {
+//        var elmElements = document.querySelectorAll(".elm");
+//        var elmArray = Array.prototype.slice.call(elmElements);
+//        elmArray.forEach(function (elm) {
+//            elm.style.display = 'none';
+//        });
+//    });
+
+</script>
+
+<script>
+
+    // Full list of configuration options available at:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+            {
+                src: 'reveal.js/lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'reveal.js/plugin/highlight/highlight.js', async: true, condition: function () {
+                return !!document.querySelector('pre code');
+            }, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            },
+            {src: 'reveal.js/plugin/zoom-js/zoom.js', async: true},
+            {src: 'reveal.js/plugin/notes/notes.js', async: true},
+            {src: 'lib/js/line-numbers.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
