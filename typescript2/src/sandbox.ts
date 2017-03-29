@@ -1,31 +1,26 @@
 // npm start
 // open in http://localhost:8080/webpack-dev-server/
 
-import Person from './Person';
-
-let a: number | null = 10;
-// a = true;
+let a: number | null;
 
 a = null;
 
-function doSomething(param: string): string {
-    return "Prefix" + param;
-
+function add(a: number, b: number): number {
+    return a + b;
 }
 
-doSomething('Hi');
+const res: number = add(10, 20);
 
-interface HasName {
-    name: string;
-}
-
-class Programmer extends Person implements HasName {
+class Person {
+    private name: string;
     constructor(name: string) {
-        super(name);
+        this.name = name;
+    }
+
+    sayName(): void {
+        console.log(this.name);
     }
 }
 
-const oma = new Programmer('Oma');
-console.log(oma.name);
-
-
+const olli = new Person("Olli");
+olli.sayName();

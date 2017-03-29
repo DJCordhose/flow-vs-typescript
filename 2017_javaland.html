@@ -199,13 +199,13 @@
         <!--</section>-->
 
         <section>
-            <h2>Demo</h2>
-            <h3>Some basic TypeScript 2.2 hacking in Visual Studio Code 1.10</h3>
+            <h2>Introductory Demonstration</h2>
+            <h3>Some basic TypeScript hacking in Visual Studio Code</h3>
         </section>
 
         <section>
         <h3>TypeScript (similar to what we just hacked)</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>let foo: string;
+           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // variables can have type information
 let foo: string;
 foo = 'yo';
@@ -339,7 +339,7 @@ if (fooed) {
 }
 </code></pre>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// or tell the compiler we know better (in this case we actually do)
+// or tell the compiler we know better (might be a bad idea)
 fooed!.toString();
 </code></pre>
             <div class="fragment">
@@ -381,6 +381,20 @@ animals.push(new Cat('Purry'));
 
         <section>
             <h3>... but wait</h3>
+            <p>Consider these classes</p>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Animal {
+   name: string;
+}
+
+class Dog extends Animal {
+    goodBoyFactor: number;
+}
+
+class Cat extends Animal {
+    purrFactor: number;
+}
+           </code></pre>
         </section>
 
         <section>
@@ -466,32 +480,34 @@ void logAnimals(List&lt;? extends Animal> animals) {
 
         </section>
 
-        <section>
-            <h3>Some Type Inference Magic</h3>
-            <p>Consider</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Dog { woof() { } }
+        <!--ONLY FOR JAX-->
 
-const animals = [];
-animals.push(new Dog());
-</code></pre>
-            <div class="fragment">
-                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
-                <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
-animals.forEach((animal: Dog) => animal.woof());
-</code></pre>
+        <!--<section>-->
+            <!--<h3>Some Type Inference Magic</h3>-->
+            <!--<p>Consider</p>-->
+            <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Dog { woof() { } }-->
 
-            </div>
-            <div class="fragment">
-                <p>Adding Cats <em>later</em> and thus changing array type later</p>
-                <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Cat { meow() { } }
-animals.push(new Cat());
-</code></pre>
-                <p>does not affect TypeScript (correct), but makes Flow fail</p>
+<!--const animals = [];-->
+<!--animals.push(new Dog());-->
+<!--</code></pre>-->
+            <!--<div class="fragment">-->
+                <!--<p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>-->
+                <!--<pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">-->
+<!--animals.forEach((animal: Dog) => animal.woof());-->
+<!--</code></pre>-->
 
-            </div>
-        </section>
+            <!--</div>-->
+            <!--<div class="fragment">-->
+                <!--<p>Adding Cats <em>later</em> and thus changing array type later</p>-->
+                <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Cat { meow() { } }-->
+<!--animals.push(new Cat());-->
+<!--</code></pre>-->
+                <!--<p>does not affect TypeScript (correct), but makes Flow fail</p>-->
+
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h3>Differences in Generic Types</h3>
@@ -516,6 +532,30 @@ animals.push(new Cat());
             </ul>
             <!--<p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>-->
         </section>
+
+        <section>
+            <h3>Immutable Data Structures can be Covariant in Flow</h3>
+            <pre><code class="fragment javascript line-numbers" contenteditable data-trim>
+// https://facebook.github.io/immutable-js/
+import {List} from 'immutable';
+
+let animals: List&lt;Animal> = List.of();
+let dogs: List&lt;Dog> = List.of();
+
+// cool, as all data structures from immutable.js are read-only
+animals = dogs;
+</code></pre>
+            <pre><code class="fragment javascript line-numbers" contenteditable data-trim>
+class List<+T> extends IndexedCollection&lt;T> {
+  // ...
+}
+</code></pre>
+            <div class="fragment">
+                <p><a href="https://github.com/facebook/immutable-js/issues/1052" target="_blank">https://github.com/facebook/immutable-js/issues/1052</a></p>
+                <p><a href="https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45" target="_blank">https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45</a></p>
+            </div>
+        </section>
+
 
         <section>
             <h3>`any` type</h3>
@@ -556,7 +596,11 @@ type Failure = { status: 'error', code: number}; // error, we get the error code
         <section>
             <h3>Implementation both in Flow and TypeScript</h3>
             <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function callback(response: Response) {
+type Result = { status: 'done', payload: Object };
+type Failure = { status: 'error', code: number};
+           </code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+function callback(response: Result | Failure) {
     // works, as this is present in both
     console.log(response.status);
     // does not work,
