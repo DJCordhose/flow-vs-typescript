@@ -1,26 +1,22 @@
 // npm start
 // open in http://localhost:8080/webpack-dev-server/
 
-let a: number | null;
+let a: number | null = null;
 
-a = null;
-
-function add(a: number, b: number): number {
+function mach(a: number, b: number): number {
     return a + b;
 }
 
-const res: number = add(10, 20);
+const b: number = mach(10, 20);
 
 class Person {
-    private name: string;
+    // public string name;
+    name: string;
+
     constructor(name: string) {
         this.name = name;
     }
-
-    sayName(): void {
-        console.log(this.name);
-    }
 }
 
-const olli = new Person("Olli");
-olli.sayName();
+const person = new Person("Oma");
+console.log(person.name);

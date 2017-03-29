@@ -78,9 +78,6 @@
                 <small><a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
                 </small>
             </p>
-            <p>Extended Version (constantly updated): <a href="http://bit.ly/js-types">
-                http://bit.ly/js-types
-            </a></p>
         </section>
 
         <section>
@@ -479,34 +476,32 @@ void logAnimals(List&lt;? extends Animal> animals) {
 
         </section>
 
-        <!--ONLY FOR JAX-->
+        <!--<section>-->
+            <!--<h3>Some Type Inference Magic</h3>-->
+            <!--<p>Consider</p>-->
+            <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Dog { woof() { } }-->
 
-        <section>
-            <h3>Some Type Inference Magic</h3>
-            <p>Consider</p>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Dog { woof() { } }
+<!--const animals = [];-->
+<!--animals.push(new Dog());-->
+<!--</code></pre>-->
+            <!--<div class="fragment">-->
+                <!--<p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>-->
+                <!--<pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">-->
+<!--animals.forEach((animal: Dog) => animal.woof());-->
+<!--</code></pre>-->
 
-const animals = [];
-animals.push(new Dog());
-</code></pre>
-            <div class="fragment">
-                <p>both TypeScript and Flow know this is safe, as we have only added Dogs so far</p>
-                <pre><code class="typescript line-numbers" contenteditable data-trim data-num-start="5">
-animals.forEach((animal: Dog) => animal.woof());
-</code></pre>
+            <!--</div>-->
+            <!--<div class="fragment">-->
+                <!--<p>Adding Cats <em>later</em> and thus changing array type later</p>-->
+                <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Cat { meow() { } }-->
+<!--animals.push(new Cat());-->
+<!--</code></pre>-->
+                <!--<p>does not affect TypeScript (correct), but makes Flow fail</p>-->
 
-            </div>
-            <div class="fragment">
-                <p>Adding Cats <em>later</em> and thus changing array type later</p>
-                <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Cat { meow() { } }
-animals.push(new Cat());
-</code></pre>
-                <p>does not affect TypeScript (correct), but makes Flow fail</p>
-
-            </div>
-        </section>
+            <!--</div>-->
+        <!--</section>-->
 
         <section>
             <h3>Differences in Generic Types</h3>
@@ -532,51 +527,51 @@ animals.push(new Cat());
             <!--<p class="fragment">Both Flow and TypeScript support upper, but not lower bounds</p>-->
         </section>
 
-        <section>
-            <h3>Immutable Data Structures can be Covariant in Flow</h3>
-            <pre><code class="fragment javascript line-numbers" contenteditable data-trim>
-// https://facebook.github.io/immutable-js/
-import {List} from 'immutable';
+        <!--<section>-->
+            <!--<h3>Immutable Data Structures can be Covariant in Flow</h3>-->
+            <!--<pre><code class="fragment javascript line-numbers" contenteditable data-trim>-->
+<!--// https://facebook.github.io/immutable-js/-->
+<!--import {List} from 'immutable';-->
 
-let animals: List&lt;Animal> = List.of();
-let dogs: List&lt;Dog> = List.of();
+<!--let animals: List&lt;Animal> = List.of();-->
+<!--let dogs: List&lt;Dog> = List.of();-->
 
-// cool, as all data structures from immutable.js are read-only
-animals = dogs;
-</code></pre>
-            <pre><code class="fragment javascript line-numbers" contenteditable data-trim>
-class List<+T> extends IndexedCollection&lt;T> {
-  // ...
-}
-</code></pre>
-            <div class="fragment">
-                <p><a href="https://github.com/facebook/immutable-js/issues/1052" target="_blank">https://github.com/facebook/immutable-js/issues/1052</a></p>
-                <p><a href="https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45" target="_blank">https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45</a></p>
-            </div>
-        </section>
+<!--// cool, as all data structures from immutable.js are read-only-->
+<!--animals = dogs;-->
+<!--</code></pre>-->
+            <!--<pre><code class="fragment javascript line-numbers" contenteditable data-trim>-->
+<!--class List<+T> extends IndexedCollection&lt;T> {-->
+  <!--// ...-->
+<!--}-->
+<!--</code></pre>-->
+            <!--<div class="fragment">-->
+                <!--<p><a href="https://github.com/facebook/immutable-js/issues/1052" target="_blank">https://github.com/facebook/immutable-js/issues/1052</a></p>-->
+                <!--<p><a href="https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45" target="_blank">https://github.com/facebook/immutable-js/commit/3f2e682b64a40bab5bf5da4da80b4da1a608ce45</a></p>-->
+            <!--</div>-->
+        <!--</section>-->
 
 
-        <section>
-            <h3>`any` type</h3>
-            <p class="fragment">can be anything, not specified</p>
-            <p class="fragment">can selectively disable type checking</p>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-function func(a: any) {
-    return a + 5;
-}
-</code></pre>
-            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// cool
-let r1: string = func(10);
+        <!--<section>-->
+            <!--<h3>`any` type</h3>-->
+            <!--<p class="fragment">can be anything, not specified</p>-->
+            <!--<p class="fragment">can selectively disable type checking</p>-->
+            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--function func(a: any) {-->
+    <!--return a + 5;-->
+<!--}-->
+<!--</code></pre>-->
+            <!--<pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--// cool-->
+<!--let r1: string = func(10);-->
 
-// cool
-let r2: boolean = func('wat');
-</code></pre>
+<!--// cool-->
+<!--let r2: boolean = func('wat');-->
+<!--</code></pre>-->
 
-            <ul>
-                <li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred
-            </ul>
-        </section>
+            <!--<ul>-->
+                <!--<li class="fragment"><em>flow / TypeScript 2</em>: explicit any supported, but any never inferred-->
+            <!--</ul>-->
+        <!--</section>-->
 
         <section>
             <h2>Union Types</h2>
@@ -652,52 +647,52 @@ function callback(response: Result | Failure) {
             </ul>
         </section>
 
-        <section>
-            <h3>Nominal Typing for Flow classes</h3>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Person {
-    name: string;
-}
+        <!--<section>-->
+            <!--<h3>Nominal Typing for Flow classes</h3>-->
+            <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Person {-->
+    <!--name: string;-->
+<!--}-->
 
-class Dog {
-    name: string;
-}
+<!--class Dog {-->
+    <!--name: string;-->
+<!--}-->
 
-let dog: Dog = new Dog();
+<!--let dog: Dog = new Dog();-->
 
-// nope, nominal type compatibility violated
-let person: Person = dog; // ERROR: Dog: This type is incompatible with Person
+<!--// nope, nominal type compatibility violated-->
+<!--let person: Person = dog; // ERROR: Dog: This type is incompatible with Person-->
 
-// same problem
-let person: Person = { // ERROR: object literal: This type is incompatible with Person
-    name: "Olli"
-};
-            </code></pre>
-        </section>
+<!--// same problem-->
+<!--let person: Person = { // ERROR: object literal: This type is incompatible with Person-->
+    <!--name: "Olli"-->
+<!--};-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
-        <section>
-            <h3>Structural Typing for TypeScript classes</h3>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-class Person {
-    name: string;
-}
+        <!--<section>-->
+            <!--<h3>Structural Typing for TypeScript classes</h3>-->
+            <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--class Person {-->
+    <!--name: string;-->
+<!--}-->
 
-class Dog {
-    name: string;
-}
+<!--class Dog {-->
+    <!--name: string;-->
+<!--}-->
 
-let dog: Dog = new Dog();
+<!--let dog: Dog = new Dog();-->
 
-// yes, correct, as structurally compatible
-let person: Person = dog;
+<!--// yes, correct, as structurally compatible-->
+<!--let person: Person = dog;-->
 
-// same thing, also correct
-let person: Person = {
-    name: "Olli"
-};
+<!--// same thing, also correct-->
+<!--let person: Person = {-->
+    <!--name: "Olli"-->
+<!--};-->
 
-            </code></pre>
-        </section>
+            <!--</code></pre>-->
+        <!--</section>-->
 
         <section>
             <h2>Structural vs Nominal Typing</h2>
@@ -711,27 +706,27 @@ let person: Person = {
             </ul>
         </section>
 
-        <section>
-            <h3>Structural Typing for both TypeScript and Flow</h3>
-            <pre><code class="typescript line-numbers" contenteditable data-trim>
-interface NamedObject {
-    name: string;
-}
+        <!--<section>-->
+            <!--<h3>Structural Typing for both TypeScript and Flow</h3>-->
+            <!--<pre><code class="typescript line-numbers" contenteditable data-trim>-->
+<!--interface NamedObject {-->
+    <!--name: string;-->
+<!--}-->
 
-// this is fine as nominal typing only applies to Flow classes
-let namedObject: NamedObject = dog;
+<!--// this is fine as nominal typing only applies to Flow classes-->
+<!--let namedObject: NamedObject = dog;-->
 
-// same thing, also fine
-let namedObject: NamedObject = {
-    name: "Olli"
-};
+<!--// same thing, also fine-->
+<!--let namedObject: NamedObject = {-->
+    <!--name: "Olli"-->
+<!--};-->
 
-// not fine in either, missing name
-let namedObject: NamedObject = {
-    firstName: "Olli"
-};
-            </code></pre>
-        </section>
+<!--// not fine in either, missing name-->
+<!--let namedObject: NamedObject = {-->
+    <!--firstName: "Olli"-->
+<!--};-->
+            <!--</code></pre>-->
+        <!--</section>-->
 
         <section>
             <h2>Classes in TypeScript</h2>
@@ -801,13 +796,15 @@ Annotations in Java</a>)
         </section>
 
         <section>
-            <h1>Final Demo: Does it work in real live?</h1>
-            <h2>Using React with TypeScript</h2>
+            <h2>Final Demo: Does it work in real live?</h2>
+            <h3>Using React with TypeScript and Flow</h3>
             <p><a target="_blank" href="https://github.com/DJCordhose/react-workshop/tree/master/code/sandbox/typescript">https://github.com/DJCordhose/react-workshop/tree/master/code/sandbox/typescript</a></p>
+            <p><a target="_blank" href="https://github.com/DJCordhose/react-workshop/tree/master/code/sandbox/flow">https://github.com/DJCordhose/react-workshop/tree/master/code/sandbox/flow</a></p>
         </section>
 
         <section>
             <h1>TL'DR Part II</h1>
+            <p>Both Flow and TypeScript work great with React and node</p>
             <ul>
                 <li class="fragment">Flow: <strong>Easy to incrementally add to existing projects</strong>
                     <ul>
