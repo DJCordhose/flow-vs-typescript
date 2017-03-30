@@ -19,14 +19,14 @@
     "eslint-plugin-flowtype": "latest",
     "eslint-plugin-flowtype-errors": "latest",
     "eslint-watch": "latest",
-    "flow-bin": "0.38.0",
+    "flow-bin": "latest",
     "flowtype-loader": "latest",
     "source-map-loader": "latest",
     "webpack": "latest",
     "webpack-dev-server": "latest"
   },
   "dependencies": {
-    "immutable": "3.8.1",
+    "immutable": "latest",
     "underscore": "latest"
   }
 }
