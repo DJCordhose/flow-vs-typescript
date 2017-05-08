@@ -5,6 +5,8 @@
     "weback": "webpack --watch",
     "devserver": "webpack-dev-server --progress --colors --hot --content-base public",
     "check": "flow",
+    "init": "flow init",
+    "flow-typed": "flow-typed install",
     "eslint": "eslint src"
   },
   "devDependencies": {
@@ -19,14 +21,14 @@
     "eslint-plugin-flowtype": "latest",
     "eslint-plugin-flowtype-errors": "latest",
     "eslint-watch": "latest",
-    "flow-bin": "latest",
+    "flow-bin": "0.45.0",
     "flowtype-loader": "latest",
     "source-map-loader": "latest",
     "webpack": "latest",
     "webpack-dev-server": "latest"
   },
   "dependencies": {
-    "immutable": "latest",
-    "underscore": "latest"
+    "immutable": "3.8.1",
+    "underscore": "1.8.3"
   }
 }

@@ -3,6 +3,5 @@
 [include]
 
 [libs]
-flow-typed/npm/.*
 
 [options]

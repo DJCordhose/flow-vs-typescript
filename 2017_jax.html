@@ -99,14 +99,13 @@
             </ul>
         </section>
 
-        <section class="todo">
-<pre>
- - Prepare live hacking:
-    - Flow basics in WebStorm
-    - React with TypeScript in VSC
-</pre>
-
-</section>
+        <!--<section class="todo">-->
+<!--<pre>-->
+ <!-- - Prepare live hacking:-->
+    <!-- - Flow basics in WebStorm-->
+    <!-- - React with TypeScript in VSC-->
+<!--</pre>-->
+<!--</section>-->
 
         <!--<section>-->
             <!--<img src="what_is_a_type_system.png">-->
@@ -208,8 +207,44 @@
             <h3>Some basic Flow hacking in WebStorm</h3>
         </section>
 
+
         <section>
-        <h3>TypeScript (similar to what we just hacked)</h3>
+            <h3>Flow (similar to what we just hacked)</h3>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// variables can have type information
+let foo: string;
+foo = 'yo';
+// Error: number: This type is incompatible with string
+foo = 10;
+
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+// types can be explicit (parameter) or inferred (return type)
+function sayIt(what: string) {
+    return `Saying: ${what}`;
+}
+const said: string = sayIt(obj);
+
+</code></pre>
+            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
+class Sayer {
+    what: string; // type also mandatory
+
+    constructor(what: string) {
+        this.what = what;
+    }
+
+    // return type if you want to
+    sayIt(): string {
+        return `Saying: ${this.what}`;
+    }
+}
+
+</code></pre>
+        </section>
+
+        <section>
+        <h3>TypeScript</h3>
            <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
 // variables can have type information
 let foo: string;
@@ -241,42 +276,6 @@ class Sayer {
 }
 </code></pre>
       </section>
-
-        <section>
-        <h3>Flow</h3>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// variables can have type information
-let foo: string;
-foo = 'yo';
-// Error: number: This type is incompatible with string
-foo = 10;
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-// types can be explicit (parameter) or inferred (return type)
-function sayIt(what: string) {
-    return `Saying: ${what}`;
-}
-const said: string = sayIt(obj);
-
-</code></pre>
-           <pre class="fragment"><code class="typescript line-numbers" contenteditable data-trim>
-class Sayer {
-    what: string; // type also mandatory
-
-    constructor(what: string) {
-        this.what = what;
-    }
-
-    // return type if you want to
-    sayIt(): string {
-        return `Saying: ${this.what}`;
-    }
-}
-
-</code></pre>
-      </section>
-
         <section>
             <h2>Flow and TypeScript basics are pretty similar</h2>
             <p>Those basic features help with documentation, refactoring, and IDE support</p>
@@ -743,6 +742,7 @@ let namedObject: NamedObject = {
             <p class="fragment">Similar features can be found in Java/C++/C#</p>
             <ul class="fragment">
                 <li><em>abstract</em> classes and methods
+                <li>interfaces
                 <li>special shortcut constructors (combined definition of fields and initialization)
                 <li>public, private, protected
                 <li>decorators (aka <a  target="_blank" href="https://msdn.microsoft.com/en-us/library/z0w1kczw(v=vs.80).aspx">
@@ -759,7 +759,7 @@ Annotations in Java</a>)
                     like in C#
                 </a>
             </ul>
-            <p class="fragment">Flow does not feature those or any other syntactic sugar, as it is a checker only</p>
+            <p class="fragment">Flow does not feature those (except for Interfaces) or any other syntactic sugar, as it is a checker only</p>
         </section>
 
         <section>
@@ -771,16 +771,15 @@ Annotations in Java</a>)
             <ul>
                 <li>Core Declarations come with Flow Checker, includes React
                 <li>Other external declarations are optional
-                <li><a target="_blank"
-                       href="https://github.com/flowtype/flow-typed">
-                    External Flow Type Definitions
-                </a>
                 <li>some libraries even come with added flow type declarations (e.g. immutable.js)
                 <li><a target="_blank"
-                       href="https://flowtype.org/docs/third-party.html">
-                    Declarations can be added to flow config files
+                       href="https://flow.org/en/docs/libdefs/">
+                    <em>flow-typed</em> either downloads or creates declarations for all your dependencies
                 </a>
-                <li>If there are no existing declaration files: still works, but less powerful
+                <li><a target="_blank"
+                       href="https://flow.org/en/docs/libdefs/creation/">
+                    You can write your own declaration files
+                </a>
             </ul>
         </section>
 
@@ -796,7 +795,7 @@ Annotations in Java</a>)
                 </li>
                 <li>TypeScript 2.x
                     <ul>
-                        <li>like Flow</li>
+                        <li>similar to Flow</li>
                         <li>install external type declarations transparently <a href="https://blogs.msdn.microsoft.com/typescript/2016/06/15/the-future-of-declaration-files/" target="_blank">using npm</a>
                             (e.g.<em>npm install @types/react --save</em>)
                     </ul>
@@ -818,7 +817,7 @@ Annotations in Java</a>)
 
         <section>
             <h1>TL'DR Part II</h1>
-            <p>Both Flow and TypeScript work great with React and node</p>
+            <p>Both Flow and TypeScript work great with on Browser and Server</p>
             <ul>
                 <li class="fragment">Flow: <strong>Easy to incrementally add to existing projects</strong>
                     <ul>
@@ -833,6 +832,10 @@ Annotations in Java</a>)
                         <li class="fragment">Language Server is part of compiler
                         <li class="fragment">Enables any IDE to deliver supreme support without much effort
                         <li class="fragment">WebStorm / IDEA support is close to what you can do in Java (but not quite there, yet)
+                        <li class="fragment">Version
+                            <a href="https://blogs.msdn.microsoft.com/typescript/2017/04/27/announcing-typescript-2-3/">2.3</a>
+                            might close a bit of the gap to flow
+
                     </ul>
                 </li>
             </ul>
